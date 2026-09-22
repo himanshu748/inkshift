@@ -1,0 +1,256 @@
+{
+  "checkedAt": "2026-09-20T17:17:51.257Z",
+  "environment": "Codex in-app browser on macOS; emulated CSS viewports, devicePixelRatio 1. Development build with warm cache. Frame intervals sampled during active camera motion; not physical phone testing.",
+  "endpoints": [
+    {
+      "metrics": {
+        "calls": "10",
+        "dpr": "1",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":0,\"move\":0,\"tableB\":false,\"gameB\":[0,1.32]}",
+        "progress": "0.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "4",
+        "triangles": "124"
+      },
+      "overflow": false,
+      "size": [
+        1440,
+        900
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "46",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":1,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "1.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "3628"
+      },
+      "overflow": false,
+      "size": [
+        1440,
+        900
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "58",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":2,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "2.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "7440"
+      },
+      "overflow": false,
+      "size": [
+        1440,
+        900
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "52",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":3,\"move\":1,\"tableB\":false,\"gameB\":[2.65,-0.65]}",
+        "progress": "3.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "6752"
+      },
+      "overflow": false,
+      "size": [
+        1440,
+        900
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "10",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":0,\"move\":0,\"tableB\":false,\"gameB\":[0,1.32]}",
+        "progress": "0.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "124"
+      },
+      "overflow": false,
+      "size": [
+        390,
+        844
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "46",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":1,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "1.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "3628"
+      },
+      "overflow": false,
+      "size": [
+        390,
+        844
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "58",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":2,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "2.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "7440"
+      },
+      "overflow": false,
+      "size": [
+        390,
+        844
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "52",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":3,\"move\":1,\"tableB\":false,\"gameB\":[2.65,-0.65]}",
+        "progress": "3.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "6752"
+      },
+      "overflow": false,
+      "size": [
+        390,
+        844
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "10",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":0,\"move\":0,\"tableB\":false,\"gameB\":[0,1.32]}",
+        "progress": "0.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "124"
+      },
+      "overflow": false,
+      "size": [
+        768,
+        1024
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "46",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":1,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "1.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "3628"
+      },
+      "overflow": false,
+      "size": [
+        768,
+        1024
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "58",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":2,\"move\":0,\"tableB\":true,\"gameB\":[0,1.32]}",
+        "progress": "2.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "7440"
+      },
+      "overflow": false,
+      "size": [
+        768,
+        1024
+      ]
+    },
+    {
+      "metrics": {
+        "calls": "52",
+        "dpr": "1",
+        "frameMedian": "16.7",
+        "frameP95": "17.7",
+        "loadMs": "47",
+        "motion": "scroll",
+        "pose": "{\"chapter\":3,\"move\":1,\"tableB\":false,\"gameB\":[2.65,-0.65]}",
+        "progress": "3.000",
+        "quality": "standard",
+        "settled": "true",
+        "textures": "10",
+        "triangles": "6752"
+      },
+      "overflow": false,
+      "size": [
+        768,
+        1024
+      ]
+    }
+  ]
+}

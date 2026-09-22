@@ -1,0 +1,41 @@
+{
+  "checkedOn": "2026-09-20",
+  "environment": "Local Next.js app, macOS Codex in-app browser, live Sanity Content Lake",
+  "eventId": "YvCA8QCXd81d2g",
+  "input": "Explicitly labeled prepared games-night fixtures",
+  "participant": "Alex Demo (synthetic test identity)",
+  "sessionId": "session-1-1",
+  "sessionTitle": "Ticket to Ride",
+  "before": {
+    "table": "B",
+    "bookings": 1,
+    "capacity": 4
+  },
+  "after": {
+    "table": "C",
+    "bookings": 1,
+    "capacity": 4
+  },
+  "checks": {
+    "landingCreatesRealSampleEvent": true,
+    "participantJoinedThroughInvite": true,
+    "organizerReviewedAndApprovedMove": true,
+    "participantPageUpdatedToTableC": true,
+    "appSdkInspectorConnected": true,
+    "appSdkRevision": 2,
+    "renamePreviewDismissedWithoutApplying": true
+  },
+  "notEvidenceOf": [
+    "Real handwriting recognition",
+    "Public deployment",
+    "Physical phone behavior"
+  ],
+  "productionSmoke": {
+    "server": "next start",
+    "port": 3333,
+    "existingEventAndBookingSurvivedRestart": true,
+    "newEventCreated": "p9TK8J6xxxSpSA",
+    "newOrganizerCookieAccepted": true,
+    "sampleSessions": 3
+  }
+}

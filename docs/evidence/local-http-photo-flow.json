@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-09-22T05:21:10.324Z",
+  "baseUrl": "http://localhost:3333",
+  "eventId": "3gI-6RrGqTRbNw",
+  "input": "Rendered typed sample sheets, not real handwriting",
+  "blankEventToThreeSessions": true,
+  "photoInterpretations": 2,
+  "firstPhotoRequiredCorrection": false,
+  "originalFirstPhotoConflicts": [],
+  "secondPhotoRequiredCorrection": true,
+  "originalSecondPhotoConflicts": [
+    "Ticket to Ride has 1 registration. Keep this session and move it instead."
+  ],
+  "sameBookingAfterPhotoMove": true,
+  "finalTable": "Table C",
+  "photoReaderEnteredSanityWorkflow": true,
+  "guestCannotOrganize": true,
+  "anonymousPhotoBlocked": true
+}

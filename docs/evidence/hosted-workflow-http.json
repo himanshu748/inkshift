@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-09-22T05:46:30.944Z",
+  "baseUrl": "https://inkshift.vercel.app",
+  "eventId": "tDt3vZ3lEM9lLg",
+  "workflow": "inkshift-plan-change v1",
+  "readingAttribution": "Prepared example",
+  "approvalAttribution": "Organizer",
+  "staleApprovalBlocked": true,
+  "correctedCounts": 2,
+  "appliedAndDiscardedHistoryPersisted": true,
+  "sameBookingAfterMove": true,
+  "finalTable": "Table C",
+  "discardLeftPlanUnchanged": true,
+  "unauthorizedReviewAccessBlocked": true,
+  "anonymousWorkflowDocumentHidden": true
+}

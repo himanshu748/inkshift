@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T05:44:47Z",
+  "title": "Design System: INKSHIFT",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Mineral ground",
+        "tonalRamp": [
+          "oklch(15.00% 0.00930 113.16)",
+          "oklch(26.43% 0.00930 113.16)",
+          "oklch(37.86% 0.00930 113.16)",
+          "oklch(49.29% 0.00930 113.16)",
+          "oklch(60.71% 0.00930 113.16)",
+          "oklch(72.14% 0.00930 113.16)",
+          "oklch(83.57% 0.00930 113.16)",
+          "oklch(95.00% 0.00930 113.16)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Warm paper",
+        "tonalRamp": [
+          "oklch(15.00% 0.00537 95.10)",
+          "oklch(26.43% 0.00537 95.10)",
+          "oklch(37.86% 0.00537 95.10)",
+          "oklch(49.29% 0.00537 95.10)",
+          "oklch(60.71% 0.00537 95.10)",
+          "oklch(72.14% 0.00537 95.10)",
+          "oklch(83.57% 0.00537 95.10)",
+          "oklch(95.00% 0.00537 95.10)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Forest ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.04279 158.58)",
+          "oklch(26.43% 0.04279 158.58)",
+          "oklch(37.86% 0.04279 158.58)",
+          "oklch(49.29% 0.04279 158.58)",
+          "oklch(60.71% 0.04279 158.58)",
+          "oklch(72.14% 0.04279 158.58)",
+          "oklch(83.57% 0.04279 158.58)",
+          "oklch(95.00% 0.04279 158.58)"
+        ]
+      },
+      "forest": {
+        "role": "primary",
+        "displayName": "Forest",
+        "tonalRamp": [
+          "oklch(15.00% 0.04514 153.25)",
+          "oklch(26.43% 0.04514 153.25)",
+          "oklch(37.86% 0.04514 153.25)",
+          "oklch(49.29% 0.04514 153.25)",
+          "oklch(60.71% 0.04514 153.25)",
+          "oklch(72.14% 0.04514 153.25)",
+          "oklch(83.57% 0.04514 153.25)",
+          "oklch(95.00% 0.04514 153.25)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted leaf",
+        "tonalRamp": [
+          "oklch(15.00% 0.03306 135.74)",
+          "oklch(26.43% 0.03306 135.74)",
+          "oklch(37.86% 0.03306 135.74)",
+          "oklch(49.29% 0.03306 135.74)",
+          "oklch(60.71% 0.03306 135.74)",
+          "oklch(72.14% 0.03306 135.74)",
+          "oklch(83.57% 0.03306 135.74)",
+          "oklch(95.00% 0.03306 135.74)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Ledger rule",
+        "tonalRamp": [
+          "oklch(15.00% 0.01984 125.84)",
+          "oklch(26.43% 0.01984 125.84)",
+          "oklch(37.86% 0.01984 125.84)",
+          "oklch(49.29% 0.01984 125.84)",
+          "oklch(60.71% 0.01984 125.84)",
+          "oklch(72.14% 0.01984 125.84)",
+          "oklch(83.57% 0.01984 125.84)",
+          "oklch(95.00% 0.01984 125.84)"
+        ]
+      },
+      "mint": {
+        "role": "neutral",
+        "displayName": "Mint",
+        "tonalRamp": [
+          "oklch(15.00% 0.01961 125.82)",
+          "oklch(26.43% 0.01961 125.82)",
+          "oklch(37.86% 0.01961 125.82)",
+          "oklch(49.29% 0.01961 125.82)",
+          "oklch(60.71% 0.01961 125.82)",
+          "oklch(72.14% 0.01961 125.82)",
+          "oklch(83.57% 0.01961 125.82)",
+          "oklch(95.00% 0.01961 125.82)"
+        ]
+      },
+      "citron": {
+        "role": "primary",
+        "displayName": "Citron",
+        "tonalRamp": [
+          "oklch(15.00% 0.13318 117.91)",
+          "oklch(26.43% 0.13318 117.91)",
+          "oklch(37.86% 0.13318 117.91)",
+          "oklch(49.29% 0.13318 117.91)",
+          "oklch(60.71% 0.13318 117.91)",
+          "oklch(72.14% 0.13318 117.91)",
+          "oklch(83.57% 0.13318 117.91)",
+          "oklch(95.00% 0.13318 117.91)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus green",
+        "tonalRamp": [
+          "oklch(15.00% 0.11793 131.87)",
+          "oklch(26.43% 0.11793 131.87)",
+          "oklch(37.86% 0.11793 131.87)",
+          "oklch(49.29% 0.11793 131.87)",
+          "oklch(60.71% 0.11793 131.87)",
+          "oklch(72.14% 0.11793 131.87)",
+          "oklch(83.57% 0.11793 131.87)",
+          "oklch(95.00% 0.11793 131.87)"
+        ]
+      },
+      "control-white": {
+        "role": "neutral",
+        "displayName": "Control white",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      },
+      "walkthrough-paper": {
+        "role": "neutral",
+        "displayName": "Walkthrough paper",
+        "tonalRamp": [
+          "oklch(15.00% 0.00796 98.87)",
+          "oklch(26.43% 0.00796 98.87)",
+          "oklch(37.86% 0.00796 98.87)",
+          "oklch(49.29% 0.00796 98.87)",
+          "oklch(60.71% 0.00796 98.87)",
+          "oklch(72.14% 0.00796 98.87)",
+          "oklch(83.57% 0.00796 98.87)",
+          "oklch(95.00% 0.00796 98.87)"
+        ]
+      },
+      "supporting-ink": {
+        "role": "neutral",
+        "displayName": "Supporting ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.04163 137.60)",
+          "oklch(26.43% 0.04163 137.60)",
+          "oklch(37.86% 0.04163 137.60)",
+          "oklch(49.29% 0.04163 137.60)",
+          "oklch(60.71% 0.04163 137.60)",
+          "oklch(72.14% 0.04163 137.60)",
+          "oklch(83.57% 0.04163 137.60)",
+          "oklch(95.00% 0.04163 137.60)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Two-line landing promise; fluid desktop size with compact and phone compositions."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing explanation and closing invitation."
+      },
+      "event-title": {
+        "displayName": "Event Title",
+        "purpose": "Organizer gathering name."
+      },
+      "section-title": {
+        "displayName": "Section Title",
+        "purpose": "Review and participant-section headings."
+      },
+      "session-title": {
+        "displayName": "Session Title",
+        "purpose": "Focusable game name in an organizer ledger row."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Inherited working-interface prose."
+      },
+      "story-body": {
+        "displayName": "Story Body",
+        "purpose": "Landing introductory explanation, with smaller compact and phone treatments."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Time, source, status and compact supporting metadata."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Shared filled and bordered action labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "source-paper",
+        "value": "0 9px 28px #283c2917",
+        "purpose": "Diffuse lift under the organizer source photograph."
+      },
+      {
+        "name": "walkthrough-paper",
+        "value": "0 8px 24px #34462b12",
+        "purpose": "The square example sheet, rotated by -1.5 degrees in the DOM walkthrough."
+      },
+      {
+        "name": "illustrated-join-confirmation",
+        "value": "0 10px 30px #213c2d26",
+        "purpose": "Temporary participant confirmation over the illustrated ledger."
+      },
+      {
+        "name": "location-arrival",
+        "value": "0 5px 13px #d6ee9133",
+        "purpose": "Transient location-update feedback at the start of the arrival animation; not a resting elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-color",
+        "value": "background 0.16s ease, color 0.16s ease",
+        "purpose": "Shared action hover feedback."
+      },
+      {
+        "name": "evidence-feedback",
+        "value": "background 0.14s ease, border-color 0.14s ease",
+        "purpose": "Source evidence hover and focus state."
+      },
+      {
+        "name": "row-feedback",
+        "value": "background 0.2s ease",
+        "purpose": "The linked schedule row highlight."
+      },
+      {
+        "name": "location-arrival",
+        "value": "2.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "A changed schedule location; static mint highlight under reduced motion."
+      },
+      {
+        "name": "walkthrough-row-feedback",
+        "value": "background 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The illustrated session highlight; removed under reduced motion."
+      },
+      {
+        "name": "walkthrough-preserved-place",
+        "value": "keep-place 0.8s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "purpose": "On the final state, the preserved session settles from citron to a pale green field; no animation under reduced motion."
+      },
+      {
+        "name": "walkthrough-join-confirmation",
+        "value": "join-place 0.5s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "purpose": "The illustrated confirmation enters from translateY(15px) with a short clip reveal; it appears directly under reduced motion."
+      },
+      {
+        "name": "walkthrough-playback",
+        "value": "3500ms per step",
+        "purpose": "Opt-in playback restarts at step one and stops at step four. Selecting a step stops playback. Reduced motion keeps the timer but presents static states."
+      },
+      {
+        "name": "review-scroll",
+        "value": "smooth; instant under prefers-reduced-motion: reduce",
+        "purpose": "Opening or reopening an organizer review brings its anchor into view."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-workspace",
+        "value": "min-width: 1450px"
+      },
+      {
+        "name": "compact-workspace",
+        "value": "max-width: 1050px"
+      },
+      {
+        "name": "stacked-workspace",
+        "value": "max-width: 760px"
+      },
+      {
+        "name": "narrow-workspace",
+        "value": "max-width: 390px"
+      },
+      {
+        "name": "compact-landing",
+        "value": "max-width: 1100px"
+      },
+      {
+        "name": "stacked-landing",
+        "value": "max-width: 760px"
+      },
+      {
+        "name": "stacked-workflow",
+        "value": "max-width: 650px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared flat action with fill feedback and a visible keyboard outline.",
+      "html": "<button class=\"ds-button-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\"/><circle cx=\"12\" cy=\"13\" r=\"3\"/></svg>Photograph my plan</button>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:7px;font:700 13px/1.4 Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:background .16s ease,color .16s ease;background:var(--citron,#d9ed83);color:var(--ink,#213c2d);border-color:transparent;}.ds-button-primary:hover:not(:disabled){background:#c8e24a;}.ds-button-primary:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-button-primary:disabled{opacity:.5;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none;}}"
+    },
+    {
+      "name": "Dark action",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Shared flat action with fill feedback and a visible keyboard outline.",
+      "html": "<button class=\"ds-button-dark\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"18\" cy=\"5\" r=\"3\"/><circle cx=\"6\" cy=\"12\" r=\"3\"/><circle cx=\"18\" cy=\"19\" r=\"3\"/><path d=\"m8.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98\"/></svg>Invite people<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></button>",
+      "css": ".ds-button-dark{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:7px;font:700 13px/1.4 Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:background .16s ease,color .16s ease;background:var(--forest,#253f2d);color:#fff;border-color:transparent;}.ds-button-dark:hover:not(:disabled){background:#2e553d;}.ds-button-dark:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-button-dark:disabled{opacity:.5;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-dark{transition:none;}}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Shared flat action with fill feedback and a visible keyboard outline.",
+      "html": "<button class=\"ds-button-secondary\">Use the crossed-out example<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:7px;font:700 13px/1.4 Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:background .16s ease,color .16s ease;background:var(--white,#fffefa);color:var(--ink,#213c2d);border-color:var(--line,#dce2d4);}.ds-button-secondary:hover:not(:disabled){background:var(--mint,#eaf0e2);}.ds-button-secondary:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.5;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none;}}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "A quieter action; underline is feedback rather than an extra filled surface.",
+      "html": "<button class=\"ds-text-button\">Enter or edit a plan by hand<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button>",
+      "css": ".ds-text-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:none;color:var(--ink,#213c2d);padding:9px 0;font:600 12px/1.6 Manrope,sans-serif;cursor:pointer;}.ds-text-button:hover:not(:disabled){color:#416937;text-decoration:underline;text-underline-offset:4px;}.ds-text-button:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-text-button:disabled{opacity:.5;cursor:not-allowed;}"
+    },
+    {
+      "name": "Icon action",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "A compact named utility with mint hover feedback.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Close invite panel\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"m18 6-12 12M6 6l12 12\"/></svg></button>",
+      "css": ".ds-icon-button{display:inline-flex;align-items:center;justify-content:center;background:none;color:var(--ink,#213c2d);border:0;min-width:36px;min-height:36px;border-radius:6px;cursor:pointer;}.ds-icon-button:hover{background:var(--mint,#eaf0e2);}.ds-icon-button:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-icon-button:disabled{opacity:.5;cursor:not-allowed;}"
+    },
+    {
+      "name": "Participant name field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A visible label, white field and plain helper text in the participant flow.",
+      "html": "<div class=\"ds-name-field\"><label for=\"ds-participant-name\">What should we call you?</label><input id=\"ds-participant-name\" autocomplete=\"given-name\" maxlength=\"40\" placeholder=\"Your first name\"><span>A name is all you need. Your booking is saved in this browser.</span></div>",
+      "css": ".ds-name-field{padding:20px 23px;border:1px solid var(--line,#dce2d4);border-radius:10px;background:#fff;color:var(--ink,#213c2d);font-family:Manrope,sans-serif;}.ds-name-field label{display:block;margin-bottom:11px;font:500 17px/1.6 Archivo,sans-serif;}.ds-name-field input{border:1px solid var(--line,#dce2d4);background:#fff;color:var(--ink,#213c2d);border-radius:6px;padding:10px 12px;width:100%;height:46px;font:400 14px/1.6 Manrope,sans-serif;caret-color:var(--forest,#253f2d);}.ds-name-field input::placeholder{color:#687567;}.ds-name-field input:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-name-field span{display:block;margin-top:8px;color:var(--muted,#63705d);font:400 11px/1.6 Manrope,sans-serif;}@media(max-width:760px){.ds-name-field input{font-size:16px;}}"
+    },
+    {
+      "name": "Ledger view navigation",
+      "kind": "nav",
+      "description": "The pressed view is dark and underlined; a small mint count sits beside People.",
+      "html": "<div class=\"ds-tab-list\" role=\"group\" aria-label=\"Event information\"><button aria-pressed=\"true\">The live plan</button><button aria-pressed=\"false\">People <span>4</span></button><button aria-pressed=\"false\" aria-label=\"Change history\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5M12 7v5l4 2\"/></svg></button></div>",
+      "css": ".ds-tab-list{display:flex;align-items:center;gap:22px;height:47px;border-bottom:1px solid var(--line,#dce2d4);}.ds-tab-list button{display:flex;align-items:center;gap:5px;height:47px;padding:11px 0;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted,#63705d);font:400 12px/1.6 Manrope,sans-serif;cursor:pointer;}.ds-tab-list button[aria-pressed=\"true\"]{color:var(--ink,#213c2d);border-bottom-color:var(--forest,#253f2d);font-weight:700;}.ds-tab-list button:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-tab-list button>span{display:inline-grid;place-items:center;min-width:18px;height:18px;background:var(--mint,#eaf0e2);border-radius:5px;font-size:11px;}"
+    },
+    {
+      "name": "Availability tags",
+      "kind": "chip",
+      "refersTo": "availability-open",
+      "description": "Written counts and Full labels carry capacity state; these are not interactive chips.",
+      "html": "<span class=\"ds-remaining\">2 open</span> <span class=\"ds-remaining ds-full\">Full</span>",
+      "css": ".ds-remaining{display:inline-block;font:600 11px/1.6 Manrope,sans-serif;white-space:nowrap;color:#4d6c3d;background:#e8f0da;padding:4px 8px;border-radius:4px;font-variant-numeric:tabular-nums;}.ds-remaining.ds-full{color:#806048;background:#f1e7d9;}"
+    },
+    {
+      "name": "Participant session card",
+      "kind": "card",
+      "refersTo": "participant-session",
+      "description": "A flat session surface with the time, current table, open places and one join action.",
+      "html": "<article class=\"ds-join-session\"><div class=\"ds-join-session-top\"><span>6 PM — 7 PM</span><span>Table B</span></div><h3>Ticket to Ride</h3><div class=\"ds-join-session-bottom\"><span>2 of 6 places open</span><button class=\"ds-card-join\">Join game<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button></div></article>",
+      "css": ".ds-join-session{background:var(--white,#fffefa);color:var(--ink,#213c2d);border:1px solid var(--line,#dce2d4);border-radius:12px;padding:23px;font-family:Manrope,sans-serif;}.ds-join-session-top{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted,#63705d);font-variant-numeric:tabular-nums;}.ds-join-session h3{margin:15px 0 0;font:500 26px/1.2 Archivo,sans-serif;letter-spacing:-.015em;}.ds-join-session-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;}.ds-join-session-bottom>span{font-size:11px;color:var(--muted,#63705d);}.ds-card-join{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:11px 18px;border:1px solid transparent;border-radius:7px;font:700 13px/1.4 Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:background .16s ease,color .16s ease;font-size:11px;background:var(--citron,#d9ed83);color:var(--ink,#213c2d);}.ds-card-join:hover:not(:disabled){background:#c8e24a;}.ds-card-join:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-card-join:disabled{opacity:.5;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-card-join{transition:none;}}"
+    },
+    {
+      "name": "Evidence and session pair",
+      "kind": "custom",
+      "refersTo": "evidence-region",
+      "description": "A single illustrative source/result pair showing the actual hover and keyboard-focus language; it is not a live photo reading.",
+      "html": "<div class=\"ds-evidence-pair\"><div class=\"ds-evidence-paper\"><button class=\"ds-evidence-region\" aria-label=\"Highlight Ticket to Ride in the plan\"><span>Ticket to Ride</span></button><div class=\"ds-paper-ink\" aria-hidden=\"true\">Ticket to Ride <span>Table B · 6 PM</span></div></div><div class=\"ds-evidence-row\"><span class=\"ds-evidence-time\">6 PM</span><div><button class=\"ds-session-title\">Ticket to Ride</button><span class=\"ds-session-location\">Table B · 4/6 joined</span></div></div><small>Example sheet · not a photo reading</small></div>",
+      "css": ".ds-evidence-pair{color:var(--ink,#213c2d);font-family:Manrope,sans-serif;}.ds-evidence-paper{position:relative;background:var(--white,#fffefa);box-shadow:0 9px 28px #283c2917;}.ds-paper-ink{display:flex;justify-content:space-between;gap:15px;padding:26px 20px;font:500 17px/1.6 Archivo,sans-serif;}.ds-paper-ink span{font:400 11px/1.6 Manrope,sans-serif;}.ds-evidence-region{position:absolute;inset:0;border:1px solid transparent;border-radius:3px;background:none;padding:0;cursor:pointer;transition:background .14s ease,border-color .14s ease;}.ds-evidence-region span{opacity:0;position:absolute;bottom:calc(100% + 5px);left:0;white-space:nowrap;background:var(--forest,#253f2d);color:#fff;font:400 11px/1.3 Manrope,sans-serif;padding:6px 8px;border-radius:3px;pointer-events:none;}.ds-evidence-row{display:flex;gap:18px;border-bottom:1px solid var(--line,#dce2d4);padding:26px 0;transition:background .2s ease;}.ds-evidence-time{width:68px;flex-shrink:0;padding-top:3px;font:700 12px/1.6 Manrope,sans-serif;font-variant-numeric:tabular-nums;}.ds-session-title{border:0;padding:0;background:none;color:var(--ink,#213c2d);font:500 21px/1.3 Archivo,sans-serif;letter-spacing:-.025em;text-align:left;cursor:pointer;}.ds-session-location{display:block;margin-top:8px;color:var(--muted,#63705d);font-size:11px;}.ds-evidence-pair:has(button:hover) .ds-evidence-region,.ds-evidence-pair:focus-within .ds-evidence-region{background:#d5ee6c35;border-color:#6e9141;}.ds-evidence-pair:has(button:hover) .ds-evidence-region span,.ds-evidence-pair:focus-within .ds-evidence-region span{opacity:1;}.ds-evidence-pair:has(button:hover) .ds-evidence-row,.ds-evidence-pair:focus-within .ds-evidence-row{background:var(--mint,#eaf0e2);}.ds-evidence-region:focus-visible,.ds-session-title:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px;}.ds-evidence-region:focus-visible{outline-offset:2px;}.ds-evidence-pair>small{display:block;margin-top:12px;color:var(--muted,#63705d);font-size:11px;}@media(prefers-reduced-motion:reduce){.ds-evidence-region,.ds-evidence-row{transition:none;}}"
+    },
+    {
+      "name": "Paper-to-ledger walkthrough",
+      "kind": "custom",
+      "refersTo": "walkthrough",
+      "description": "Review-state specimen of the DOM paper/ledger comparison and four-step selector. The landing starts paused; play/pause advances at 3.5-second intervals, selection stops playback, and Apply this example selects the preserved-registration state. Reduced motion shows each state directly. This preview has no event mutation or photo reading.",
+      "html": "<section class=\"ds-product-demo\" aria-label=\"Illustrated product walkthrough\"><div class=\"ds-demo-toolbar\"><div class=\"ds-demo-steps\" role=\"group\" aria-label=\"Walkthrough step\"><button aria-pressed=\"false\"><span>1</span>Read the plan</button><button aria-pressed=\"false\"><span>2</span>People join</button><button aria-pressed=\"true\"><span>3</span>Review the edit</button><button aria-pressed=\"false\"><span>4</span>Keep the people</button></div><button class=\"ds-demo-play\" aria-label=\"Play walkthrough\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 3 14 9-14 9V3z\"/></svg><span>Play</span></button></div><div class=\"ds-demo-stage\"><div><p class=\"ds-demo-pane-label\">Your paper<span>A small change</span></p><div class=\"ds-demo-sheet\"><div class=\"ds-sheet-topline\"><span>Sunday games club</span><span>6 PM</span></div><h2>A table for<br>every game.</h2><div class=\"ds-sheet-row\"><span>Catan<small>6–7:30 PM · 4 people</small></span><strong>Table A</strong></div><div class=\"ds-sheet-row ds-sheet-crossed\"><span>Ticket to Ride<small>6–7:30 PM · 4 people</small></span><strong>Table B</strong></div><div class=\"ds-sheet-row\"><span>Wavelength<small>7:30–8:30 PM · 6 people</small></span><strong>Table C</strong></div><p class=\"ds-sheet-foot\"><strong>Table B is unavailable.</strong> Keep the games going.</p></div></div><div><p class=\"ds-demo-pane-label\">Your review<span>INKSHIFT</span></p><div class=\"ds-demo-ledger\"><h3>Check the change.</h3><p class=\"ds-demo-ledger-subtitle\">Your plan stays as it is until you approve.</p><div class=\"ds-demo-review-diff\"><span>Ticket to Ride</span><div><del>Table B</del><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg><strong>Table C</strong></div><p>Available for the full game, 6–7:30 PM.</p></div><div class=\"ds-demo-people\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 12 2 2 4-4\"/></svg><div><strong>4 registrations preserved</strong><span>Alex, Sam, Jo and Lee keep their places.</span></div></div><button class=\"ds-demo-approve\">Apply this example <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 12 2 2 4-4\"/></svg></button></div></div></div><div class=\"ds-demo-caption\"><p>Cross out a table. Check where its game can go.</p><span>Illustrated example · no photo is being read</span></div></section>",
+      "css": ".ds-product-demo{background:#e9ede1;border-radius:16px;overflow:hidden;color:var(--ink,#213c2d);font:400 14px/1.6 Manrope,sans-serif}.ds-demo-toolbar{display:flex;align-items:stretch;justify-content:space-between;border-bottom:1px solid #cbd5c0;background:#e3e9d9;padding:0 22px;gap:12px}.ds-demo-steps{display:flex;gap:22px}.ds-demo-steps button{border:0;border-bottom:2px solid transparent;background:transparent;padding:18px 0 16px;display:flex;align-items:center;gap:8px;font:600 12px/1.6 Manrope,sans-serif;color:#52634c;cursor:pointer}.ds-demo-steps button[aria-pressed=\"true\"]{border-bottom-color:var(--ink,#213c2d);color:var(--ink,#213c2d)}.ds-demo-steps button span{width:21px;height:21px;border:1px solid #aab69e;border-radius:50%;display:grid;place-items:center;font-size:10px;font-variant-numeric:tabular-nums}.ds-demo-steps button[aria-pressed=\"true\"] span{background:var(--ink,#213c2d);color:white;border-color:var(--ink,#213c2d)}.ds-demo-play{display:flex;align-items:center;gap:7px;border:0;background:transparent;padding:8px;font:600 12px/1.6 Manrope,sans-serif;color:var(--ink,#213c2d);cursor:pointer}.ds-demo-steps button:hover,.ds-demo-play:hover{color:#152a1a}.ds-product-demo button:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px}.ds-demo-stage{display:grid;grid-template-columns:1fr 1.12fr;gap:68px;padding:24px 42px 32px}.ds-demo-stage>div{min-width:0}.ds-demo-pane-label{display:flex;justify-content:space-between;gap:9px;font:600 11px/1.6 Manrope,sans-serif;margin:0 0 18px;color:#52634c}.ds-demo-pane-label>span{font-size:10px}.ds-demo-sheet{background:#fffef8;padding:23px 28px 19px;box-shadow:0 8px 24px #34462b12;transform:rotate(-1.5deg);min-height:335px}.ds-sheet-topline{display:flex;justify-content:space-between;font-size:10px;border-bottom:1px solid #bec6b6;padding-bottom:8px}.ds-demo-sheet h2{font:500 32px/1.06 Archivo,sans-serif;letter-spacing:-.03em;margin:15px 0 18px}.ds-sheet-row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #d6dcca;padding:10px 0;font-size:12px}.ds-sheet-row small{display:block;font-size:9px;margin-top:2px;color:#596652}.ds-sheet-row strong{white-space:nowrap;font-size:11px}.ds-sheet-crossed>strong{text-decoration:line-through;text-decoration-thickness:2px;color:#8c4538}.ds-sheet-foot{margin:0;padding-top:10px;font-size:10px}.ds-sheet-foot>strong{color:#8c4538}.ds-demo-ledger{background:var(--white,#fffefa);border-radius:12px;padding:26px 27px 20px;min-height:335px}.ds-demo-ledger h3{font:500 23px/1.2 Archivo,sans-serif;letter-spacing:-.015em;margin:0}.ds-demo-ledger-subtitle{font-size:11px;color:#596652;margin:5px 0 0}.ds-demo-review-diff{padding:22px 0 2px}.ds-demo-review-diff>span{font-size:12px;font-weight:600}.ds-demo-review-diff>div{display:flex;align-items:center;gap:20px;font:400 29px/1.6 Archivo,sans-serif;margin:8px 0}.ds-demo-review-diff del{color:#796e58;text-decoration-thickness:1px}.ds-demo-review-diff strong{font-weight:500}.ds-demo-review-diff p{font-size:10px;color:#596652;margin:0}.ds-demo-people{display:flex;align-items:center;gap:11px;margin-top:15px;padding-top:14px;border-top:1px solid #dce2d4;min-height:48px}.ds-demo-people strong,.ds-demo-people span{display:block}.ds-demo-people strong{font-size:11px}.ds-demo-people span{font-size:9px;color:#596652;margin-top:2px}.ds-demo-approve{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:44px;margin-top:19px;padding:11px 18px;border:1px solid transparent;border-radius:7px;background:var(--forest,#253f2d);color:white;font:700 12px/1.4 Manrope,sans-serif;cursor:pointer;transition:background .16s ease,color .16s ease}.ds-demo-approve:hover{background:#2e553d}.ds-demo-caption{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 27px;border-top:1px solid #cbd5c0;font-size:12px}.ds-demo-caption p{margin:0}.ds-demo-caption>span{font-size:10px;color:#52634c}@media(max-width:1100px){.ds-demo-stage{gap:42px;padding:22px 27px 28px}.ds-demo-steps{gap:14px}.ds-demo-steps button{font-size:11px}.ds-demo-sheet,.ds-demo-ledger{padding:22px}}@media(max-width:760px){.ds-demo-toolbar{padding:0 14px;align-items:center}.ds-demo-steps{display:grid;grid-template-columns:1fr 1fr;gap:0 15px;padding:5px 0;flex:1}.ds-demo-steps button{padding:9px 0 7px;font-size:10px;gap:5px;min-height:38px}.ds-demo-steps button span{width:18px;height:18px;font-size:9px}.ds-demo-play{padding:8px 0 8px 8px;min-height:44px}.ds-demo-play>span{display:none}.ds-demo-stage{grid-template-columns:1fr;gap:23px;padding:19px 22px 24px}.ds-demo-pane-label{margin-bottom:12px}.ds-demo-sheet{min-height:0;padding:18px 20px 16px}.ds-demo-sheet h2{font-size:28px;margin:12px 0}.ds-demo-sheet h2 br{display:none}.ds-sheet-row{padding:8px 0}.ds-demo-ledger{min-height:337px;padding:21px 20px}.ds-demo-ledger h3{font-size:21px}.ds-demo-people{gap:8px}.ds-demo-people strong{font-size:10px}.ds-demo-caption{flex-direction:column;align-items:flex-start;gap:6px;padding:15px 20px}.ds-demo-caption>span{font-size:9px}}@media(prefers-reduced-motion:reduce){.ds-demo-approve{transition:none}}"
+    },
+    {
+      "name": "Review progress and saved reviews",
+      "kind": "custom",
+      "refersTo": "workflow-progress",
+      "description": "Pending progress and illustrative saved-review rows. Completed stages show checks; current Review is dark and marked aria-current. Applied and discarded receipts preserve their written outcome and omit approval. An unavailable workflow replaces progress with an amber reason and Retry workflow action; a local review states that Sanity is needed for history. Saved rows reopen the latest 20 reviews.",
+      "html": "<div class=\"ds-review-patterns\"><div class=\"ds-workflow-progress\"><ol aria-label=\"Review progress\"><li data-state=\"done\"><span class=\"ds-workflow-marker\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 12 2 2 4-4\"/></svg></span><div><strong>Reading</strong><span>Prepared example</span></div></li><li data-state=\"current\" aria-current=\"step\"><span class=\"ds-workflow-marker\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg></span><div><strong>Review</strong><span>Your decision</span></div></li><li data-state=\"upcoming\"><span class=\"ds-workflow-marker\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg></span><div><strong>Applied or discarded</strong><span>After your review</span></div></li></ol><details><summary>Review record · Sanity Workflows</summary><p>2 changes · 0 unresolved checks · 1 registration affected</p><p class=\"ds-workflow-id\">Illustrative record identifier · definition v1</p><p>Photo readings and organizer decisions share one saved review. INKSHIFT’s server records each caller; approval still checks the current plan and registrations.</p></details></div><section class=\"ds-saved-reviews\" aria-labelledby=\"ds-saved-reviews-title\"><h2 id=\"ds-saved-reviews-title\">Saved reviews</h2><p>Reopen a reading or see how a decision was recorded. Showing the latest 20.</p><div><button class=\"ds-saved-review-row\"><span><strong>Example paper edit</strong><time datetime=\"2026-09-22T10:52:00+05:30\">22 Sept, 10:52</time></span><span>Awaiting review <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></span></button><button class=\"ds-saved-review-row\"><span><strong>Manual plan</strong><time datetime=\"2026-09-22T10:40:00+05:30\">22 Sept, 10:40</time></span><span>Applied <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></span></button><button class=\"ds-saved-review-row\"><span><strong>Example paper edit</strong><time datetime=\"2026-09-22T10:20:00+05:30\">22 Sept, 10:20</time></span><span>Discarded <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></span></button></div></section></div>",
+      "css": ".ds-review-patterns{color:var(--ink,#213c2d);font:400 14px/1.6 Manrope,sans-serif}.ds-workflow-progress{padding:22px 28px;background:#eff3e8;border-top:1px solid var(--line,#dce2d4);border-bottom:1px solid var(--line,#dce2d4)}.ds-workflow-progress ol{display:flex;list-style:none;margin:0;padding:0;gap:32px}.ds-workflow-progress li{display:flex;align-items:center;gap:10px;flex:1}.ds-workflow-marker{width:29px;height:29px;border:1px solid #a9b79c;border-radius:50%;display:grid;place-items:center;flex-shrink:0}.ds-workflow-progress li[data-state=\"done\"] .ds-workflow-marker{background:#d8e7c6;border-color:#d8e7c6}.ds-workflow-progress li[data-state=\"current\"] .ds-workflow-marker{background:var(--ink,#213c2d);color:white;border-color:var(--ink,#213c2d)}.ds-workflow-progress li strong,.ds-workflow-progress li div>span{display:block}.ds-workflow-progress li strong{font-size:13px}.ds-workflow-progress li div>span{font-size:11px;color:#52634c}.ds-workflow-progress details{margin-top:17px;font-size:11px;color:#52634c}.ds-workflow-progress summary{cursor:pointer;width:fit-content;min-height:24px}.ds-workflow-progress summary:focus-visible,.ds-saved-review-row:focus-visible{outline:3px solid var(--focus,#648d3e);outline-offset:4px}.ds-workflow-progress details p{margin:8px 0 0;max-width:75ch}.ds-workflow-id{overflow-wrap:anywhere}.ds-saved-reviews{margin-top:36px;border-top:1px solid var(--line,#dce2d4);padding-top:28px}.ds-saved-reviews h2{margin:0;font:600 22px/1.2 Archivo,sans-serif;letter-spacing:-.03em}.ds-saved-reviews>p{color:#52634c;font-size:12px;margin:7px 0 0}.ds-saved-reviews>div{margin-top:18px}.ds-saved-review-row{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:transparent;color:var(--ink,#213c2d);border:0;border-top:1px solid var(--line,#dce2d4);text-align:left;padding:14px 10px;font:400 14px/1.6 Manrope,sans-serif;cursor:pointer}.ds-saved-review-row:hover{background:var(--mint,#eaf0e2)}.ds-saved-review-row:disabled{opacity:.5;cursor:not-allowed}.ds-saved-review-row strong{font-size:13px}.ds-saved-review-row time{display:block;font-size:11px;color:#52634c;margin-top:2px}.ds-saved-review-row>span:last-child{display:flex;align-items:center;gap:10px;font-size:12px}@media(max-width:650px){.ds-workflow-progress{padding:18px}.ds-workflow-progress ol{gap:18px;flex-direction:column}.ds-saved-review-row{padding:13px 0;gap:12px}.ds-saved-review-row>span:last-child{font-size:11px;gap:6px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Community-centre reservation ledger",
+    "overview": "Daylit mineral-white surfaces, forest-green type and a citron action color. Manrope prose, sturdy Archivo headings, fine table rules, squared paper corners and generous gutters. People counts use tabular figures. The working interface gives the source sheet and the chronological ledger comparable visual weight.\n\nThe landing carries the same source-and-result relationship into an inspectable DOM walkthrough. Its ruled sample sheet and shared-plan illustration keep game and people identities visible through an edit. The organizer and participant screens are denser and operational; review progress and saved outcomes use the same quiet fields, explicit text and fine rules.",
+    "keyCharacteristics": [
+      "Forest ink on pale mineral and paper surfaces.",
+      "Citron for consequential actions and selected evidence; forest for launch and approval actions where implemented.",
+      "Archivo headings, Manrope prose and tabular time and capacity figures.",
+      "Fine ledger rules, softly rounded controls and square source sheets.",
+      "Direct walkthrough controls, linked source evidence and written review outcomes."
+    ],
+    "rules": [
+      {
+        "name": "The Working Accent Rule",
+        "body": "Citron identifies the next action or the evidence being inspected. Pale neutral fields and fine rules carry the surrounding structure.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ledger Type Rule",
+        "body": "Archivo names the gathering and its sessions; Manrope explains actions and state. Times and capacity figures align with tabular numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Depth Rule",
+        "body": "Give physical paper a soft shadow. Separate working panels with tonal fields and fine rules; keep buttons and session cards flat at rest.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the source paper and its matching session visually connected on hover and keyboard focus.",
+      "Do place photograph and upload controls before the source sheet in the organizer column.",
+      "Do use real text for time, capacity, connection state, uncertainty and preserved registrations; color and dots supplement it.",
+      "Do retain the same paper, game and player identities across all four illustrated walkthrough states.",
+      "Do keep walkthrough steps directly selectable and preserve visible keyboard focus and reduced-motion state changes.",
+      "Do label sample sheets and illustrated registrations where they appear.",
+      "Do distinguish awaiting, applied, discarded, unavailable and local review states with explicit text and the appropriate available actions."
+    ],
+    "donts": [
+      "Don't add decorative eyebrows above the landing headings.",
+      "Don't add hard offset shadows to actions or promote ambient paper shadows into a general card style.",
+      "Don't replace the ledger's fine rules with a grid of decorative cards in the organizer schedule.",
+      "Don't make playback a prerequisite for inspecting a walkthrough state or opening the organizer.",
+      "Don't present the illustrated apply action as a saved change to a real event.",
+      "Don't treat viewport screenshots as evidence of physical-phone performance or photo-reader accuracy."
+    ]
+  }
+}

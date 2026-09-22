@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-09-20T14:17:44.311Z",
+  "projectId": "a5xdqsb7",
+  "eventId": "JGLbyKpsimpIWw",
+  "storage": "sanity",
+  "lastSeatRace": {
+    "requests": 2,
+    "winners": 1
+  },
+  "staleApprovalRejected": true,
+  "relocation": "Table B to Table C",
+  "preservedRegistrationIds": 5,
+  "anonymousPrivateReadBlocked": true,
+  "publicProjectionReadable": true
+}

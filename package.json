@@ -1,0 +1,59 @@
+{
+  "name": "inkshift",
+  "version": "1.0.0",
+  "description": "Photograph a plan. Run a gathering. Keep registrations through paper edits.",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:live": "node --env-file=.env.local --conditions=react-server --import tsx scripts/live-check.ts",
+    "test:http": "node --import tsx scripts/http-check.ts",
+    "test:vision": "node --env-file=.env.local --conditions=react-server --import tsx scripts/vision-check.ts",
+    "test:workflow-http": "node --import tsx scripts/workflow-http-check.ts",
+    "workflows:check": "node scripts/deploy-workflows.mjs --check",
+    "workflows:deploy": "node scripts/deploy-workflows.mjs"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/archivo": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
+    "@sanity/client": "^8.6.2",
+    "@sanity/sdk": "^3.3.0",
+    "@sanity/sdk-react": "^3.3.0",
+    "@sanity/workflow-engine": "0.34.0",
+    "lucide-react": "^1.47.0",
+    "next": "^16.3.5",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@sanity/workflow-blueprint": "0.34.0",
+    "@sanity/workflow-cli": "0.34.0",
+    "@sanity/workflow-engine-test": "0.34.0",
+    "@types/node": "^26.6.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1"
+  },
+  "private": true,
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "^1.2.9"
+  }
+}

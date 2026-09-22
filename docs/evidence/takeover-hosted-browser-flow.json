@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-09-22T05:48:39.860258+00:00",
+  "baseUrl": "https://inkshift.vercel.app",
+  "eventId": "iemagrkyiPEJCg",
+  "viewport": [
+    390,
+    844
+  ],
+  "newProductLandingVisible": true,
+  "horizontalOverflow": false,
+  "sampleCreatedFromLanding": true,
+  "preparedReviewCreated": true,
+  "workflowStagesVisible": [
+    "Reading - Prepared example",
+    "Review - Your decision",
+    "Applied or discarded - After your review"
+  ],
+  "appSdkConnected": true,
+  "publicProjectionSessions": 3,
+  "browserWarningsAndErrors": [],
+  "scope": "Fresh hosted landing, sample, review and inspector; booking relocation is exercised in hosted-workflow-http.json and hosted-http-photo-flow.json"
+}

@@ -1,0 +1,409 @@
+{
+  "checkedAt": "2026-09-20T14:34:34.323Z",
+  "inputType": "Programmatically rendered typed sample sheets; not real handwriting.",
+  "results": [
+    {
+      "sample": "original",
+      "elapsedMs": 10763,
+      "model": "Qwen/Qwen3-VL-30B-A3B-Instruct:novita",
+      "draft": {
+        "title": "Sunday games club",
+        "date": "2026-09-27",
+        "timeZone": "Asia/Kolkata",
+        "complete": true,
+        "uncertainties": [],
+        "spaces": [
+          {
+            "key": "space-1-0",
+            "existingId": "space-1-0",
+            "label": "Table A",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Table A 4 seats",
+              "box": [
+                0.1,
+                0.28,
+                0.35,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "space-1-1",
+            "existingId": "space-1-1",
+            "label": "Table B",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Table B 4 seats",
+              "box": [
+                0.39,
+                0.28,
+                0.63,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "space-1-2",
+            "existingId": "space-1-2",
+            "label": "Table C",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Table C 6 seats",
+              "box": [
+                0.68,
+                0.28,
+                0.92,
+                0.58
+              ]
+            }
+          }
+        ],
+        "sessions": [
+          {
+            "key": "session-1-0",
+            "existingId": "session-1-0",
+            "title": "Catan",
+            "spaceKey": "space-1-0",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Catan 6–7:30 PM 4 players",
+              "box": [
+                0.1,
+                0.28,
+                0.35,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "session-1-1",
+            "existingId": "session-1-1",
+            "title": "Ticket to Ride",
+            "spaceKey": "space-1-1",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Ticket to Ride 6–7:30 PM 4 players",
+              "box": [
+                0.39,
+                0.28,
+                0.63,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "session-1-2",
+            "existingId": "session-1-2",
+            "title": "Wavelength",
+            "spaceKey": "space-1-2",
+            "start": "19:30",
+            "end": "20:30",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Wavelength 7:30–8:30 PM 6 players",
+              "box": [
+                0.68,
+                0.28,
+                0.92,
+                0.58
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [],
+      "conflicts": []
+    },
+    {
+      "sample": "table-removed",
+      "elapsedMs": 8269,
+      "model": "Qwen/Qwen3-VL-30B-A3B-Instruct:novita",
+      "draft": {
+        "title": "Sunday games club",
+        "date": "2026-09-27",
+        "timeZone": "Asia/Kolkata",
+        "complete": true,
+        "uncertainties": [],
+        "spaces": [
+          {
+            "key": "space-1-0",
+            "existingId": "space-1-0",
+            "label": "Table A",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Table A 4 seats",
+              "box": [
+                0.1,
+                0.28,
+                0.35,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "space-1-1",
+            "existingId": "space-1-1",
+            "label": "Table B",
+            "capacity": 4,
+            "removed": true,
+            "evidence": {
+              "text": "Table B 4 seats",
+              "box": [
+                0.38,
+                0.28,
+                0.63,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "space-1-2",
+            "existingId": "space-1-2",
+            "label": "Table C",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Table C 6 seats",
+              "box": [
+                0.66,
+                0.28,
+                0.91,
+                0.58
+              ]
+            }
+          }
+        ],
+        "sessions": [
+          {
+            "key": "session-1-0",
+            "existingId": "session-1-0",
+            "title": "Catan",
+            "spaceKey": "space-1-0",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Catan 6–7:30 PM 4 players",
+              "box": [
+                0.1,
+                0.28,
+                0.35,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "session-1-1",
+            "existingId": "session-1-1",
+            "title": "Ticket to Ride",
+            "spaceKey": "space-1-1",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Ticket to Ride 6–7:30 PM 4 players",
+              "box": [
+                0.38,
+                0.28,
+                0.63,
+                0.58
+              ]
+            }
+          },
+          {
+            "key": "session-1-2",
+            "existingId": "session-1-2",
+            "title": "Wavelength",
+            "spaceKey": "space-1-2",
+            "start": "19:30",
+            "end": "20:30",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Wavelength 7:30–8:30 PM 6 players",
+              "box": [
+                0.66,
+                0.28,
+                0.91,
+                0.58
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "kind": "remove",
+          "entity": "Table B",
+          "entityId": "space-1-1",
+          "detail": "Remove Table B.",
+          "affected": 0
+        },
+        {
+          "kind": "move",
+          "entity": "Ticket to Ride",
+          "entityId": "session-1-1",
+          "before": "Table B",
+          "after": "Table C",
+          "detail": "Move Ticket to Ride from Table B to Table C. Keep the same session link.",
+          "affected": 0
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "sample": "renamed",
+      "elapsedMs": 15958,
+      "model": "Qwen/Qwen3-VL-30B-A3B-Instruct:novita",
+      "draft": {
+        "title": "Sunday games club",
+        "date": "2026-09-27",
+        "timeZone": "Asia/Kolkata",
+        "complete": true,
+        "uncertainties": [
+          ","
+        ],
+        "spaces": [
+          {
+            "key": "space-1-0",
+            "existingId": "space-1-0",
+            "label": "Table A",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Table A 4 seats",
+              "box": [
+                0.09,
+                0.27,
+                0.33,
+                0.59
+              ]
+            }
+          },
+          {
+            "key": "space-1-1",
+            "existingId": "space-1-1",
+            "label": "Table B",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Table B 4 seats",
+              "box": [
+                0.38,
+                0.27,
+                0.62,
+                0.59
+              ]
+            }
+          },
+          {
+            "key": "space-1-2",
+            "existingId": "space-1-2",
+            "label": "Table C",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Table C 6 seats",
+              "box": [
+                0.67,
+                0.27,
+                0.91,
+                0.59
+              ]
+            }
+          }
+        ],
+        "sessions": [
+          {
+            "key": "session-1-0",
+            "existingId": "session-1-0",
+            "title": "Catan",
+            "spaceKey": "space-1-0",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Catan 6–7:30 PM 4 players",
+              "box": [
+                0.09,
+                0.27,
+                0.33,
+                0.59
+              ]
+            }
+          },
+          {
+            "key": "session-1-1",
+            "existingId": "session-1-1",
+            "title": "Ticket to Ride: Europe",
+            "spaceKey": "space-1-1",
+            "start": "18:00",
+            "end": "19:30",
+            "capacity": 4,
+            "removed": false,
+            "evidence": {
+              "text": "Ticket to Ride: Europe 6–7:30 PM 4 players",
+              "box": [
+                0.38,
+                0.27,
+                0.62,
+                0.59
+              ]
+            }
+          },
+          {
+            "key": "session-1-2",
+            "existingId": "session-1-2",
+            "title": "Wavelength",
+            "spaceKey": "space-1-2",
+            "start": "19:30",
+            "end": "20:30",
+            "capacity": 6,
+            "removed": false,
+            "evidence": {
+              "text": "Wavelength 7:30–8:30 PM 6 players",
+              "box": [
+                0.67,
+                0.27,
+                0.91,
+                0.59
+              ]
+            }
+          }
+        ]
+      },
+      "changes": [
+        {
+          "kind": "rename",
+          "entity": "Ticket to Ride: Europe",
+          "entityId": "session-1-1",
+          "before": "Ticket to Ride",
+          "after": "Ticket to Ride: Europe",
+          "detail": "Rename Ticket to Ride to Ticket to Ride: Europe. Keep the same session.",
+          "affected": 0
+        }
+      ],
+      "conflicts": [
+        {
+          "code": "uncertain-reading",
+          "message": ","
+        }
+      ]
+    }
+  ]
+}

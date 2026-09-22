@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-09-22T05:39:32.280576+00:00",
+  "baseUrl": "http://localhost:3333",
+  "eventId": "sH04SLr1L2hFyg",
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "captureScope": "Native viewport captures of named regions, not full-page or physical-device evidence",
+  "sampleCreateFromLanding": true,
+  "participantName": "Alex Demo",
+  "participantJoined": "Ticket to Ride",
+  "preparedReviewCreated": true,
+  "sanityWorkflowStagesObserved": [
+    "reading",
+    "review",
+    "applied"
+  ],
+  "reviewReopenedAfterReload": true,
+  "domainAndWorkflowTests": 25,
+  "browserErrorsObserved": [],
+  "handwritingTested": false,
+  "reducedMotion": "CSS implementation inspected; no media emulation was performed",
+  "participantBookingAfterApproval": {
+    "session": "Ticket to Ride",
+    "table": "C",
+    "stillJoined": true
+  },
+  "walkthroughPlayReachedFinalStep": true,
+  "walkthroughPlayStoppedAtFinalStep": true
+}

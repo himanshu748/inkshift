@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-09-22T05:20:20.203Z",
+  "baseUrl": "http://localhost:3333",
+  "eventId": "fffWGn0melHdSA",
+  "workflow": "inkshift-plan-change v1",
+  "readingAttribution": "Prepared example",
+  "approvalAttribution": "Organizer",
+  "staleApprovalBlocked": true,
+  "correctedCounts": 2,
+  "appliedAndDiscardedHistoryPersisted": true,
+  "sameBookingAfterMove": true,
+  "finalTable": "Table C",
+  "discardLeftPlanUnchanged": true,
+  "unauthorizedReviewAccessBlocked": true,
+  "anonymousWorkflowDocumentHidden": true
+}

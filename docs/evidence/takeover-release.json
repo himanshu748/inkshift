@@ -1,0 +1,16 @@
+{
+  "deployedAt": "2026-09-22T05:47:24.075900+00:00",
+  "url": "https://inkshift.vercel.app",
+  "deploymentId": "dpl_BY9ohBLjZmnWqDYY6Z88W47s4WVY",
+  "deploymentUrl": "https://inkshift-nmfz2kqzd-himanshus-projects-acd54afd.vercel.app",
+  "readyState": "READY",
+  "vercelProject": "inkshift",
+  "sanityProjectId": "a5xdqsb7",
+  "dataset": "production",
+  "workflow": "inkshift-plan-change v1",
+  "definitionDeployShared": false,
+  "sourceUrl": "https://github.com/himanshu748/inkshift",
+  "hostedWorkflowCheckPassed": true,
+  "hostedTypedPhotoCheckPassed": true,
+  "freshHostedBrowserCheckPassed": true
+}

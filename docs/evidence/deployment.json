@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-09-20T18:45:30.343510+00:00",
+  "productionUrl": "https://inkshift.vercel.app",
+  "projectId": "prj_FmcsdtlRKsm0ZLNJix9mEK4VADBe",
+  "deploymentId": "dpl_724qpe96xMacACb7thXy4qNteJsd",
+  "deploymentUrl": "https://inkshift-ahwrstkeq-himanshus-projects-acd54afd.vercel.app",
+  "readyState": "READY",
+  "framework": "nextjs",
+  "node": "24.x",
+  "publicLandingHttpStatus": 200,
+  "finalHealth": {
+    "httpStatus": 200,
+    "storage": "sanity",
+    "visionAvailable": true,
+    "projectId": "a5xdqsb7"
+  },
+  "sanityCors": {
+    "origin": "https://inkshift.vercel.app",
+    "allowCredentials": false,
+    "verifiedBy": "Saved Sanity management UI row and direct App SDK browser connection"
+  },
+  "serverEnvironment": {
+    "variables": 11,
+    "sensitiveKeys": [
+      "SANITY_API_TOKEN",
+      "HF_TOKEN"
+    ],
+    "valuesExcluded": true
+  },
+  "checks": {
+    "typecheck": "pass",
+    "lint": "pass",
+    "domainTests": 19,
+    "productionBuild": "pass",
+    "finalDeploymentErrorLogs": "No results at verification time"
+  },
+  "hostedHttpFlow": {
+    "report": "hosted-http-photo-flow.json",
+    "deploymentId": "dpl_EqrJWM5Kdq31QpxARJNTQ5JvXTCv",
+    "scope": "Run before the browser-only SDK rendering fix; API and domain implementation did not change in the final deployment."
+  },
+  "initialIssuesResolved": [
+    "Vercel Other framework preset served 404; pinned nextjs.",
+    "Sanity App SDK hook had no server snapshot; provider now loads only in the browser."
+  ],
+  "remaining": [
+    "Public repository",
+    "Physical handwriting and camera testing",
+    "Physical-paper demo video",
+    "Remote Sanity schema/Studio deployment",
+    "DEV article publication and submission receipt"
+  ]
+}

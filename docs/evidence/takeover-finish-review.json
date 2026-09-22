@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-09-22T05:47:24.075581+00:00",
+  "scope": "Nine native viewport captures and current source, followed by a documentation-only verdict pass",
+  "reviewerRole": "Generic agent following the unavailable Impeccable finish reviewer fallback contract",
+  "documenterRole": "Generic agent following the unavailable Impeccable documenter fallback contract",
+  "initialDisposition": "fix",
+  "materialFix": "Replace obsolete 3D descriptions in DESIGN.md and its JSON sidecar",
+  "materialVisualDefects": [],
+  "fixVerified": true,
+  "finalDisposition": "ship",
+  "limits": [
+    "No quality barcard or reference comp supplied for the settled continuation",
+    "Viewport captures are not full-page or physical-device evidence",
+    "Handwriting accuracy was not tested",
+    "Reduced-motion CSS inspected without media-emulation runtime test"
+  ]
+}

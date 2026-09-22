@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-09-20T18:45:30.343510+00:00",
+  "baseUrl": "https://inkshift.vercel.app",
+  "eventId": "qFBBYm77qNVCPA",
+  "flow": {
+    "createdFromLanding": true,
+    "participant": "Alex Demo",
+    "session": "Ticket to Ride",
+    "sessionId": "session-1-1",
+    "joinedAt": "Table B",
+    "preparedExampleReview": "1 registration preserved; remove Table B and move Ticket to Ride to C",
+    "approved": true,
+    "participantUpdatedTo": "Table C",
+    "inspectorRevision": 2,
+    "inspectorJoined": "1/4"
+  },
+  "postFixSmoke": {
+    "deploymentId": "dpl_724qpe96xMacACb7thXy4qNteJsd",
+    "participantBookingSurvivedReload": true,
+    "inspectorConnected": true,
+    "sdkLiveUpdate": "Wavelength changed from 0/6 to 1/6 after participant joined, without reloading the inspector.",
+    "noNewBrowserErrors": "Only the earlier React 419 entry remained in the tab log; no new entries after reload.",
+    "finalDeploymentErrorLogs": "No results"
+  },
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 720,
+      "page": "landing",
+      "horizontalOverflow": false,
+      "webglPaperAndChangeEndpoints": true,
+      "nativeReturnToPaper": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page": "landing",
+      "horizontalOverflow": false,
+      "webglPaperEndpoint": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page": "participant",
+      "horizontalOverflow": false,
+      "signupAndMove": true
+    }
+  ],
+  "scope": "Separate tabs in one macOS browser. Independent HTTP tests used separate cookie contexts. CSS viewport checks are not physical-phone testing.",
+  "captureNotes": "Screenshots inspected in the browser tool; no full-page or physical-device capture claimed. Temporary viewport override reset."
+}

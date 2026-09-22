@@ -31,7 +31,9 @@ export function Join({ id }: { id: string }) {
     try {
       await api(`/api/events/${id}/registrations`, { sessionId, name });
       await refresh();
-      setNotice("You’re on the list. Your registration stays in this browser.");
+      setNotice(
+        "You’re on the list. Keep this link to check your place or leave the session.",
+      );
       setSelected("");
     } catch (e) {
       setError((e as Error).message);
@@ -92,7 +94,7 @@ export function Join({ id }: { id: string }) {
           <p>
             Pull up a chair.
             <br />
-            There’s a game with your name on it.
+            There’s a place with your name on it.
           </p>
           <div className="join-meta">
             <span>

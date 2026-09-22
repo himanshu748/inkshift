@@ -1,4 +1,10 @@
-# INKSHIFT demo, about 90 seconds
+# Recorded product walkthrough
+
+[Watch the 43-second walkthrough](video/inkshift-product-walkthrough.mp4). Captured from the public app on September 22, 2026, then edited from real browser states with cursor motion. Network waits and guest-form entry are compressed. The recording uses a visibly labeled prepared sample; it does not demonstrate photographed handwriting.
+
+It shows gathering setup, a saved organizer workspace, the practice plan, participant invite, a guest booking at Table B, approval of the move, the retained place at Table C, and the returning organizer list. The full API and browser records are in `evidence/product-hosted-browser-flow.json`, `evidence/hosted-product-http.json`, and `evidence/hosted-workflow-http.json`.
+
+# Physical-paper demo script, about 90 seconds
 
 Use a fresh event and a second browser. A hosted URL is needed for judges to scan the QR code from their own phones; `localhost` only reaches the computer running the server.
 
@@ -19,6 +25,6 @@ Rehearse this with actual handwriting before recording. The completed automated 
 
 ## Reproducible fallback demonstration
 
-Choose **Try a games night**, join a game through its invite, and choose **Use the crossed-out example**. Say that the reading is prepared. This proves registration, reconciliation and persistence, while the image reader needs a separate photo demonstration. The interface already labels the distinction.
+Choose **Try a sample**, join a game through its invite, and choose **Use the crossed-out example**. Say that the reading is prepared. This proves registration, reconciliation and persistence, while the image reader needs a separate photo demonstration. The interface already labels the distinction.
 
 The real Sanity race report is in `docs/evidence/live-sanity.json`. Do not claim that a staged two-phone join establishes concurrency correctness; use that report for the one-seat race result.

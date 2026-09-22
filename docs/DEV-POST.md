@@ -19,9 +19,11 @@ I kept the scope to games nights, clubs and workshops. The model proposes struct
 
 ## Demo
 
-[Open INKSHIFT](https://inkshift.vercel.app). Choose **Try a games night** to create your own sample event; no account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. Approve it and check the participant page: the booking is still there.
+[Watch the 43-second product walkthrough](https://github.com/himanshu748/inkshift/blob/main/docs/video/inkshift-product-walkthrough.mp4). It is edited from real browser states and uses the prepared sample described below.
 
-The landing walkthrough is an illustration. The prepared edit button uses a fixed reading. Both are labeled. **Start with your own photo** uses the real image reader instead.
+[Open INKSHIFT](https://inkshift.vercel.app). Choose **Try a sample** to create your own sample event; no account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. Approve it and check the participant page: the booking is still there.
+
+The landing walkthrough is an illustration. The prepared edit button uses a fixed reading. Both are labeled. **Plan a gathering** starts your own event. Uploading a photo from its workspace uses the real image reader instead.
 
 ![INKSHIFT demonstrates a paper edit and its proposed session move](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/product-review.jpg)
 
@@ -51,9 +53,13 @@ The process now runs through Reading, Review and either Applied or Discarded. Th
 
 One failure needed special handling. The event transaction can succeed just before the workflow record fails to update. Repeating the entire operation could apply a decision twice. INKSHIFT saves the decision on the proposal alongside the event update, then uses that saved decision to resume the missing workflow action. The interface tells the organizer when the plan is saved but the workflow record needs a retry.
 
-I tested that recovery with a simulated connection failure and the real workflow engine's in-memory test bench. The suite also checks blocked approval, corrections, discard, stale registrations, attribution and repeated reads. There are 25 tests in total, including the 19 domain tests from the earlier build.
+I tested that recovery with a simulated connection failure and the real workflow engine's in-memory test bench. The suite also checks blocked approval, corrections, discard, stale registrations, attribution and repeated reads. There are 31 tests in total: 19 domain tests, six workflow tests and six tests for organizer access and returning to saved gatherings.
 
 The live HTTP check goes further: it creates a Sanity-backed event, joins a participant, opens a review, adds another participant, verifies that the review is stale, rechecks it and applies the move. It then discards a conflicting proposal and confirms that the plan stayed unchanged. Anonymous callers cannot open the saved reviews or read the private workflow instance directly from the dataset. The scripts and dated reports are in the repository.
+
+The next pass was about using it beyond that first demo. I moved the sample behind a secondary action and added setup for the organizer’s own name, date and time zone. A returning organizer now has a Your gatherings page. A private access code restores the same organizer capability on another device; it is separate from the participant invite, and the interface explains that anyone with the code can manage the gathering.
+
+Testing the new path exposed two defects. A native date field could show a date that differed from the submitted state, so setup now reads the form’s current values at submission. Manual entry also inherited an unrelated sample photograph. I removed that fallback, opened the editor immediately for typed plans, and checked that approving one creates no example-photo link. The live API check verifies private listing, rejected unauthorized code exports, restored access and unchanged plan revisions during recovery.
 
 ## Sanity Project Details
 
@@ -66,4 +72,4 @@ The organizer and content inspector use App SDK subscriptions to a public projec
 
 The deployed Workflows definition is `inkshift-plan-change`, version 1. Its instances sit next to the proposals in Content Lake. The server records whether each step came from the photo reader, a prepared example or the organizer. These are declared execution contexts under the same server credential; they are not separate Sanity user accounts. Server authorization and revision checks enforce the actual write boundary.
 
-The local Studio schema is included. Remote schema and Studio deployment remain a handoff because the available token does not have those deployment permissions. Content Lake writes, App SDK subscriptions and workflow transitions have been tested separately. The next demonstration I need to record is the same full flow with physical handwriting and a participant on a second phone.
+The local Studio schema is included. The schema validates and the read-only Studio builds locally. Remote deployment remains pending approval under the earlier handoff instruction; I have not re-established its deployment permissions. Content Lake writes, App SDK subscriptions and workflow transitions have been tested separately. The next demonstration I need to record is the same full flow with physical handwriting and a participant on a second phone.

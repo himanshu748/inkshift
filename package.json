@@ -14,7 +14,8 @@
     "test:vision": "node --env-file=.env.local --conditions=react-server --import tsx scripts/vision-check.ts",
     "test:workflow-http": "node --import tsx scripts/workflow-http-check.ts",
     "workflows:check": "node scripts/deploy-workflows.mjs --check",
-    "workflows:deploy": "node scripts/deploy-workflows.mjs"
+    "workflows:deploy": "node scripts/deploy-workflows.mjs",
+    "test:product-http": "node --import tsx scripts/product-http-check.ts"
   },
   "engines": {
     "node": "24.x"

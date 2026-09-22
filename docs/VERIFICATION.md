@@ -2,7 +2,18 @@
 
 The September 22, 2026 continuation replaces the 3D landing and connects the existing review system to Sanity Workflows. Earlier deployment, concurrency and photo evidence remains in [the September 21 record](VERIFICATION-2026-09-21.md); its 3D performance findings describe a removed interface.
 
-## Current checks
+## Product continuation — September 22
+
+- Added real gathering setup, the returning organizer list, private access-code backup and restore, an empty-workspace path, and Help/Privacy/About routes. Practice gatherings are separate from an organizer’s real plans.
+- TypeScript, ESLint, the optimized Next.js build and all **31 tests** passed. Six new unit tests cover gathering discovery and organizer access. The actual local HTTP flow verified custom details, invalid dates, owner-only discovery/export, cross-origin rejection, a manual plan with no example photo, and restoration in a separate cookie context without changing the plan. See `evidence/local-product-http.json`.
+- Browser verification caught a native-date input mismatch; setup now submits the actual form values. The browser-created “Community games night” preserved October 3, 2026. The check also exercised returning to a gathering, invalid-code feedback, disabled invites on an empty plan, and the typed-plan review. Eleven desktop/phone viewport regions were captured. See `evidence/product-browser-flow.json`.
+- A fresh independent Impeccable finish reviewer returned **ship**; a separate documenter preserved the incumbent system for this ordinary extension. See `evidence/product-finish-review.md`.
+- Vercel deployment `dpl_85WtKuFmLmU5SUyqgF4hc28YEwqJ` is Ready and aliased to `https://inkshift.vercel.app`. The hosted product and workflow HTTP checks passed, including separate-cookie recovery, unchanged plan revisions, stale-review rejection, recheck, preserved booking, discard, saved history and private access restrictions. See `evidence/hosted-product-http.json` and `evidence/hosted-workflow-http.json`.
+- Fresh hosted-browser checks preserved the custom October 2 date, opened a guest invite, booked Ticket to Ride, applied a prepared move and showed the retained place at Table C. The organizer list reopened the real gathering on a 390 × 844 viewport without horizontal overflow. Console warnings/errors: zero. See `evidence/product-hosted-browser-flow.json`.
+- The 43-second edited browser walkthrough exported successfully. ffprobe confirms H.264, 60fps and a 1920 × 1340 public copy; its native content crop is preserved. A midpoint frame was inspected for legible controls, visible cursor and the prepared-example disclosure. See `video/inkshift-product-walkthrough.mp4` and `evidence/product-video.json`.
+- The read-only Sanity Studio schema validates with **zero errors and zero warnings**. The Studio production build and schema extraction passed. Schema/Studio deployment is pending explicit approval after automatic review blocked it against the earlier handoff instruction. No event records were edited by these preparation commands.
+
+## Earlier workflow release checks
 
 - TypeScript, ESLint, all 25 tests, workflow-definition validation and the optimized Next.js build passed.
 - Six tests use the real Sanity workflow engine with its in-memory bench. They cover applied and discarded outcomes, unclear-reading approval gates, recheck, stale registrations, caller attribution, repeated reads and recovery after a simulated follow-up write failure.
@@ -24,6 +35,6 @@ The September 22, 2026 continuation replaces the 3D landing and connects the exi
 
 The image inputs are rendered typed sheets, not photographed handwriting. Prepared example buttons do not use image inference. Browser tests use CSS viewports in a desktop browser, not physical phone hardware. The workflow fault-recovery test simulates a lost engine write in memory; it does not claim to have induced a live Sanity outage.
 
-Remote schema and Studio deployment remain a handoff. The available token can write the dataset and deploy workflow definitions but previously lacked schema/Studio deployment access. No new Sanity login or Studio deployment was attempted during this continuation.
+Remote schema and Studio deployment remain pending. The local schema and Studio build are prepared; the earlier workflow release did not establish remote schema/Studio permissions.
 
-A physical-paper video, DEV publication and a submission receipt remain unfinished. The global event/photo caps are shared quota guards. Capability cookies have no account-recovery flow, and distinct browsers do not establish distinct human identities.
+An edited browser walkthrough is included; a physical-paper video, DEV publication and a submission receipt remain unfinished. The global event/photo caps are shared quota guards. Organizers can now save a private bearer code to restore access. There is still no account/email recovery when both that code and the original browser access are lost, and codes cannot yet be rotated in the interface. Distinct browsers do not establish distinct human identities.

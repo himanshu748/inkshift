@@ -24,6 +24,7 @@ import {
   Users,
   X,
   AlertCircle,
+  KeyRound,
 } from "lucide-react";
 import type {
   DraftPlan,
@@ -45,6 +46,7 @@ import {
 import { Paper } from "./paper";
 import { WorkflowProgress } from "./workflow-progress";
 import { DraftEditor } from "./draft-editor";
+import { OrganizerAccess } from "./organizer-access";
 const SanityLiveBridge = dynamic(
   () => import("./sanity-live").then((module) => module.SanityLiveBridge),
   { ssr: false },
@@ -225,7 +227,9 @@ function Review({
   onDiscard: () => void;
   onRetry: () => void;
 }) {
-  const [editing, setEditing] = useState(proposal.preview.conflicts.length > 0);
+  const [editing, setEditing] = useState(
+    proposal.source === "manual" || proposal.preview.conflicts.length > 0,
+  );
   const [draft, setDraft] = useState(proposal.draft);
   const [dirty, setDirty] = useState(false);
   const stale = event.version !== proposal.baseVersion;
@@ -295,7 +299,9 @@ function Review({
           <p>
             {proposal.source === "sample"
               ? "This uses a prepared example reading. Your live event changes only when you approve."
-              : "Compare the reading with your paper. Nothing changes until you approve."}
+              : proposal.source === "manual"
+                ? "Add or edit your tables and sessions, then check the changes before you approve."
+                : "Compare the reading with your paper. Nothing changes until you approve."}
           </p>
         </div>
         <button
@@ -478,6 +484,7 @@ export function Workspace({ id }: { id: string }) {
   const [reviews, setReviews] = useState<ReviewSummary[]>([]);
   const [reviewsError, setReviewsError] = useState("");
   const [sharing, setSharing] = useState(false);
+  const [savingAccess, setSavingAccess] = useState(false);
   const [active, setActive] = useState<string>();
   const [tab, setTab] = useState<"schedule" | "people" | "history">("schedule");
   const [highlighted, setHighlighted] = useState(false);
@@ -652,12 +659,15 @@ export function Workspace({ id }: { id: string }) {
           <div className="error-empty">
             <h1>You’re invited.</h1>
             <p>
-              Organizer controls stay in the browser that created the event. Use
-              the participant page to join a game.
+              Use the participant page to join. If you organize this gathering,
+              open it in your original browser or use your saved access code.
             </p>
             <Link className="button primary" href={`/join/${id}`}>
               Join {event.title}
               <ArrowRight size={16} />
+            </Link>
+            <Link className="text-button" href="/restore">
+              Restore organizer access <ArrowRight size={16} />
             </Link>
           </div>
         </main>
@@ -670,15 +680,14 @@ export function Workspace({ id }: { id: string }) {
       </div>
       <header className="workspace-header">
         <Brand small />
-        <Link href="/" className="text-button">
-          <Plus size={15} />
-          New gathering
+        <Link href="/gatherings" className="text-button">
+          Your gatherings
         </Link>
         <span className="storage-label">
           <span className={`status-dot ${!connected ? "disconnected" : ""}`} />
           {connected
             ? event.storage === "sanity"
-              ? "Saved to Sanity"
+              ? "All changes saved"
               : "Saved on this computer"
             : "Reconnecting…"}
         </span>
@@ -695,13 +704,68 @@ export function Workspace({ id }: { id: string }) {
               {event.timeZone.replaceAll("_", " ")}
             </p>
           </div>
-          <button className="button dark" onClick={() => setSharing((v) => !v)}>
+          <button
+            className="button dark"
+            onClick={() => setSharing((v) => !v)}
+            disabled={!event.sessions.length}
+            title={
+              !event.sessions.length
+                ? "Add and approve a session before inviting people"
+                : undefined
+            }
+          >
             <Share2 size={17} />
             Invite people
             <ArrowUpRight size={17} />
           </button>
         </div>
+        <div className="workspace-utilities">
+          <button
+            className="text-button"
+            onClick={() => setSavingAccess((open) => !open)}
+            aria-expanded={savingAccess}
+          >
+            <KeyRound size={15} />
+            Save organizer access
+          </button>
+          <Link className="text-button" href="/help">
+            Organizer guide <ArrowUpRight size={14} />
+          </Link>
+          {event.sample && (
+            <span className="practice-label">Practice gathering</span>
+          )}
+        </div>
+        {savingAccess && (
+          <OrganizerAccess id={id} onClose={() => setSavingAccess(false)} />
+        )}
         {sharing && <SharePanel id={id} onClose={() => setSharing(false)} />}
+        {!event.sessions.length && !proposal && (
+          <section className="first-plan-guide">
+            <div>
+              <h2>Give your gathering a plan.</h2>
+              <p>
+                Add the tables, activities and available places. You’ll check
+                everything before people can join.
+              </p>
+            </div>
+            <button
+              className="button primary"
+              disabled={!!busy}
+              onClick={() => upload.current?.click()}
+            >
+              <ImagePlus size={17} />
+              Upload a plan
+            </button>
+            <button
+              className="button secondary"
+              disabled={!!busy}
+              onClick={manual}
+            >
+              <FilePenLine size={17} />
+              Start by typing
+            </button>
+          </section>
+        )}
         {error && (
           <div className="notice warning" role="alert">
             <AlertCircle size={19} />
@@ -790,7 +854,7 @@ export function Workspace({ id }: { id: string }) {
             </p>
             <button className="text-button" disabled={!!busy} onClick={manual}>
               <FilePenLine size={15} />
-              Enter or edit a plan by hand
+              {event.sessions.length ? "Edit plan" : "Enter a plan by hand"}
             </button>
             <Paper
               eventId={id}
@@ -815,7 +879,7 @@ export function Workspace({ id }: { id: string }) {
               <div className="try-edit">
                 <div className="try-edit-heading">
                   <Sparkles size={18} />
-                  <h3>Try the second photograph.</h3>
+                  <h3>Try changing the plan.</h3>
                 </div>
                 <p>
                   First, invite someone to Ticket to Ride. Then remove Table B
@@ -982,6 +1046,7 @@ export function Workspace({ id }: { id: string }) {
                 className="icon-button"
                 onClick={() => setSharing(true)}
                 aria-label="Share participant invite"
+                disabled={!event.sessions.length}
               >
                 <ArrowUpRight size={22} />
               </button>
@@ -1055,13 +1120,20 @@ export function Workspace({ id }: { id: string }) {
         <footer className="workspace-footer">
           <span>Your paper. Your call.</span>
           <span>
-            {event.storage === "sanity"
-              ? "Content and registrations on Sanity"
-              : "Local preview · connect Sanity before deploying"}
+            <Link href="/privacy">Privacy</Link>
             <span className="meta-divider" />
-            <Link href={`/event/${id}/inspector`}>
-              Content inspector <ArrowUpRight size={12} />
-            </Link>
+            <Link href="/about">About INKSHIFT</Link>
+            <details className="technical-details">
+              <summary>Technical details</summary>
+              <p>
+                {event.storage === "sanity"
+                  ? "Stored in Sanity Content Lake."
+                  : "Stored locally on this computer."}{" "}
+                <Link href={`/event/${id}/inspector`}>
+                  Open content inspector <ArrowUpRight size={12} />
+                </Link>
+              </p>
+            </details>
           </span>
         </footer>
       </main>

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { ArrowUpRight, MoveUpRight, LoaderCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { MoveUpRight, LoaderCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { EventView } from "@/lib/model";
 
@@ -19,18 +20,24 @@ export function Brand({ small = false }: { small?: boolean }) {
   );
 }
 export function Header() {
+  const path = usePathname();
   return (
     <header className="site-header">
       <Brand />
-      <span className="header-note">A little paper. A lot of possibility.</span>
-      <a
-        href="https://dev.to/challenges/sanity-2026-09-16"
-        target="_blank"
-        rel="noreferrer"
-        className="header-link"
-      >
-        Sanity Challenge <ArrowUpRight size={15} />
-      </a>
+      <nav className="product-navigation" aria-label="Main navigation">
+        <Link href="/#how-it-works" className="how-link">
+          How it works
+        </Link>
+        <Link
+          href="/gatherings"
+          aria-current={path === "/gatherings" ? "page" : undefined}
+        >
+          Your gatherings
+        </Link>
+        <Link href="/help" aria-current={path === "/help" ? "page" : undefined}>
+          Help
+        </Link>
+      </nav>
     </header>
   );
 }
@@ -63,6 +70,11 @@ export async function api<T>(
     headers: payload ? { "content-type": "application/json" } : undefined,
     body: payload ? JSON.stringify(payload) : undefined,
     cache: "no-store",
+    signal: AbortSignal.timeout(80_000),
+  }).catch(() => {
+    throw new Error(
+      "The connection was interrupted. Check your internet connection and try again.",
+    );
   });
   const data = await response.json().catch(() => {
     throw new Error(

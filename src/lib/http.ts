@@ -93,7 +93,9 @@ export async function reserveDailyBudget(scope: "events" | "photos") {
     const current = await store.get<Document>(id);
     if (Number(current?.count ?? 0) >= limit)
       throw new AppError(
-        "The shared demo has reached its daily limit. Existing events still work. Please try creating a new plan tomorrow.",
+        scope === "photos"
+          ? "Today’s photo-reading limit has been reached. You can still enter or edit your plan by hand, or try a photo tomorrow."
+          : "Today’s new-gathering limit has been reached. Your existing gatherings still work. Please try creating a gathering tomorrow.",
         429,
         "daily-limit",
       );
@@ -115,5 +117,5 @@ export async function reserveDailyBudget(scope: "events" | "photos") {
         throw error;
     }
   }
-  throw new AppError("The demo is busy. Try again in a moment.", 429);
+  throw new AppError("INKSHIFT is busy. Try again in a moment.", 429);
 }

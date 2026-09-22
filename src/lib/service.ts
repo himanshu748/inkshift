@@ -167,6 +167,7 @@ export async function createEvent(
   mode: "sample" | "blank",
   date: string,
   timeZone: string,
+  title?: string,
 ) {
   const id = randomBytes(10).toString("base64url");
   const token = randomToken();
@@ -176,7 +177,11 @@ export async function createEvent(
     _id: ids.event(id),
     _type: "inkshiftEvent",
     id,
-    title: mode === "sample" ? draft.title : "Untitled gathering",
+    title: title
+      ? draftSchema.shape.title.parse(title)
+      : mode === "sample"
+        ? draft.title
+        : "Untitled gathering",
     date,
     timeZone,
     version: 0,

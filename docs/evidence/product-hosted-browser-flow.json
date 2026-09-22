@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-09-22T06:55:35.913387+00:00",
+  "url": "https://inkshift.vercel.app",
+  "createdEvent": "2MFQskfI97PWJQ",
+  "createdDetails": {
+    "title": "Friday at the games caf\u00e9",
+    "date": "2026-10-02",
+    "timeZone": "Asia/Calcutta"
+  },
+  "sampleEvent": "OwBz69sWdOi2Ww",
+  "browserChecks": {
+    "customDetailsSaved": true,
+    "emptyPlanInviteDisabled": true,
+    "sampleClearlyLabeled": true,
+    "guestJoinedTicketToRide": true,
+    "approvalPreservedOneRegistration": true,
+    "guestBookingMovedFromBToC": true,
+    "realGatheringReturnedThroughList": true,
+    "practiceGatheringsCollapsed": true,
+    "mobileReopenedWorkspace": true,
+    "mobileOverflow": false,
+    "consoleWarningsOrErrors": 0
+  },
+  "captureRegion": [
+    1440,
+    1005
+  ],
+  "mobileCssViewport": [
+    390,
+    844
+  ],
+  "limits": [
+    "Edited screenshot walkthrough, not continuous recording",
+    "Prepared sample reading, not a photographed-handwriting test",
+    "Desktop browser CSS emulation, not a physical phone"
+  ],
+  "privateOrganizerCodeRecorded": false
+}

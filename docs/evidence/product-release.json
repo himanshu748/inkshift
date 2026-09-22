@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-09-22T06:41:28Z",
+  "productionUrl": "https://inkshift.vercel.app",
+  "deploymentId": "dpl_85WtKuFmLmU5SUyqgF4hc28YEwqJ",
+  "deploymentState": "READY",
+  "deploymentUrl": "https://inkshift-hmb0nnwi2-himanshus-projects-acd54afd.vercel.app",
+  "tests": 31,
+  "localBuild": true,
+  "localLint": true,
+  "hostedProductHttp": "hosted-product-http.json",
+  "hostedWorkflowHttp": "hosted-workflow-http.json",
+  "finishReview": "ship",
+  "studio": {
+    "schemaValidationErrors": 0,
+    "schemaValidationWarnings": 0,
+    "localBuildPassed": true,
+    "remoteDeployment": "not performed; earlier handoff constraint needs explicit override, internal tool not required for public app"
+  }
+}

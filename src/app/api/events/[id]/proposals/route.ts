@@ -42,7 +42,7 @@ export async function POST(
           draft,
           input.sampleChange
             ? `sample-${input.sampleChange}`
-            : (event.photoId ?? "sample-original"),
+            : (event.photoId ?? ""),
           input.sampleChange ? "sample" : "manual",
         ),
       ),

@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-09-22T06:24:26.653Z",
+  "baseUrl": "http://localhost:3333",
+  "eventId": "QWEsQbzvZsXKiw",
+  "customDetailsPreserved": true,
+  "typedPlanApprovedWithoutExamplePhoto": true,
+  "invalidDateRejected": true,
+  "anonymousGatheringsEmpty": true,
+  "onlyOwnedGatheringsListed": true,
+  "unauthorizedCodeExportBlocked": true,
+  "crossOriginCodeExportBlocked": true,
+  "invalidCodeRejected": true,
+  "organizerAccessRestoredInNewCookieContext": true,
+  "restoreDidNotMutatePlan": true,
+  "privateResponsesNotCached": true,
+  "credentialsIncludedInReport": false
+}

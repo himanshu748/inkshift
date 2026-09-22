@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -51,6 +52,7 @@ function Walkthrough() {
   }
   return (
     <section
+      id="how-it-works"
       className="product-demo"
       aria-label="Illustrated product walkthrough"
       data-step={step}
@@ -264,21 +266,19 @@ export function Landing() {
   const router = useRouter();
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
-  async function start(mode: "sample" | "blank") {
-    setBusy(mode);
+  async function start() {
+    setBusy("sample");
     setError("");
     try {
       const next = new Date();
       next.setDate(next.getDate() + 7);
       const date = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-${String(next.getDate()).padStart(2, "0")}`;
       const result = await api<{ id: string }>("/api/events", {
-        mode,
+        mode: "sample",
         date,
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       });
-      router.push(
-        `/event/${result.id}${mode === "blank" ? "?start=photo" : ""}`,
-      );
+      router.push(`/event/${result.id}`);
     } catch (e) {
       setError((e as Error).message);
       setBusy("");
@@ -286,14 +286,10 @@ export function Landing() {
     }
   }
   const launch = (
-    <button
-      className="button dark landing-launch"
-      onClick={() => start("sample")}
-      disabled={!!busy}
-    >
-      {busy === "sample" ? "Opening your games night…" : "Try a games night"}
+    <Link className="button dark landing-launch" href="/new">
+      Plan a gathering
       <ArrowRight size={19} />
-    </button>
+    </Link>
   );
   return (
     <div className="product-landing">
@@ -312,18 +308,14 @@ export function Landing() {
             </p>
             <div className="landing-actions">
               {launch}
-              <button
-                className="text-button"
-                disabled={!!busy}
-                onClick={() => start("blank")}
-              >
-                <Camera size={16} />
-                {busy === "blank"
-                  ? "Opening your workspace…"
-                  : "Start with your own photo"}
+              <button className="text-button" disabled={!!busy} onClick={start}>
+                <Play size={16} />
+                {busy ? "Opening your sample…" : "Try a sample"}
               </button>
             </div>
-            <small>A working sample. No account needed.</small>
+            <small>
+              For games nights, clubs and workshops. No account needed.
+            </small>
             {error && (
               <p className="landing-error" role="alert">
                 {error}
@@ -376,20 +368,19 @@ export function Landing() {
               <br />
               for a good time.
             </h2>
-            <p>Open the sample, invite someone, then remove Table B.</p>
+            <p>Bring your plan. We’ll make room for the people.</p>
           </div>
           {launch}
         </section>
         <footer className="landing-footer">
           <span>INKSHIFT · Your paper. Your call.</span>
-          <a
-            href="https://dev.to/challenges/sanity-2026-09-16"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Built for the Sanity Challenge
-            <ArrowUpRight size={14} />
-          </a>
+          <nav aria-label="Footer">
+            <Link href="/help">Help</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/about">
+              About INKSHIFT <ArrowUpRight size={14} />
+            </Link>
+          </nav>
         </footer>
       </main>
     </div>

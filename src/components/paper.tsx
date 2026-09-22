@@ -1,5 +1,5 @@
 "use client";
-import { ScanLine } from "lucide-react";
+import { ScanLine, FilePenLine } from "lucide-react";
 import type { Session } from "@/lib/model";
 export function Paper({
   eventId,
@@ -77,12 +77,25 @@ export function Paper({
         </>
       ) : (
         <div className="empty-paper">
-          <ScanLine size={36} strokeWidth={1.3} />
-          <h3>A blank page is a good start.</h3>
-          <p>
-            Photograph your plan with every table, game, time, and player limit
-            in view.
-          </p>
+          {sessions.length || compact ? (
+            <>
+              <FilePenLine size={36} strokeWidth={1.3} />
+              <h3>Your typed plan.</h3>
+              <p>
+                Tables and sessions entered by hand. No photograph was used for
+                this plan.
+              </p>
+            </>
+          ) : (
+            <>
+              <ScanLine size={36} strokeWidth={1.3} />
+              <h3>A blank page is a good start.</h3>
+              <p>
+                Photograph your plan with every table, activity, time, and
+                player limit in view.
+              </p>
+            </>
+          )}
         </div>
       )}
     </div>

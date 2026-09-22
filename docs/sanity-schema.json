@@ -385,6 +385,10 @@
             {
               "type": "string",
               "value": "applied"
+            },
+            {
+              "type": "string",
+              "value": "discarded"
             }
           ]
         },
@@ -942,6 +946,13 @@
                 "type": "number"
               },
               "optional": true
+            },
+            "affectedRegistrations": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "number"
+              },
+              "optional": true
             }
           }
         },
@@ -955,6 +966,20 @@
         "optional": true
       },
       "appliedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "appliedVersion": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "discardedAt": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

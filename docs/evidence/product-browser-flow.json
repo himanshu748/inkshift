@@ -1,0 +1,76 @@
+{
+  "date": "2026-09-22",
+  "target": "local production server localhost:3333",
+  "checks": {
+    "customGatheringDate": "2026-10-03 persisted from visible native date form",
+    "returnToGathering": "Your gatherings reopens saved workspace",
+    "restoreFailure": "Invalid private code returns useful feedback",
+    "emptyInviteDisabled": true,
+    "manualReview": "Editor opens immediately; no photograph was used placeholder; no sample image",
+    "mobileHorizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "eventId": "Rj1BMZp8Jy_CCg",
+  "captures": [
+    {
+      "file": ".impeccable/review/product/landing-desktop.jpg",
+      "viewport": "1440x900",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/landing-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/setup-desktop.jpg",
+      "viewport": "1440x900",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/setup-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/gatherings-desktop.jpg",
+      "viewport": "1440x900",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/gatherings-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/restore-desktop.jpg",
+      "viewport": "1440x900",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/restore-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/access-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/manual-review-desktop.jpg",
+      "viewport": "1440x900",
+      "scope": "viewport region, desktop browser CSS size"
+    },
+    {
+      "file": ".impeccable/review/product/help-mobile.jpg",
+      "viewport": "390x844",
+      "scope": "viewport region, desktop browser CSS size"
+    }
+  ],
+  "limits": [
+    "Not physical phone hardware",
+    "Access code restoration success also checked through live HTTP; no real access code in captures",
+    "No photographed handwriting tested"
+  ]
+}

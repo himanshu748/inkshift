@@ -13,3 +13,4 @@ test-results/
 .impeccable/config.local.json
 sanity/dist/
 .vercel
+sanity/.sanity/

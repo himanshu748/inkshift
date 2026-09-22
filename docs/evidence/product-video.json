@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-09-22T07:10:49.581692+00:00",
+  "artifact": "docs/video/inkshift-product-walkthrough.mp4",
+  "sha256": "b92a8a5d2e2b2d82e398ccdd9dc5aa40ff82b81bee115f6f1fc56820c7a8d143",
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1340,
+        "r_frame_rate": "60/1"
+      }
+    ],
+    "format": {
+      "duration": "43.000000",
+      "size": "4956785"
+    }
+  },
+  "content": "Edited actual hosted-browser captures with a prepared example; not a physical-paper recording",
+  "midpointThumbnailInspected": true,
+  "cursorVisible": true,
+  "browserOnlyCrop": true,
+  "viewportReset": true,
+  "master": {
+    "size": [
+      3840,
+      2680
+    ],
+    "fps": 60,
+    "seconds": 43,
+    "bytes": 114926538
+  },
+  "captureSize": [
+    1440,
+    1005
+  ],
+  "publicCopySize": [
+    1920,
+    1340
+  ]
+}

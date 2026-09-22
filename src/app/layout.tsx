@@ -7,6 +7,7 @@ import "@fontsource/archivo/500.css";
 import "@fontsource/archivo/600.css";
 import "@fontsource/archivo/700.css";
 import "./globals.css";
+import "./product.css";
 export const metadata: Metadata = {
   title: "INKSHIFT — Your paper. A real gathering.",
   description:

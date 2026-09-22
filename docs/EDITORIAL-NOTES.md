@@ -4,6 +4,8 @@
 
 ## Finished post — September 22
 
+Reworked the article around the user's requested focus: the product, its organizer/guest flow and its use of Sanity. Removed the tool-handoff narrative, landing-page pivot and debugging chronology. Kept a short build-process paragraph for the challenge template. Expanded the Content Lake identity model, revision checks, App SDK subscriptions and Workflows review into concrete product behavior. Checked the SDK subscription path and schema against the current source, then evaluated the full rewrite against no-ai-slop/eval.md. The prepared-sample and typed-image disclosures remain; no new readiness or test claims were added.
+
 The final framing presents the shipped product. It opens with what organizers can use and ends with a direct invitation to create a gathering. Removed the future-work closing and internal Studio deployment status from the article. The demo still identifies the prepared sample and typed-sheet checks, and the verification record retains the full evidence limits. This wording does not claim that physical handwriting was tested. Rechecked the revised article against no-ai-slop/eval.md; the ending is a concrete reader action, not a recap or roadmap.
 
 Applied the explicitly requested no-ai-slop skill to the full existing draft. Preserved the first-person build story, the booked-game example, the model's failed session match, the partial-write recovery and the concrete product fixes. Changed the title to avoid suggesting that physical handwriting was already demonstrated. Removed repetition and internal approval/handoff details, clarified that checks precede applying a change, and linked the implementation and verification record directly.

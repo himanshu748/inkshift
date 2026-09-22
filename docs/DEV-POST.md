@@ -11,7 +11,7 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 Four people sign up for Ticket to Ride at Table B. Then Table B becomes unavailable.
 
-I wanted the organizer to cross out the table on their paper plan, photograph the edit, and move the game without asking everyone to sign up again. I built INKSHIFT around that problem, with games nights, clubs and workshops in mind.
+INKSHIFT gives organizers a shared signup page they can keep using when the plan changes. I built it for games nights, clubs and workshops where moving a session should preserve the people already booked into it.
 
 An organizer creates a gathering with a name, date and time zone, then uploads a photo or types the plan. They check the games, tables, times and player limits before sharing a signup link. A later photograph creates a proposed change that they can correct, approve or discard. People who already joined keep their registrations when the same session moves.
 
@@ -25,11 +25,9 @@ The model proposes structured data. The app checks capacity, time conflicts and 
 
 [Open INKSHIFT](https://inkshift.vercel.app) and choose **Try a sample**. No account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. After approval, the participant page shows the same booking at Table C.
 
-The landing walkthrough is an illustration, and the sample uses a fixed reading. Both are labeled. Choose **Plan a gathering** to start your own event; uploading a photo from its workspace calls the image reader.
+The landing walkthrough is an illustration, and the sample uses a fixed reading. Both are labeled. Photo-reader checks used rendered typed sheets. Choose **Plan a gathering** to start your own event; uploading a photo from its workspace calls the image reader.
 
 ![INKSHIFT demonstrates a paper edit and its proposed session move](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/product-review.jpg)
-
-The photo-reader tests used rendered typed sheets. I have not yet validated photographed handwriting or recorded the physical-paper demonstration.
 
 ## Code
 
@@ -76,6 +74,4 @@ The organizer and content inspector use App SDK subscriptions for the public sch
 
 The deployed Workflows definition is `inkshift-plan-change`, version 1. Its instances sit alongside the proposals in Content Lake. The server records whether a step came from the photo reader, a prepared example or the organizer. Those labels describe application callers under one server credential. Server authorization and revision checks enforce access and protect writes.
 
-The repository includes the Studio schema and a read-only inspector. The schema validates and the inspector builds locally; I have not deployed that inspector. The public app's Content Lake writes, App SDK subscriptions and workflow transitions have been tested.
-
-Next, I need to run the full flow with physical handwriting and a participant on a second phone, then record it.
+INKSHIFT is live at [inkshift.vercel.app](https://inkshift.vercel.app). Choose **Plan a gathering**, add your plan and share the signup link with your guests.

@@ -1,7 +1,7 @@
 ---
-title: "I crossed out a table. INKSHIFT kept the registrations."
+title: "INKSHIFT: move the game, keep the bookings"
 published: false
-description: "A paper event plan becomes a signup app, with Sanity Workflows handling the review before an edit goes live."
+description: "A small-event planner that keeps existing bookings when a session moves, with photo review and approval through Sanity Workflows."
 tags: devchallenge, sanitychallenge, sanity, ai
 ---
 
@@ -11,11 +11,11 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 Four people sign up for Ticket to Ride at Table B. Then Table B becomes unavailable.
 
-I wanted the organizer to cross out the table on their paper plan, photograph the edit, and move the game without asking everyone to sign up again. That is the demo behind INKSHIFT.
+I wanted the organizer to cross out the table on their paper plan, photograph the edit, and move the game without asking everyone to sign up again. I built INKSHIFT around that problem, with games nights, clubs and workshops in mind.
 
-An organizer uploads a small-event plan, checks the extracted games, tables, times and player limits, then shares a signup link. A later photograph creates a proposed change. The organizer can correct the reading, approve it or discard it. The people who already joined keep their registrations when the same session moves.
+An organizer creates a gathering with a name, date and time zone, then uploads a photo or types the plan. They check the games, tables, times and player limits before sharing a signup link. A later photograph creates a proposed change that they can correct, approve or discard. People who already joined keep their registrations when the same session moves.
 
-I kept the scope to games nights, clubs and workshops. The model proposes structured data. The app renders a fixed interface and checks capacity, time conflicts and session identity before saving anything.
+The model proposes structured data. The app checks capacity, time conflicts and session identity before applying a change. Returning organizers can reopen their gatherings and save a private access code to restore access on another device.
 
 ## Demo
 
@@ -23,55 +23,59 @@ I kept the scope to games nights, clubs and workshops. The model proposes struct
 
 {% embed https://www.youtube.com/watch?v=xM5eC-q7t_0 %}
 
-[Open INKSHIFT](https://inkshift.vercel.app). Choose **Try a sample** to create your own sample event; no account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. Approve it and check the participant page: the booking is still there.
+[Open INKSHIFT](https://inkshift.vercel.app) and choose **Try a sample**. No account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. After approval, the participant page shows the same booking at Table C.
 
-The landing walkthrough is an illustration. The prepared edit button uses a fixed reading. Both are labeled. **Plan a gathering** starts your own event. Uploading a photo from its workspace uses the real image reader instead.
+The landing walkthrough is an illustration, and the sample uses a fixed reading. Both are labeled. Choose **Plan a gathering** to start your own event; uploading a photo from its workspace calls the image reader.
 
 ![INKSHIFT demonstrates a paper edit and its proposed session move](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/product-review.jpg)
 
-My image tests sent rendered typed sheets through the actual provider. The edited sheet produced a reading that would have removed a booked game. INKSHIFT blocked approval, and an explicit identity correction let the existing booking move to Table C. I have not yet validated photographed handwriting or recorded the physical-paper demonstration.
+The photo-reader tests used rendered typed sheets. I have not yet validated photographed handwriting or recorded the physical-paper demonstration.
 
 ## Code
 
 [Source and setup instructions](https://github.com/himanshu748/inkshift)
 
-The app uses Next.js, React, Sanity Content Lake, Sanity App SDK, Sanity Workflows, Zod and Qwen3-VL through Hugging Face Inference Providers. Server credentials stay out of the browser and repository.
+The app uses Next.js, React, Sanity Content Lake, Sanity App SDK, Sanity Workflows, Zod and Qwen3-VL through Hugging Face Inference Providers. The Sanity write token stays on the server.
 
-The most useful files to read are `src/lib/reconcile.ts` for identity and scheduling, `src/lib/service.ts` for revision-checked writes, and `src/lib/plan-change.ts` for the workflow definition.
+Start with [`reconcile.ts`](https://github.com/himanshu748/inkshift/blob/main/src/lib/reconcile.ts) for identity and scheduling, [`service.ts`](https://github.com/himanshu748/inkshift/blob/main/src/lib/service.ts) for revision-checked writes, and [`plan-change.ts`](https://github.com/himanshu748/inkshift/blob/main/src/lib/plan-change.ts) for the workflow definition.
 
 ## My Build Process
 
-The original brief asked for “a handwritten plan” that becomes “a working, multiplayer app,” then survives changes after people have started using it. I built with Codex, continued in Claude Code, and returned to Codex to finish and verify the unfinished work.
+The original brief asked for “a handwritten plan” that becomes “a working, multiplayer app,” then survives changes after people have started using it. I started in Codex, continued in Claude Code, and returned to Codex to finish the integration and test it.
 
 I started with the data model. A table and a game needed different IDs. A booking points to a session, so the session can change tables without replacing the booking. Moving a game requires enough seats and an available table for its entire time slot. When no destination fits, approval stays blocked.
 
-The photo reader was harder than the first screenshot suggested. The provider initially rejected the JSON schema for source boxes. Representing each box as a fixed-length homogeneous array fixed that request. The next failure mattered more: the second image sometimes lost a game's identity. I kept the conflict visible and added a review editor for matching the reading to an existing session. Cropped photos, missing games and deletions with registrations also require review.
+The photo reader was harder than the first screenshot suggested. The provider initially rejected the JSON schema for source boxes. Representing each box as a fixed-length array of numbers fixed that request.
 
-I first asked for a Three.js scroll world on the landing page. Later I chose “Product-led, drop the 3D” so the demonstration could show the paper, signup interface and approval directly. The replacement keeps those objects visible through four selectable steps. Its play control walks through the sequence, and reduced-motion CSS removes the transitions. The live sample starts a separate event.
+The next failure affected an existing booking. In a test using two typed sheets, the edited sheet produced a reading that would have removed the booked game. Approval stayed blocked until I corrected the session match. The same booking then moved to Table C. I kept that correction step in the interface because an uncertain reading needs a person to check it.
 
-Claude began the Sanity Workflows integration before its session stopped. It had written the definition and engine adapter, but the API and UI still used the old approval path. During the takeover, I connected those paths, added saved reviews and gave prepared examples their own caller label. An example reading should not appear in the audit trail as an AI photo reading.
+I first asked for a Three.js scroll world on the landing page. Later I dropped it so the demonstration could show the paper, signup interface and approval directly. The replacement walks through four selectable steps. The live sample opens a separate practice gathering.
 
-The process now runs through Reading, Review and either Applied or Discarded. The reader submits the proposed changes and unresolved-check count. The organizer rechecks corrections and approves through the same saved workflow instance. The interface shows those steps, and a closed review can be reopened from its history.
+Claude began the Sanity Workflows integration before its session stopped. It had written the definition and engine adapter, but the API and UI still used the old approval path. I used Codex to connect those paths and add saved reviews. Prepared examples also got their own caller label so the history distinguishes them from photo readings.
 
-One failure needed special handling. The event transaction can succeed just before the workflow record fails to update. Repeating the entire operation could apply a decision twice. INKSHIFT saves the decision on the proposal alongside the event update, then uses that saved decision to resume the missing workflow action. The interface tells the organizer when the plan is saved but the workflow record needs a retry.
+The process now runs through Reading, Review and either Applied or Discarded. The reader submits the proposed changes and unresolved checks. The organizer corrects and approves through the same saved workflow instance. Completed reviews can be reopened from their history.
 
-I tested that recovery with a simulated connection failure and the real workflow engine's in-memory test bench. The suite also checks blocked approval, corrections, discard, stale registrations, attribution and repeated reads. There are 31 tests in total: 19 domain tests, six workflow tests and six tests for organizer access and returning to saved gatherings.
+I also had to handle a partial failure. The event transaction can succeed while the workflow record fails to update. Repeating the entire operation could apply a decision twice. INKSHIFT saves the decision alongside the event update and uses it to resume the missing workflow action. The interface tells the organizer when the plan is saved but the workflow record needs a retry.
 
-The live HTTP check goes further: it creates a Sanity-backed event, joins a participant, opens a review, adds another participant, verifies that the review is stale, rechecks it and applies the move. It then discards a conflicting proposal and confirms that the plan stayed unchanged. Anonymous callers cannot open the saved reviews or read the private workflow instance directly from the dataset. The scripts and dated reports are in the repository.
+I tested that recovery with a simulated connection failure and the workflow engine's in-memory test bench. All 31 tests passed: 19 domain tests, six workflow tests and six tests for organizer access and returning to saved gatherings.
 
-The next pass was about using it beyond that first demo. I moved the sample behind a secondary action and added setup for the organizer’s own name, date and time zone. A returning organizer now has a Your gatherings page. A private access code restores the same organizer capability on another device; it is separate from the participant invite, and the interface explains that anyone with the code can manage the gathering.
+Against the deployed app, I checked that a new registration makes an open review stale. Rechecking it updated the affected count, and approval preserved the booking through the move. Discarding a conflicting proposal left the plan unchanged. The [dated verification records](https://github.com/himanshu748/inkshift/blob/main/docs/VERIFICATION.md) include those checks and the rejected requests for private review data.
 
-Testing the new path exposed two defects. A native date field could show a date that differed from the submitted state, so setup now reads the form’s current values at submission. Manual entry also inherited an unrelated sample photograph. I removed that fallback, opened the editor immediately for typed plans, and checked that approving one creates no example-photo link. The live API check verifies private listing, rejected unauthorized code exports, restored access and unchanged plan revisions during recovery.
+My later instruction was “make sure it's like a product not a project.” I moved the sample behind a secondary action and added gathering setup, a returning-organizer list and access recovery. The private backup code lets someone manage the gathering on another device, so the interface tells organizers to keep it separate from the participant invite.
+
+Testing that path exposed two defects. The date shown in the form could differ from the date submitted, so setup now reads the form's current values. Manual entry also inherited an unrelated sample photograph. I removed that fallback and checked that approving a typed plan creates no example-photo link.
 
 ## Sanity Project Details
 
 Project ID: `a5xdqsb7`  
 Dataset: `production`
 
-Sanity stores the event aggregate and linked spaces, sessions, registrations, photo revisions and proposals. Domain writes update their public schedule projection in the same revision-checked transaction. Approval checks both the event and proposal revisions, so a new registration or another review edit can invalidate an old approval.
+Sanity Content Lake stores the event and linked spaces, sessions, registrations, photo revisions and proposals. Plan and registration updates write the public schedule projection in the same revision-checked transaction. Approval checks both the event and proposal revisions, so a new registration or another review edit can invalidate an old approval.
 
-The organizer and content inspector use App SDK subscriptions to a public projection of the schedule and counts. Authorized server routes return private organizer data and each participant's own booking. The browser never receives the write token.
+The organizer and content inspector use App SDK subscriptions for the public schedule and counts. Authorized server routes return private organizer data and each participant's own booking. The browser never receives the write token.
 
-The deployed Workflows definition is `inkshift-plan-change`, version 1. Its instances sit next to the proposals in Content Lake. The server records whether each step came from the photo reader, a prepared example or the organizer. These are declared execution contexts under the same server credential; they are not separate Sanity user accounts. Server authorization and revision checks enforce the actual write boundary.
+The deployed Workflows definition is `inkshift-plan-change`, version 1. Its instances sit alongside the proposals in Content Lake. The server records whether a step came from the photo reader, a prepared example or the organizer. Those labels describe application callers under one server credential. Server authorization and revision checks enforce access and protect writes.
 
-The local Studio schema is included. The schema validates and the read-only Studio builds locally. Remote deployment remains pending approval under the earlier handoff instruction; I have not re-established its deployment permissions. Content Lake writes, App SDK subscriptions and workflow transitions have been tested separately. The next demonstration I need to record is the same full flow with physical handwriting and a participant on a second phone.
+The repository includes the Studio schema and a read-only inspector. The schema validates and the inspector builds locally; I have not deployed that inspector. The public app's Content Lake writes, App SDK subscriptions and workflow transitions have been tested.
+
+Next, I need to run the full flow with physical handwriting and a participant on a second phone, then record it.

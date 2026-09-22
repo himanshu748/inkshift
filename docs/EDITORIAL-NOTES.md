@@ -2,6 +2,14 @@
 
 `DEV-POST.md` is the current unpublished Path Two draft. `DEV-DRAFT.md` points to it. The physical-paper recording and DEV publication remain pending. Public source, deployment, draft and embedded screenshot links were verified at release on September 22.
 
+## Finished post — September 22
+
+Applied the explicitly requested no-ai-slop skill to the full existing draft. Preserved the first-person build story, the booked-game example, the model's failed session match, the partial-write recovery and the concrete product fixes. Changed the title to avoid suggesting that physical handwriting was already demonstrated. Removed repetition and internal approval/handoff details, clarified that checks precede applying a change, and linked the implementation and verification record directly.
+
+Checked the current official Path Two template: all five required sections, the challenge tags, project ID, deployed app, source and demo are present. The YouTube embed and prepared-sample disclosure remain. The article is saved with `published: false`; this edit does not establish DEV publication or a submission receipt.
+
+Read the finished post directly against the installed eval.md. All 10 editing-principle checks, the words check, all eight pattern checks and the five applicable final-read checks pass. Detect-only reporting is not applicable. Required template headings and bold interface labels serve the reader. The mechanical check found no banned phrases or em dashes. Publication-ready text is in DEV-POST.md; this explanation stays separate.
+
 ## What changed
 
 Replaced the obsolete 3D demo description with the product walkthrough and actual Sanity Workflows integration. Added Claude's incomplete integration and Codex's continuation, the example/reader attribution correction, saved review recovery and the six workflow tests. Preserved the booked-session example, solo I/my voice, typed-input limitation, model identity failure and remote schema/Studio handoff.

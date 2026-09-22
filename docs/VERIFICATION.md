@@ -18,6 +18,8 @@ The September 22, 2026 continuation replaces the 3D landing and connects the exi
 - Two hosted image calls entered the real workflow with Reader agent attribution. As in the local test, the edited typed sheet needed explicit session-identity correction; the same booking then appeared at Table C. Unauthorized organizer and photo requests were rejected. See `evidence/hosted-http-photo-flow.json`.
 - Fresh production-browser checks confirmed the new landing at 390 × 844 without horizontal overflow, sample creation, the three-stage review display and a connected App SDK inspector. No warning or error was recorded in that tab. See `evidence/takeover-hosted-browser-flow.json`.
 
+- Published the scanned source to the public `himanshu748/inkshift` repository. GitHub main matched implementation commit `a6afe74633cc3acaeb6745352e5a396754bfafd1`; the repository, draft and embedded JPEG URLs returned HTTP 200. See `evidence/takeover-release.json`.
+
 ## Evidence limits
 
 The image inputs are rendered typed sheets, not photographed handwriting. Prepared example buttons do not use image inference. Browser tests use CSS viewports in a desktop browser, not physical phone hardware. The workflow fault-recovery test simulates a lost engine write in memory; it does not claim to have induced a live Sanity outage.

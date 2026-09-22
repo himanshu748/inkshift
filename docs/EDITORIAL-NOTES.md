@@ -1,6 +1,6 @@
 # DEV draft status
 
-`DEV-POST.md` is the current unpublished Path Two draft. `DEV-DRAFT.md` points to it. The physical-paper recording and DEV publication remain pending. Public source and deployment links are checked at release.
+`DEV-POST.md` is the current unpublished Path Two draft. `DEV-DRAFT.md` points to it. The physical-paper recording and DEV publication remain pending. Public source, deployment, draft and embedded screenshot links were verified at release on September 22.
 
 ## What changed
 

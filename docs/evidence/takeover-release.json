@@ -12,5 +12,14 @@
   "sourceUrl": "https://github.com/himanshu748/inkshift",
   "hostedWorkflowCheckPassed": true,
   "hostedTypedPhotoCheckPassed": true,
-  "freshHostedBrowserCheckPassed": true
+  "freshHostedBrowserCheckPassed": true,
+  "sourcePublicationVerified": true,
+  "sourceVisibility": "PUBLIC",
+  "publishedImplementationCommit": "a6afe74633cc3acaeb6745352e5a396754bfafd1",
+  "publicSourceAndDraftImageUrlsReturned200": true,
+  "credentialScan": {
+    "scope": "all 114 initial staged files and paths",
+    "findings": 0
+  },
+  "checkedAt": "2026-09-22T05:50:37.672934+00:00"
 }

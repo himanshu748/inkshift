@@ -1,5 +1,7 @@
 # INKSHIFT product walkthrough
 
+[Watch on YouTube](https://youtu.be/xM5eC-q7t_0). Published as unlisted on September 22, 2026; anyone with the link can watch. The [MP4 copy](inkshift-product-walkthrough.mp4) remains in this folder.
+
 Edited sequence of actual in-app browser states captured from https://inkshift.vercel.app on September 22, 2026. It is not a continuous screen recording or a physical-handwriting demonstration. Network waits and guest-form entry are compressed. The sample is visibly labeled a prepared example.
 
 The creation flow saved Friday at the games café for October 2. The sample flow registered Demo guest, proposed a move from Table B to C, approved it, and showed the retained guest booking. No private organizer code was retrieved or recorded.

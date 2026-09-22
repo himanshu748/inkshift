@@ -39,5 +39,25 @@
   "publicCopySize": [
     1920,
     1340
-  ]
+  ],
+  "youtube": {
+    "checkedAt": "2026-09-22T07:27:45Z",
+    "url": "https://youtu.be/xM5eC-q7t_0",
+    "watchUrl": "https://www.youtube.com/watch?v=xM5eC-q7t_0",
+    "videoId": "xM5eC-q7t_0",
+    "title": "INKSHIFT | Plan a gathering. Keep people booked.",
+    "channel": "Himanshu Jha",
+    "visibility": "unlisted",
+    "publicationConfirmed": true,
+    "copyrightChecks": "No issues found",
+    "playback": {
+      "context": "Signed-in watch page in the in-app browser",
+      "currentTimeSeconds": 43.021,
+      "durationSeconds": 43.021,
+      "ended": true,
+      "readyState": 4,
+      "videoWidth": 1920,
+      "videoHeight": 1340
+    }
+  }
 }

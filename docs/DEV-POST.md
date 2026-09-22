@@ -19,7 +19,9 @@ I kept the scope to games nights, clubs and workshops. The model proposes struct
 
 ## Demo
 
-[Watch the 43-second product walkthrough](https://github.com/himanshu748/inkshift/blob/main/docs/video/inkshift-product-walkthrough.mp4). It is edited from real browser states and uses the prepared sample described below.
+[Watch the 43-second product walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). It is edited from real browser states and uses the prepared sample described below.
+
+{% embed https://www.youtube.com/watch?v=xM5eC-q7t_0 %}
 
 [Open INKSHIFT](https://inkshift.vercel.app). Choose **Try a sample** to create your own sample event; no account is needed. Open its participant invite, join Ticket to Ride, then return to the organizer and choose **Use the crossed-out example**. The review proposes moving the game from B to C. Approve it and check the participant page: the booking is still there.
 

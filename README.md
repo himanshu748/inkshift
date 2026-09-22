@@ -6,7 +6,7 @@ Built for [DEV's Sanity Challenge, Path Two](https://dev.to/challenges/sanity-20
 
 **[Open INKSHIFT](https://inkshift.vercel.app)**
 
-[Watch the 43-second product walkthrough](docs/video/inkshift-product-walkthrough.mp4). This edited browser sequence shows setup, a prepared sample, a guest booking and its move from B to C.
+[Watch the 43-second product walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). This edited browser sequence shows setup, a prepared sample, a guest booking and its move from B to C.
 
 ![INKSHIFT product walkthrough](docs/images/product-review.jpg)
 

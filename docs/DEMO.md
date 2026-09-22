@@ -1,6 +1,6 @@
 # Recorded product walkthrough
 
-[Watch the 43-second walkthrough](video/inkshift-product-walkthrough.mp4). Captured from the public app on September 22, 2026, then edited from real browser states with cursor motion. Network waits and guest-form entry are compressed. The recording uses a visibly labeled prepared sample; it does not demonstrate photographed handwriting.
+[Watch the 43-second walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). Captured from the public app on September 22, 2026, then edited from real browser states with cursor motion. Network waits and guest-form entry are compressed. The recording uses a visibly labeled prepared sample; it does not demonstrate photographed handwriting.
 
 It shows gathering setup, a saved organizer workspace, the practice plan, participant invite, a guest booking at Table B, approval of the move, the retained place at Table C, and the returning organizer list. The full API and browser records are in `evidence/product-hosted-browser-flow.json`, `evidence/hosted-product-http.json`, and `evidence/hosted-workflow-http.json`.
 

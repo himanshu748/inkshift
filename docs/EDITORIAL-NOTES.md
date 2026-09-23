@@ -33,3 +33,7 @@ The product-continuity update was edited against no-ai-slop/eval.md. It adds onl
 The final product update was read again against eval.md: applicable editing, filler, pattern and final-read checks pass. The recording is described as an edited browser sequence using a prepared sample; no continuous recording, successful handwriting test or published DEV submission is claimed. The remote Studio state now distinguishes prepared local output from the still-pending deployment approval. Publication-ready copy remains in DEV-POST.md; these notes stay separate.
 
 The YouTube title and description and the draft's video-link update were checked against no-ai-slop/eval.md. Applicable checks pass. The description preserves the prepared-example and handwriting limitations. The draft uses the current [DEV editor guide's embed syntax](https://dev.to/p/editor_guide) and remains unpublished.
+
+## 23 September: design and sponsor evidence pass
+
+See PRESENTATION-STRATEGY.md for primary sources and the transfer from winner examples to INKSHIFT. Added the live link and sponsor responsibilities near the opening, a small relationship diagram, and a substantive but bounded build section. Clarified that App SDK observes the public projection and the organiser refreshes through authorised routes. Checked the complete revised draft against no-ai-slop/eval.md: concrete facts preserved; no borrowed personal anecdote, invented result, inflated winner claim, repetitive summary or future-work ending. Required DEV headings and demo limits retained.

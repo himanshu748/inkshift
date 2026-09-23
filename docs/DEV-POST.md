@@ -13,9 +13,11 @@ You're organising a games night. People have picked their games and booked their
 
 Then Table B becomes unavailable. There is room for Ticket to Ride at Table C, but the people joining it already have a booking that says Table B.
 
-I built INKSHIFT so the organiser can approve that move and keep those bookings.
+I built INKSHIFT so the organiser can approve that move and keep those bookings. You can [try it now](https://inkshift.vercel.app) without creating an account.
 
 INKSHIFT turns a small-event plan into a shared signup page. You can use it for a games night, a club meetup or a workshop, then keep managing the same gathering as the plan changes.
+
+Sanity holds the relationships that make that possible. Content Lake stores the sessions and their registrations, Workflows records the review, and App SDK subscribes to the shared schedule. The table can change while the session and its bookings keep their IDs.
 
 ### Start with the plan you already have
 
@@ -31,6 +33,15 @@ Ticket to Ride is still the same game, at the same time, with the same people. I
 
 In Sanity Content Lake, the table, session and registration are separate linked records. Each booking belongs to the session's stable ID. Moving the session to Table C changes its table reference, and the bookings stay attached to it.
 
+```text
+Registration → Session → Space
+                   │
+              same session ID
+              Table B → Table C
+```
+
+The [schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaTypes.ts) makes those relationships explicit. A table label is allowed to change without becoming a new booking destination.
+
 The app checks that C has enough seats and is free for the whole session. You see the proposed move and the affected registrations before approving it. If the move cannot fit, approval stays blocked while you correct the plan.
 
 ![INKSHIFT's illustrated walkthrough showing a table move and preserved registrations](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/product-review.jpg)
@@ -45,7 +56,7 @@ Sanity Workflows keeps that review as a saved process alongside the proposal in 
 
 Someone might join the game while you're still deciding where to move it. INKSHIFT checks the event and proposal revisions before saving. If the registrations have changed, it asks you to recheck the move against the current bookings.
 
-The approved plan, linked records and public schedule are saved together in one Content Lake transaction. App SDK subscribes to the schedule and booking counts, keeping the organiser workspace connected to those changes. The content inspector lets you see the session's ID alongside its current table and booked places.
+The approved plan, linked records and public schedule are saved together in one Content Lake transaction. App SDK subscribes to the public schedule and booking counts. When its version changes, the organiser workspace refreshes its private data through an authorised server route. The content inspector lets you see the session's ID alongside its current table and booked places.
 
 That public view contains the schedule and counts. Participant names, uploaded photos and organiser access data remain behind authorised server routes. The Sanity write token stays on the server.
 
@@ -67,7 +78,11 @@ INKSHIFT uses Next.js and React, with Qwen3-VL through Hugging Face Inference Pr
 
 ## My Build Process
 
-I used Codex and Claude Code to build the app around sessions that keep their identity when the plan changes. In a typed-image test, the reader treated a booked game as removed. I added an explicit correction step before approval and verified that the original booking survived the move. That is why the review is part of the product's normal flow.
+I used Codex and Claude Code to build INKSHIFT. The main schema decision was to give spaces, sessions and registrations their own identities. A new reading has to reconcile with the existing gathering, because replacing the schedule wholesale would lose the connection to people who already joined.
+
+In a typed-image test, the reader treated a booked game as removed. The correction step let me match it back to the original session before approval, and I verified that the booking survived the move. That check is part of the normal product flow.
+
+I also checked what happens when someone joins during a review. Approval uses Content Lake revision guards and recomputes the constraints against the current event. A stale proposal has to be reviewed again. Workflows records the process; the server enforces who may approve and whether the move is valid.
 
 ## Sanity Project Details
 

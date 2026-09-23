@@ -15,6 +15,20 @@ export default function Page() {
           another table, the registration stays with the game. An organizer
           checks every proposed change before it reaches the people who joined.
         </p>
+        <h2>What keeps a booking intact</h2>
+        <p>
+          Sanity Content Lake holds linked records for spaces, sessions and
+          registrations. A booking references the session, so approving a new
+          location keeps the same booking attached to it. The app checks space,
+          capacity and current revisions before saving the change.
+        </p>
+        <p>
+          Sanity Workflows records each review through Reading, Review and either
+          Applied or Discarded. You can reopen a saved review to see its outcome.
+          App SDK subscribes to the public schedule and counts; the organiser
+          workspace then refreshes its private view through authorised routes.
+          Participant names and uploaded photos stay out of that public view.
+        </p>
         <h2>Built in the open</h2>
         <p>
           INKSHIFT is built for the{" "}

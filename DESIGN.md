@@ -347,3 +347,9 @@ A ruled list shows the latest 20 reviews by source label and timestamp, with “
 - Don't make playback a prerequisite for inspecting a walkthrough state or opening the organizer.
 - Don't present the illustrated apply action as a saved change to a real event.
 - Don't treat viewport screenshots as evidence of physical-phone performance or photo-reader accuracy.
+
+## September 23 presentation refinement
+
+The existing paper-and-ledger world is retained. Shared tokens now name supporting ink, paper, walkthrough ground, toolbar and rule colours. The desktop intro uses 44px top and 40px bottom padding to bring the demonstration forward. Walkthrough annotations have an 11px minimum; mobile step buttons have a 44px minimum height. On phones, session times use their own line, and the redundant decorative avatar initials are hidden while the names remain in text.
+
+The pre-invitation questions use native, independently openable disclosures with fine ledger rules, 15px summaries and 14px answers. Keyboard focus uses the existing global focus treatment. Chevron rotation respects reduced motion. The About page explains the link between stable bookings and Sanity's content, review and subscription roles. Component inspiration and attribution are recorded in docs/PRESENTATION-STRATEGY.md; no third-party component code or raster assets were imported.

@@ -8,6 +8,7 @@ import {
   Camera,
   Check,
   CheckCheck,
+  ChevronDown,
   MapPin,
   Pause,
   Play,
@@ -29,6 +30,11 @@ const games = [
   { name: "Wavelength", table: "C", time: "7:30–8:30 PM", seats: 6 },
 ];
 const people = ["Alex", "Sam", "Jo", "Lee"];
+const questions = [
+  { question: "Do my guests need an account?", answer: "No. Share the participant link, and guests can choose a session and book a place. Keep your organiser backup code private; it gives access to manage the gathering." },
+  { question: "What if the photo reader gets something wrong?", answer: "Check and correct the reading before you apply it. You can also type a plan yourself. A proposed change waits for your approval, and conflicts must be resolved before it can be saved." },
+  { question: "What happens to people who already joined?", answer: "Their registration belongs to the session. If you approve a move to another table, those registrations stay with it. The review checks available seats and the full time slot before the move." },
+];
 
 function Walkthrough() {
   const [step, setStep] = useState(0);
@@ -359,6 +365,21 @@ export function Landing() {
                 same game, with its new location.
               </p>
             </div>
+          </div>
+        </section>
+        <section className="landing-questions" aria-labelledby="questions-title">
+          <div>
+            <h2 id="questions-title">Before you send<br />the invite.</h2>
+            <p>A few things worth knowing before people join.</p>
+            <Link className="text-button" href="/help">Read the guide <ArrowRight size={16} /></Link>
+          </div>
+          <div className="landing-answers">
+            {questions.map(({ question, answer }) => (
+              <details key={question}>
+                <summary>{question}<ChevronDown size={18} aria-hidden="true" /></summary>
+                <p>{answer}</p>
+              </details>
+            ))}
           </div>
         </section>
         <section className="landing-close">

@@ -400,7 +400,16 @@ function Review({
                   </span>
                   <div>
                     <strong>{change.entity}</strong>
-                    <p>{change.detail}</p>
+                    {change.kind === "move" && change.before && change.after ? (
+                      <>
+                        <div className="change-location" aria-label={`Location changes from ${change.before} to ${change.after}`}>
+                          <div><span>Current table</span><del>{change.before}</del></div>
+                          <ArrowRight size={22} aria-hidden="true" />
+                          <div><span>Proposed table</span><b>{change.after}</b></div>
+                        </div>
+                        <p>{change.affected === 0 ? "The session keeps its link." : `${change.affected} booked ${change.affected === 1 ? "place stays" : "places stay"} with this session.`}</p>
+                      </>
+                    ) : <p>{change.detail}</p>}
                   </div>
                 </div>
               ))

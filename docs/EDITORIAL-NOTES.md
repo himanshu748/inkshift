@@ -37,3 +37,7 @@ The YouTube title and description and the draft's video-link update were checked
 ## 23 September: design and sponsor evidence pass
 
 See PRESENTATION-STRATEGY.md for primary sources and the transfer from winner examples to INKSHIFT. Added the live link and sponsor responsibilities near the opening, a small relationship diagram, and a substantive but bounded build section. Clarified that App SDK observes the public projection and the organiser refreshes through authorised routes. Checked the complete revised draft against no-ai-slop/eval.md: concrete facts preserved; no borrowed personal anecdote, invented result, inflated winner claim, repetitive summary or future-work ending. Required DEV headings and demo limits retained.
+
+## Real product screenshots
+
+Replaced the illustrated landing capture with the actual pending review, and added the retained participant booking and live App SDK inspector. Captions describe only visible or directly observed outcomes. All assets use labelled prepared samples. Checked the resulting article against no-ai-slop/eval.md: existing voice and structure preserved, no new performance or accuracy claim, no repeated marketing summary, and publication copy remains separate from these notes.

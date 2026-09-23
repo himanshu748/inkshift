@@ -37,7 +37,7 @@ const questions = [
 ];
 
 function Walkthrough() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
     if (!playing) return;
@@ -322,6 +322,9 @@ export function Landing() {
             <small>
               For games nights, clubs and workshops. No account needed.
             </small>
+            <a className="landing-watch" href="https://www.youtube.com/watch?v=xM5eC-q7t_0" target="_blank" rel="noreferrer">
+              Watch the working app <span>43 sec</span><ArrowUpRight size={14} />
+            </a>
             {error && (
               <p className="landing-error" role="alert">
                 {error}

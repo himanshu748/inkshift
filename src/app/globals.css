@@ -2402,3 +2402,30 @@ input[type="checkbox"] {
     gap: 6px;
   }
 }
+
+/* A proposal's structured before/after values stay legible during review. */
+.change-row > div { min-width: 0; flex: 1; }
+.change-location {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  margin: 16px 0 12px;
+}
+.change-location > div { min-width: 0; }
+.change-location span { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.change-location del, .change-location b {
+  display: block;
+  font-family: Archivo, sans-serif;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.change-location del { color: var(--muted); text-decoration-thickness: 1px; }
+.change-location b { color: var(--ink); }
+.review-heading p, .change-row p { font-size: 12px; line-height: 1.7; }
+@media (max-width: 480px) {
+  .change-location { gap: 10px; }
+  .change-location del, .change-location b { font-size: 23px; }
+}

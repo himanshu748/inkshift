@@ -44,9 +44,9 @@ The [schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaType
 
 The app checks that C has enough seats and is free for the whole session. You see the proposed move and the affected registrations before approving it. If the move cannot fit, approval stays blocked while you correct the plan.
 
-![INKSHIFT's illustrated walkthrough showing a table move and preserved registrations](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/product-review.jpg)
+![The organiser review shows Ticket to Ride moving from Table B to Table C with one registration preserved](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/review-booking-kept.jpg)
 
-The landing-page illustration shows how a table move affects existing registrations.
+In this sample gathering, one person has already booked Ticket to Ride. The review shows the proposed table change and the booking that will stay with it.
 
 ### You decide when the change goes live
 
@@ -58,6 +58,10 @@ Someone might join the game while you're still deciding where to move it. INKSHI
 
 The approved plan, linked records and public schedule are saved together in one Content Lake transaction. App SDK subscribes to the public schedule and booking counts. When its version changes, the organiser workspace refreshes its private data through an authorised server route. The content inspector lets you see the session's ID alongside its current table and booked places.
 
+![Sanity App SDK inspector showing Ticket to Ride as session-1-1 at Table C with one of four places booked](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/sanity-booking-inspector.jpg)
+
+After approval, the live inspector shows `session-1-1` at Table C with `1/4` places booked. This is the Content Lake projection read through App SDK.
+
 That public view contains the schedule and counts. Participant names, uploaded photos and organiser access data remain behind authorised server routes. The Sanity write token stays on the server.
 
 ## Demo
@@ -68,7 +72,11 @@ That public view contains the schedule and counts. Participant names, uploaded p
 
 To try the move yourself, choose **Try a sample** and join Ticket to Ride through its participant invite. Return to the organiser, select **Use the crossed-out example**, review the move and approve it. Reopen the participant page to see your booking at Table C.
 
-The video uses a labeled prepared sample with a fixed reading. Separate photo-reader checks used rendered typed sheets.
+![The participant page still lists Ticket to Ride under Your places, now at Table C](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/participant-booking-kept.jpg)
+
+The participant's existing booking now shows Table C. They did not sign up again.
+
+The video and screenshots use labelled prepared samples with fixed readings. The screenshots show saved demo registrations and an applied review. Separate photo-reader checks used rendered typed sheets.
 
 ## Code
 

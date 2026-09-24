@@ -102,7 +102,7 @@ The same day we set a second rule: a region missing from a photo is uncertainty,
 
 - **The vision provider rejected the schema.** Qwen3-VL through the Hugging Face router refused the bounding-box format. Codex fixed it by expressing each box as a fixed-length array of numbers.
 - **The reader removed a booked game.** On the second photo of an edited plan, the reader decided Ticket to Ride was gone. Review blocked approval until I matched it back to the original session. After approval, the booking appeared at Table C. That run is why review is mandatory, not optional.
-- **The schema deploy was refused.** The token Sanity provisioned for the project could write documents but could not deploy a schema. The app doesn't need it at runtime, so the deploy waits on my own Sanity login.
+- **The schema deploy was refused.** The token Sanity provisioned for the project could write documents but could not deploy a schema. The app doesn't need it at runtime, so it waited until I deployed it with my own Sanity login four days later.
 - **App SDK warned during server rendering in production.** Moving the subscription provider behind a browser-only import fixed it.
 - **Vercel picked the wrong framework preset.** Committing an explicit Next.js configuration fixed the first deploy.
 
@@ -122,7 +122,7 @@ I pushed back on two drafts: "you've to establish it as completed product not in
 
 ### What is still unverified
 
-Real handwriting (every image test used rendered typed sheets), camera access on physical phones and the remote schema deploy. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts: 31 tests in all. A live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
+Real handwriting (every image test used rendered typed sheets) and camera access on physical phones. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts: 31 tests in all. A live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
 
 ## Sanity Project Details
 

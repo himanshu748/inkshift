@@ -16,6 +16,8 @@ import {
   Users,
 } from "lucide-react";
 import { Header, api } from "./common";
+import { Bento } from "./landing-bento";
+import { useReveal } from "./landing-reveal";
 import "./landing.css";
 
 const steps = [
@@ -25,9 +27,9 @@ const steps = [
   "Keep the people",
 ];
 const games = [
-  { name: "Catan", table: "A", time: "6–7:30 PM", seats: 4 },
-  { name: "Ticket to Ride", table: "B", time: "6–7:30 PM", seats: 4 },
-  { name: "Wavelength", table: "C", time: "7:30–8:30 PM", seats: 6 },
+  { name: "Catan", table: "A", time: "6-7:30 PM", seats: 4 },
+  { name: "Ticket to Ride", table: "B", time: "6-7:30 PM", seats: 4 },
+  { name: "Wavelength", table: "C", time: "7:30-8:30 PM", seats: 6 },
 ];
 const people = ["Alex", "Sam", "Jo", "Lee"];
 const questions = [
@@ -182,7 +184,7 @@ function Walkthrough() {
                     <ArrowRight size={24} />
                     <strong>Table C</strong>
                   </div>
-                  <p>Available for the full game, 6–7:30 PM.</p>
+                  <p>Available for the full game, 6-7:30 PM.</p>
                 </div>
                 <div className="demo-people">
                   <CheckCheck size={20} />
@@ -283,16 +285,105 @@ function Walkthrough() {
             ][step]
           }
         </p>
-        <span>Illustrated example · no photo is being read</span>
+        <span>Illustrated example. No photo is being read.</span>
       </div>
+    </section>
+  );
+}
+
+const uses = [
+  "Sunday games club",
+  "Book club",
+  "Pottery workshop",
+  "Quiz night",
+  "Chess club",
+  "Coding meetup",
+  "Craft circle",
+  "Language exchange",
+  "Running club",
+  "Community garden day",
+];
+
+function Uses() {
+  return (
+    <section className="ink-uses" aria-labelledby="uses-title">
+      <h2 id="uses-title">For the plans you already keep on paper.</h2>
+      <div className="ink-marquee">
+        <ul>
+          {uses.map((use) => (
+            <li key={use}>{use}</li>
+          ))}
+        </ul>
+        <ul aria-hidden="true">
+          {uses.map((use) => (
+            <li key={use}>{use}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function RealApp() {
+  return (
+    <section className="ink-real" aria-labelledby="real-title">
+      <div className="ink-section-head" data-reveal>
+        <h2 id="real-title">The working app, from both sides.</h2>
+        <p>
+          Real screens from the prepared sample, captured on 23 September
+          2026. The guest keeps the same booking after the move.
+        </p>
+      </div>
+      <div className="ink-shots">
+        <figure className="ink-shot ink-shot-wide" data-reveal>
+          <div className="ink-shot-frame">
+            <img
+              src="/landing/organizer-review.jpg"
+              alt="Organizer review: Table B removed, Ticket to Ride moves from Table B to Table C, 1 registration preserved"
+              width={1280}
+              height={720}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>Organizer review, waiting for approval</figcaption>
+        </figure>
+        <figure className="ink-shot ink-shot-narrow" data-reveal>
+          <div className="ink-shot-frame">
+            <img
+              src="/landing/participant-page.jpg"
+              alt="Participant page: Your places, Ticket to Ride at Table C, 6 PM"
+              width={640}
+              height={450}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>The guest’s page after approval</figcaption>
+        </figure>
+      </div>
+      <a
+        className="ink-watch"
+        href="https://youtu.be/xM5eC-q7t_0"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span className="ink-watch-icon">
+          <Play size={15} />
+        </span>
+        Watch the 43-second walkthrough
+        <ArrowUpRight size={15} />
+      </a>
     </section>
   );
 }
 
 export function Landing() {
   const router = useRouter();
+  const root = useRef<HTMLElement>(null);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
+  useReveal(root);
   async function start() {
     setBusy("sample");
     setError("");
@@ -312,113 +403,109 @@ export function Landing() {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }
-  const launch = (
-    <Link className="button dark landing-launch" href="/new">
-      Plan a gathering
-      <ArrowRight size={19} />
-    </Link>
+  const sample = (
+    <button
+      className="button secondary ink-sample"
+      disabled={!!busy}
+      onClick={start}
+    >
+      <Play size={16} />
+      {busy ? "Opening your sample…" : "Try a sample"}
+    </button>
   );
   return (
     <div className="product-landing">
       <Header />
-      <main id="main">
-        <section className="landing-intro">
+      <main id="main" ref={root}>
+        <section className="ink-hero">
+          <div className="ink-dots" aria-hidden="true" />
+          <a
+            className="ink-pill"
+            href="https://dev.to/challenges/sanity-2026-09-16"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>Path Two</span>
+            Built for the DEV x Sanity Challenge
+            <ArrowUpRight size={14} />
+          </a>
           <h1>
             The plan changes.
             <br />
-            <span>The people stay.</span>
+            The people <em>stay.</em>
           </h1>
-          <div className="landing-intro-copy">
-            <p>
-              Turn a photo of your event plan into a signup page. Change the
-              paper later. Keep the people who already joined.
+          <p>
+            Photograph or type your event plan and share a signup page. Change
+            the paper later. Everyone keeps their place.
+          </p>
+          <div className="ink-actions">
+            <Link className="button dark ink-launch" href="/new">
+              Plan a gathering
+              <ArrowRight size={18} />
+            </Link>
+            {sample}
+          </div>
+          {error && (
+            <p className="landing-error" role="alert">
+              {error}
             </p>
-            <div className="landing-actions">
-              {launch}
-              <button className="text-button" disabled={!!busy} onClick={start}>
-                <Play size={16} />
-                {busy ? "Opening your sample…" : "Try a sample"}
-              </button>
-            </div>
-            <small>
-              For games nights, clubs and workshops. No account needed.
-            </small>
-            <a className="landing-watch" href="https://www.youtube.com/watch?v=xM5eC-q7t_0" target="_blank" rel="noreferrer">
-              Watch the working app <span>43 sec</span><ArrowUpRight size={14} />
-            </a>
-            {error && (
-              <p className="landing-error" role="alert">
-                {error}
-              </p>
-            )}
-          </div>
+          )}
         </section>
-        <Walkthrough />
-        <section className="landing-explanation">
-          <div>
-            <h2>
-              A crossed-out table
-              <br />
-              isn’t a cancelled night.
-            </h2>
-            <p>
-              Ticket to Ride belongs to its players, even when it needs a new
-              table. INKSHIFT keeps the session’s identity through the edit, so
-              its registrations move with it.
-            </p>
+        <div className="ink-stage">
+          <div className="ink-glow" aria-hidden="true" />
+          <div className="ink-frame">
+            <div className="ink-chrome" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <em>Illustrated walkthrough</em>
+            </div>
+            <Walkthrough />
           </div>
-          <div className="landing-decisions">
-            <div>
-              <h3>The reader proposes.</h3>
-              <p>
-                Upload a photo. Check the names, times and tables it found.
-                Unclear readings and conflicts stay visible.
-              </p>
-            </div>
-            <div>
-              <h3>You make the call.</h3>
-              <p>
-                Correct a reading, approve the changes or keep the current plan.
-                Every review has a saved outcome.
-              </p>
-            </div>
-            <div>
-              <h3>People keep their place.</h3>
-              <p>
-                The shared schedule updates. A registration still belongs to the
-                same game, with its new location.
-              </p>
-            </div>
-          </div>
-        </section>
+        </div>
+        <Uses />
+        <Bento />
+        <RealApp />
         <section className="landing-questions" aria-labelledby="questions-title">
           <div>
-            <h2 id="questions-title">Before you send<br />the invite.</h2>
+            <h2 id="questions-title">
+              Before you send
+              <br />
+              the invite.
+            </h2>
             <p>A few things worth knowing before people join.</p>
-            <Link className="text-button" href="/help">Read the guide <ArrowRight size={16} /></Link>
+            <Link className="text-button" href="/help">
+              Read the guide <ArrowRight size={16} />
+            </Link>
           </div>
           <div className="landing-answers">
             {questions.map(({ question, answer }) => (
               <details key={question}>
-                <summary>{question}<ChevronDown size={18} aria-hidden="true" /></summary>
+                <summary>
+                  {question}
+                  <ChevronDown size={18} aria-hidden="true" />
+                </summary>
                 <p>{answer}</p>
               </details>
             ))}
           </div>
         </section>
-        <section className="landing-close">
-          <div>
-            <h2>
-              Make a little room
-              <br />
-              for a good time.
-            </h2>
-            <p>Bring your plan. We’ll make room for the people.</p>
+        <section className="ink-close" aria-labelledby="close-title">
+          <div className="ink-close-dots" aria-hidden="true" />
+          <h2 id="close-title">
+            Make a little room for a <em>good</em> time.
+          </h2>
+          <p>Bring your plan. INKSHIFT keeps a place for every person.</p>
+          <div className="ink-actions">
+            <Link className="button primary ink-launch" href="/new">
+              Plan a gathering
+              <ArrowRight size={18} />
+            </Link>
+            {sample}
           </div>
-          {launch}
         </section>
         <footer className="landing-footer">
-          <span>INKSHIFT · Your paper. Your call.</span>
+          <span>INKSHIFT. Your paper. Your call.</span>
           <nav aria-label="Footer">
             <Link href="/help">Help</Link>
             <Link href="/privacy">Privacy</Link>

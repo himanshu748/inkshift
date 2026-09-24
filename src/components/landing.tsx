@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -39,6 +39,24 @@ const questions = [
 function Walkthrough() {
   const [step, setStep] = useState(2);
   const [playing, setPlaying] = useState(false);
+  const section = useRef<HTMLElement>(null);
+  const autoplayed = useRef(false);
+  useEffect(() => {
+    const node = section.current;
+    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || autoplayed.current) return;
+        autoplayed.current = true;
+        observer.disconnect();
+        setStep(0);
+        setPlaying(true);
+      },
+      { threshold: 0.45 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (!playing) return;
     let next = 0;
@@ -53,11 +71,13 @@ function Walkthrough() {
     return () => clearInterval(timer);
   }, [playing]);
   function choose(value: number) {
+    autoplayed.current = true;
     setPlaying(false);
     setStep(value);
   }
   return (
     <section
+      ref={section}
       id="how-it-works"
       className="product-demo"
       aria-label="Illustrated product walkthrough"
@@ -79,6 +99,7 @@ function Walkthrough() {
         <button
           className="demo-play"
           onClick={() => {
+            autoplayed.current = true;
             if (playing) setPlaying(false);
             else {
               setStep(0);

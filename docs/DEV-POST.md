@@ -1,7 +1,7 @@
 ---
-title: "INKSHIFT: keep the bookings when the plan changes"
+title: "INKSHIFT: cross out a table, keep the booking"
 published: false
-description: "A plan becomes a signup page. When a session moves, the people who booked it keep their places. Built with Sanity Content Lake, App SDK and Workflows."
+description: "Turn an event plan into a signup page, then move a session without losing its bookings. Powered by Sanity Content Lake, App SDK and Workflows."
 tags: devchallenge, sanitychallenge, sanity, ai
 ---
 
@@ -9,91 +9,129 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 ## What I Built
 
-You're organising a games night. People have picked their games and booked their places.
+Someone has booked Ticket to Ride at Table B. Then Table B becomes unavailable.
 
-Then Table B becomes unavailable. There is room for Ticket to Ride at Table C, but the people joining it already have a booking that says Table B.
+Moving the game to Table C sounds easy. But there is already a person attached to that plan, and their booking needs to survive the edit.
 
-I built INKSHIFT so the organiser can approve that move and keep those bookings. You can [try it now](https://inkshift.vercel.app) without creating an account.
+I built [INKSHIFT](https://inkshift.vercel.app) for this kind of change. It turns a plan for a games night, workshop or club meetup into a shared signup page. Upload a photo or type the plan, check the sessions, and send the invite link. Guests can book a place without creating an account.
 
-INKSHIFT turns a small-event plan into a shared signup page. You can use it for a games night, a club meetup or a workshop, then keep managing the same gathering as the plan changes.
+When the plan changes, you review the proposed edits against the people who have already joined. You can correct the reading, check the affected bookings and approve the move. Guests keep their places at the new location.
 
-Sanity holds the relationships that make that possible. Content Lake stores the sessions and their registrations, Workflows records the review, and App SDK subscribes to the shared schedule. The table can change while the session and its bookings keep their IDs.
+Sanity gives the gathering continuity: Content Lake stores the linked sessions and registrations, Workflows records each plan review, and App SDK subscribes to the shared schedule. The booking belongs to a session whose location can change.
 
-### Start with the plan you already have
-
-Create a gathering, give it a name and choose its date and time zone. Upload a photo of the plan, or type it in. Check the sessions, spaces, times and player limits before opening registrations.
-
-Once you're happy with the plan, share the invite link. Your guests pick a session and join without creating an account. Their places appear in the organiser's workspace.
-
-You can come back through **Your gatherings** to manage the event. A private backup code lets you restore organiser access on another device, so keep that code separate from the invitation you send to guests.
-
-### Move the game with its bookings
-
-Ticket to Ride is still the same game, at the same time, with the same people. It needs another table.
-
-In Sanity Content Lake, the table, session and registration are separate linked records. Each booking belongs to the session's stable ID. Moving the session to Table C changes its table reference, and the bookings stay attached to it.
-
-```text
-Registration → Session → Space
-                   │
-              same session ID
-              Table B → Table C
-```
-
-The [schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaTypes.ts) makes those relationships explicit. A table label is allowed to change without becoming a new booking destination.
-
-The app checks that C has enough seats and is free for the whole session. You see the proposed move and the affected registrations before approving it. If the move cannot fit, approval stays blocked while you correct the plan.
-
-![The organiser review shows Ticket to Ride moving from Table B to Table C with one registration preserved](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/review-booking-kept.jpg)
-
-In this sample gathering, one person has already booked Ticket to Ride. The review shows the proposed table change and the booking that will stay with it.
-
-### You decide when the change goes live
-
-Uploading an edited plan opens a review. The reading can be corrected before it changes anyone's booking.
-
-Sanity Workflows keeps that review as a saved process alongside the proposal in Content Lake. It moves through Reading, Review and either Applied or Discarded. You can approve the change, discard it or reopen a completed review later to see the decision.
-
-Someone might join the game while you're still deciding where to move it. INKSHIFT checks the event and proposal revisions before saving. If the registrations have changed, it asks you to recheck the move against the current bookings.
-
-The approved plan, linked records and public schedule are saved together in one Content Lake transaction. App SDK subscribes to the public schedule and booking counts. When its version changes, the organiser workspace refreshes its private data through an authorised server route. The content inspector lets you see the session's ID alongside its current table and booked places.
-
-![Sanity App SDK inspector showing Ticket to Ride as session-1-1 at Table C with one of four places booked](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/sanity-booking-inspector.jpg)
-
-After approval, the live inspector shows `session-1-1` at Table C with `1/4` places booked. This is the Content Lake projection read through App SDK.
-
-That public view contains the schedule and counts. Participant names, uploaded photos and organiser access data remain behind authorised server routes. The Sanity write token stays on the server.
+[Open INKSHIFT](https://inkshift.vercel.app) · [Watch the walkthrough](https://youtu.be/xM5eC-q7t_0) · [Source code](https://github.com/himanshu748/inkshift)
 
 ## Demo
 
-[Try INKSHIFT](https://inkshift.vercel.app) or watch the 43-second walkthrough:
+The 43-second walkthrough follows a prepared games-night plan through a table change:
 
 {% embed https://www.youtube.com/watch?v=xM5eC-q7t_0 %}
 
-To try the move yourself, choose **Try a sample** and join Ticket to Ride through its participant invite. Return to the organiser, select **Use the crossed-out example**, review the move and approve it. Reopen the participant page to see your booking at Table C.
+You can try the same flow yourself:
 
-![The participant page still lists Ticket to Ride under Your places, now at Table C](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/participant-booking-kept.jpg)
+1. Choose **Try a sample** and open its participant invite.
+2. Join Ticket to Ride, then return to the organiser workspace.
+3. Choose **Use the crossed-out example** and review the proposed move to Table C.
+4. Approve it, then reopen the participant page.
 
-The participant's existing booking now shows Table C. They did not sign up again.
+Here is the organiser's review with a booking already in place:
 
-The video and screenshots use labelled prepared samples with fixed readings. The screenshots show saved demo registrations and an applied review. Separate photo-reader checks used rendered typed sheets.
+![Organiser review showing Ticket to Ride moving from Table B to Table C, with one registration preserved](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/review-booking-kept.jpg)
+
+The review identifies the move and the registration that stays with it. INKSHIFT checks that Table C has enough seats and is available for the full session before allowing approval.
+
+After approval, the guest's existing booking appears under **Your places** at Table C:
+
+![Participant page showing the existing Ticket to Ride booking at Table C](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/participant-booking-kept.jpg)
+
+They do not need to sign up again.
+
+The video and screenshots use labelled prepared samples with fixed readings. The screenshots show a saved demo registration and an applied review. Separate photo-reader checks used rendered typed sheets.
+
+### How Sanity keeps the booking attached
+
+In Content Lake, spaces, sessions and registrations have separate identities. A registration points to a session; the session points to its space.
+
+```text
+Registration → Ticket to Ride → Table B
+                       ↓ move approved
+Registration → Ticket to Ride → Table C
+```
+
+Moving Ticket to Ride changes its space reference. Its session ID stays the same, so the registrations still belong to it. You can inspect these relationships in the [Sanity schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaTypes.ts).
+
+The app also includes a live content inspector. After the move, it shows `session-1-1` at Table C with `1/4` places booked:
+
+![Sanity App SDK inspector showing session-1-1 at Table C with one of four places booked](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/sanity-booking-inspector.jpg)
+
+App SDK reads this public schedule and its booking counts from Content Lake. Participant names, uploaded photos and organiser access data stay behind authorised server routes. The Sanity write token stays on the server.
+
+### A change has a review and a decision
+
+An edited plan becomes a saved proposal. Sanity Workflows tracks it through Reading, Review and either Applied or Discarded, so the organiser can return to a review and see what happened.
+
+There is a timing problem here: someone can join while the organiser is reviewing a move. A proposal that fitted the earlier bookings may no longer fit.
+
+Before applying it, the server checks the event and proposal revisions and recomputes the constraints. If the event has changed, the organiser has to recheck. Once approved, the plan, linked records and public schedule are saved together in one Content Lake transaction.
+
+App SDK subscribes to the public schedule's version. A change prompts the organiser workspace to refresh its private data through an authorised server route. Workflows records the review's progress; the server checks permission and validates the move.
 
 ## Code
 
-[Source and setup instructions](https://github.com/himanshu748/inkshift)
+[Source code and setup instructions](https://github.com/himanshu748/inkshift)
 
-INKSHIFT uses Next.js and React, with Qwen3-VL through Hugging Face Inference Providers for photo reading. The [verification record](https://github.com/himanshu748/inkshift/blob/main/docs/VERIFICATION.md) covers booking preservation, concurrent changes, access recovery and private-data checks.
+INKSHIFT uses Next.js and React, Sanity Content Lake, App SDK and Workflows. Photo reading uses Qwen3-VL through Hugging Face Inference Providers. The [verification record](https://github.com/himanshu748/inkshift/blob/main/docs/VERIFICATION.md) covers booking preservation, concurrent changes, access recovery and private-data checks.
 
 ## My Build Process
 
-I used Codex and Claude Code to build INKSHIFT. The main schema decision was to give spaces, sessions and registrations their own identities. A new reading has to reconcile with the existing gathering, because replacing the schedule wholesale would lose the connection to people who already joined.
+I built INKSHIFT with two AI-native tools: Codex for the first build and the finish, and Claude Code for an upgrade pass in between. Every step ran against the real Sanity project, so each claim below comes from a test run or a live check.
 
-In a typed-image test, the reader treated a booked game as removed. The correction step let me match it back to the original session before approval, and I verified that the booking survived the move. That check is part of the normal product flow.
+### The pitch, then very short prompts
 
-I also checked what happens when someone joins during a review. Approval uses Content Lake revision guards and recomputes the constraints against the current event. A stale proposal has to be reviewed again. Workflows records the process; the server enforces who may approve and whether the move is valid.
+The idea started as a note I pasted in: "A handwritten plan becomes a working, multiplayer app. Then you change the paper, and the app understands what changed without losing what people already did."
+
+My prompts after that were short. "go on it's for dev.to challenge", then "anything works also if that does not fit the hackathon let me know and switch over to another project". Codex read the Path Two rules before writing code and answered that it fit, because Sanity would hold the model the whole product depends on.
+
+### The first correction: a table is not a session
+
+The first model tied each game to its table. Moving Ticket to Ride from Table B to Table C would have replaced the session and dropped its bookings, which is the exact failure the product exists to prevent. Spaces, sessions and registrations became separate records with stable IDs, and a registration points to its session. Most of the later work follows from that decision.
+
+The same day we set a second rule: a region missing from a photo is uncertainty, not evidence of a deletion, and it goes to review.
+
+### Where the models got stuck
+
+- **The vision provider rejected the schema.** Qwen3-VL through the Hugging Face router refused the bounding-box format. Codex fixed it by expressing each box as a fixed-length array of numbers.
+- **The reader removed a booked game.** On the second photo of an edited plan, the reader decided Ticket to Ride was gone. Review blocked approval until I matched it back to the original session. After approval, the booking appeared at Table C. That run is why review is mandatory, not optional.
+- **The schema deploy was refused.** The token Sanity provisioned for the project could write documents but could not deploy a schema. The app doesn't need it at runtime, so the deploy waits on my own Sanity login.
+- **App SDK warned during server rendering in production.** Moving the subscription provider behind a browser-only import fixed it.
+- **Vercel picked the wrong framework preset.** Committing an explicit Next.js configuration fixed the first deploy.
+
+### What I threw away
+
+I asked for a Three.js scroll world on the landing page. It worked: the paper became tables, pawns took their seats and the game moved from B to C. It also looked like a toy, with small pieces and handwriting you couldn't read. I told Claude the 3D looked bad and chose a replacement built from the real interface. The walkthrough on the homepage is now the actual screens.
+
+### Reaching into Workflows
+
+Workflows is in early access, so the agent worked from the docs, not from memory. Claude wrote the `inkshift-plan-change` definition (Reading, then Review, then Applied or Discarded) and its adapter, then hit its session limit before wiring the routes and interface. Codex picked up that working copy, connected proposal creation, readings, corrections, approval and discard to the engine, and deployed definition v1.
+
+One detail from the docs shaped the design: the engine's checks are advisory, and only the Content Lake enforces anything. So the server still rechecks revisions, seats and the time slot before it writes, and a registration that arrives during review invalidates the stale proposal. Codex also added recovery for a plan decision whose workflow follow-up fails.
+
+### Writing this post
+
+I pushed back on two drafts: "you've to establish it as completed product not incomplete" and "why'd you talk about how we made it instead of what product and how it uses sanity". That's why the post opens with the product. The build story lives here.
+
+### What is still unverified
+
+Real handwriting (every image test used rendered typed sheets), camera access on physical phones and the remote schema deploy. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts: 31 tests in all. A live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
 
 ## Sanity Project Details
 
-Project ID: `a5xdqsb7`, dataset: `production`. The deployed workflow is `inkshift-plan-change`, version 1.
+Project ID: `a5xdqsb7`  
+Dataset: `production`  
+Workflow: `inkshift-plan-change`, version 1
 
-[Create your own gathering](https://inkshift.vercel.app), add the plan and share the signup link with your guests.
+To use INKSHIFT for your own gathering, [create an event](https://inkshift.vercel.app), add its plan and share the participant invite. You can return through **Your gatherings**, or restore organiser access on another device with your private backup code.
+
+## Agent Session
+
+<!-- Before publishing: upload the main Codex session (rollout-2026-09-20T18-56-46, INKSHIFT) at https://dev.to/agent_sessions/new, slice it to the concept check, the space/session split and the Workflows wiring, check it for keys and tokens, press Make Public, then embed it here. Delete this section if you skip it. -->

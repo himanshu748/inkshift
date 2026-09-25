@@ -131,7 +131,3 @@ Dataset: `production`
 Workflow: `inkshift-plan-change`, version 1
 
 To use INKSHIFT for your own gathering, [create an event](https://inkshift.vercel.app), add its plan and share the participant invite. You can return through **Your gatherings**, or restore organiser access on another device with your private backup code.
-
-## Agent Session
-
-<!-- Before publishing: upload the main Codex session (rollout-2026-09-20T18-56-46, INKSHIFT) at https://dev.to/agent_sessions/new, slice it to the concept check, the space/session split and the Workflows wiring, check it for keys and tokens, press Make Public, then embed it here. Delete this section if you skip it. -->

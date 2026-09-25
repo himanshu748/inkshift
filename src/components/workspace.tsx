@@ -47,6 +47,7 @@ import { Paper } from "./paper";
 import { WorkflowProgress } from "./workflow-progress";
 import { DraftEditor } from "./draft-editor";
 import { OrganizerAccess } from "./organizer-access";
+import { TimeMachine } from "./time-machine";
 const SanityLiveBridge = dynamic(
   () => import("./sanity-live").then((module) => module.SanityLiveBridge),
   { ssr: false },
@@ -1077,6 +1078,7 @@ export function Workspace({ id }: { id: string }) {
             />
           )}
         </div>
+        <TimeMachine eventId={id} revision={event.version} />
         {(reviews.length > 0 || reviewsError) && (
           <section
             className="saved-reviews"

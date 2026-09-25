@@ -1,10 +1,22 @@
 import { randomUUID } from "node:crypto";
-import { StaleWriteError, type Document, type Store } from "../src/lib/store";
+import {
+  StaleWriteError,
+  timelineFromDocuments,
+  type Document,
+  type Store,
+} from "../src/lib/store";
 export class MemoryStore implements Store {
   kind = "local" as const;
   docs = new Map<string, Document>();
   async reviews() {
     return [];
+  }
+  async timelineRecords(eventId: string) {
+    return timelineFromDocuments(
+      [...this.docs.values()]
+        .filter((d) => d.eventId === eventId)
+        .map((d) => structuredClone(d)),
+    );
   }
   async get<T>(id: string) {
     return structuredClone(this.docs.get(id) ?? null) as T | null;

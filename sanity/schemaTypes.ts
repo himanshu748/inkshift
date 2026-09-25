@@ -228,6 +228,17 @@ export const schemaTypes = [
       at("createdAt"),
       at("appliedAt"),
       num("appliedVersion"),
+      defineField({
+        name: "planBefore",
+        type: "object",
+        description:
+          "The live tables and sessions this proposal replaced, recorded at apply time. Lets the time machine show earlier plans from records instead of guesses.",
+        fields: [
+          str("photoId"),
+          arr("spaces", table()),
+          arr("sessions", session()),
+        ],
+      }),
       at("discardedAt"),
     ],
     "A reading is a proposal and the subject of one inkshift-plan-change Sanity Workflows run. The workflow records who read, reviewed and decided; the server still recomputes constraints and guards event and proposal revisions before any plan change.",

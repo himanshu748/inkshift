@@ -4,6 +4,7 @@ import { mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { randomUUID } from "node:crypto";
 import type { Proposal, ReviewSummary } from "./model";
+import type { TimelinePhoto, TimelineProposal } from "./timeline";
 
 export type Document = {
   _id: string;
@@ -20,10 +21,15 @@ export class StaleWriteError extends Error {
     );
   }
 }
+export type TimelineRecords = {
+  proposals: TimelineProposal[];
+  photos: TimelinePhoto[];
+};
 export interface Store {
   kind: "sanity" | "local";
   get<T>(id: string): Promise<T | null>;
   reviews(eventId: string): Promise<ReviewSummary[]>;
+  timelineRecords(eventId: string): Promise<TimelineRecords>;
   transact(expected: Expected, documents: Document[]): Promise<void>;
 }
 const stripSystem = (doc: Document) =>
@@ -49,6 +55,15 @@ class SanityStore implements Store {
   async reviews(eventId: string) {
     return this.client.fetch<ReviewSummary[]>(
       '*[_type == "inkshiftProposal" && eventId == $eventId] | order(createdAt desc)[0...20]{id, source, status, createdAt, appliedAt, discardedAt}',
+      { eventId },
+    );
+  }
+  async timelineRecords(eventId: string) {
+    return this.client.fetch<TimelineRecords>(
+      `{
+        "proposals": *[_type == "inkshiftProposal" && eventId == $eventId && status in ["applied", "discarded"]] | order(createdAt asc)[0...80]{id, status, source, photoId, baseVersion, createdAt, appliedAt, appliedVersion, discardedAt, planBefore, "preview": preview{spaces, sessions, changes, retainedBookings}},
+        "photos": *[_type == "inkshiftPhoto" && eventId == $eventId]{id, samplePath, "stored": defined(dataUrl)}
+      }`,
       { eventId },
     );
   }
@@ -125,6 +140,21 @@ class LocalStore implements Store {
       db.close();
     }
   }
+  async timelineRecords(eventId: string) {
+    const db = await this.db();
+    try {
+      const rows = (
+        db
+          .prepare(
+            "SELECT body FROM documents WHERE json_extract(body, '$._type') IN ('inkshiftProposal', 'inkshiftPhoto') AND json_extract(body, '$.eventId') = ?",
+          )
+          .all(eventId) as { body: string }[]
+      ).map(({ body }) => JSON.parse(body) as Document);
+      return timelineFromDocuments(rows);
+    } finally {
+      db.close();
+    }
+  }
   async transact(expected: Expected, documents: Document[]) {
     const guards = expected
       ? Array.isArray(expected)
@@ -157,6 +187,24 @@ class LocalStore implements Store {
       db.close();
     }
   }
+}
+export function timelineFromDocuments(docs: Document[]): TimelineRecords {
+  const proposals = docs
+    .filter(
+      (d) =>
+        d._type === "inkshiftProposal" &&
+        (d.status === "applied" || d.status === "discarded"),
+    )
+    .map((d) => d as unknown as TimelineProposal)
+    .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  const photos = docs
+    .filter((d) => d._type === "inkshiftPhoto")
+    .map((d) => ({
+      id: String(d.id),
+      ...(d.samplePath ? { samplePath: String(d.samplePath) } : {}),
+      stored: Boolean(d.dataUrl),
+    }));
+  return { proposals, photos };
 }
 let cached: Store | undefined;
 export function getStore(): Store {

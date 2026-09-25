@@ -37,6 +37,7 @@ import {
   reviseProposal,
 } from "./service";
 import type { Store } from "./store";
+import type { TimelineWorkflow } from "./timeline";
 
 /**
  * The engine stamps every call with the token's identity, and both callers use
@@ -408,4 +409,35 @@ export async function discardReview(
 ) {
   if (engines) await allowed(engines, proposal, "review", "discard");
   return trackReview(engines, await discardProposal(store, proposal));
+}
+
+/** Read-only: reports each run as it stands without firing catch-up actions. */
+export async function reviewStages(
+  engines: ReviewEngines | null,
+  proposals: Pick<Proposal, "eventId" | "id">[],
+): Promise<Record<string, TimelineWorkflow>> {
+  const entries = await Promise.all(
+    proposals.map(async (proposal): Promise<[string, TimelineWorkflow]> => {
+      if (!engines) return [proposal.id, { status: "local" }];
+      try {
+        const instance = await readInstance(
+          engines.organizer,
+          instanceIdFor(proposal),
+        );
+        return [
+          proposal.id,
+          instance
+            ? {
+                status: "tracked",
+                stage: instance.currentStage,
+                steps: steps(instance),
+              }
+            : { status: "unavailable" },
+        ];
+      } catch {
+        return [proposal.id, { status: "unavailable" }];
+      }
+    }),
+  );
+  return Object.fromEntries(entries);
 }

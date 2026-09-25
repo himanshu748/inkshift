@@ -404,6 +404,11 @@ export async function applyProposal(
         status: "applied",
         appliedAt: at,
         appliedVersion: version,
+        planBefore: {
+          ...(event.photoId ? { photoId: event.photoId } : {}),
+          spaces: event.spaces,
+          sessions: event.sessions,
+        },
       } as unknown as Document,
     ],
   );

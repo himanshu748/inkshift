@@ -156,6 +156,13 @@ export type Proposal = {
   appliedAt?: string;
   appliedVersion?: number;
   discardedAt?: string;
+  planBefore?: PlanSnapshot;
+};
+/** The live plan as it stood the moment a proposal was applied over it. */
+export type PlanSnapshot = {
+  photoId?: string;
+  spaces: Space[];
+  sessions: Session[];
 };
 export type WorkflowStep = {
   stage: "reading" | "review" | "applied" | "discarded" | "outcome";

@@ -48,6 +48,20 @@ They do not need to sign up again.
 
 The video and screenshots use labelled prepared samples with fixed readings. The screenshots show a saved demo registration and an applied review. Separate photo-reader checks used rendered typed sheets.
 
+### Scrub back through the paper
+
+Every approved edit becomes a version. Below the live plan there is a **Paper time machine**: a slider over every version of the paper, with the sheet on the left and the tables on the right. Move from version 1 to version 2 and the Ticket to Ride card slides from Table B to Table C, carrying Ada's token with it. Move back and it slides home.
+
+![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
+
+Each version shows when it was applied, what changed ("Ticket to Ride: Table B → Table C"), how many bookings were kept and the state of its Workflows run. Readings I discarded appear as a faded note, never as a version.
+
+Version 1 in the sample needs no upload: choose **Try a sample**, join as a guest, apply the crossed-out example and the time machine has two versions. The rename example adds a third.
+
+It is built from records, not an animation of a guess. Plans only change when a proposal is applied, so each applied proposal's stored preview is exactly the plan it produced. The one gap was the plan before the first edit: nothing stored it. INKSHIFT now records a `planBefore` snapshot on the proposal at apply time. Older sample gatherings that predate the snapshot rebuild version 1 from the prepared sample definition, and the time machine labels that version **Reconstructed**. Bookings are placed per version from their `createdAt` and `cancelledAt` times; they always point at the same session ID, so nothing has to be guessed about where a person went.
+
+The timeline, photos and booking initials come from an organiser-only server route. A request without the organiser cookie gets a 403, and the App SDK public schedule still carries only sessions and counts.
+
 ### How Sanity keeps the booking attached
 
 In Content Lake, spaces, sessions and registrations have separate identities. A registration points to a session; the session points to its space.
@@ -116,13 +130,21 @@ Workflows is in early access, so the agent worked from the docs, not from memory
 
 One detail from the docs shaped the design: the engine's checks are advisory, and only the Content Lake enforces anything. So the server still rechecks revisions, seats and the time slot before it writes, and a registration that arrives during review invalidates the stale proposal. Codex also added recovery for a plan decision whose workflow follow-up fails.
 
+### The time machine
+
+After the first submission I wanted the strange part to be visible: ink on paper edits a live database, and the same people travel with their bookings as the paper changes. I asked Claude Code for a "paper time machine" and gave it one rule: do not fake history.
+
+Before any UI, it checked the rule against the real dataset with a GROQ read. 17 events had applied proposals, and in all 17 the latest applied preview matched the live plan exactly. Two problems came out of that read. 8 of 21 applied proposals were saved before `appliedVersion` existed, so ordering falls back to the applied time. And nothing stored the plan before the first edit, so version 1 of a sample could only be rebuilt from code. That is why `planBefore` now exists and why old gatherings say **Reconstructed** on version 1.
+
+What went wrong: the first test run was flaky. A booking and an approval landed in the same millisecond, and the version-1 frame dropped the guest. The tests now run on a fixed clock, and a booking made at the exact moment of an apply counts as before it. The agent also hit its session limit while writing the component and picked the work up from the last commit.
+
 ### Writing this post
 
 I pushed back on two drafts: "you've to establish it as completed product not incomplete" and "why'd you talk about how we made it instead of what product and how it uses sanity". That's why the post opens with the product. The build story lives here.
 
 ### What is still unverified
 
-Real handwriting (every image test used rendered typed sheets) and camera access on physical phones. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts: 31 tests in all. A live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
+Real handwriting (every image test used rendered typed sheets) and camera access on physical phones. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts. With 6 tests for the time machine (ordering, discarded readings left out, bookings followed by session ID, missing photos, reconstructed originals) there are 37 in all. A live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
 
 ## Sanity Project Details
 

@@ -9,15 +9,19 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 ## What I Built
 
-Someone has booked Ticket to Ride at Table B. Then Table B becomes unavailable.
+Cross out a table on a paper plan and photograph it: a live Sanity database moves the game while every guest keeps their seat. Then scrub back through every version of the paper.
 
-Moving the game to Table C sounds easy. But there is already a person attached to that plan, and their booking needs to survive the edit.
+![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
 
-I built [INKSHIFT](https://inkshift.vercel.app) for this kind of change. It turns a plan for a games night, workshop or club meetup into a shared signup page. Upload a photo or type the plan, check the sessions, and send the invite link. Guests can book a place without creating an account.
+The paper time machine halfway between version 1 and 2: Ticket to Ride slides from Table B to Table C and its booking goes with it.
 
-When the plan changes, you review the proposed edits against the people who have already joined. You can correct the reading, check the affected bookings and approve the move. Guests keep their places at the new location.
+<!-- TIME MACHINE CLIP -->
 
-Sanity gives the gathering continuity: Content Lake stores the linked sessions and registrations, Workflows records each plan review, and App SDK subscribes to the shared schedule. The booking belongs to a session whose location can change.
+[INKSHIFT](https://inkshift.vercel.app) turns a plan for a games night, workshop or club meetup into a shared signup page. Upload a photo or type the plan, check the sessions and send the invite link. Guests book a place without an account.
+
+When the paper changes, you review the proposed edit against the people who have already joined, correct the reading if needed and approve. Guests keep their places at the new location.
+
+Sanity gives the gathering continuity: Content Lake stores the linked sessions and registrations, Workflows records each plan review and App SDK subscribes to the shared schedule. The booking belongs to a session whose location can change.
 
 [Open INKSHIFT](https://inkshift.vercel.app) · [Watch the walkthrough](https://youtu.be/xM5eC-q7t_0) · [Source code](https://github.com/himanshu748/inkshift)
 
@@ -52,8 +56,6 @@ The video and screenshots use labelled prepared samples with fixed readings. The
 
 Every approved edit becomes a version. Below the live plan there is a **Paper time machine**: a slider over every version of the paper, with the sheet on the left and the tables on the right. Move from version 1 to version 2 and the Ticket to Ride card slides from Table B to Table C, carrying Ada's token with it. Move back and it slides home.
 
-![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
-
 Each version shows when it was applied, what changed ("Ticket to Ride: Table B → Table C"), how many bookings were kept and the state of its Workflows run. Readings I discarded appear as a faded note, never as a version.
 
 Version 1 in the sample needs no upload: choose **Try a sample**, join as a guest, apply the crossed-out example and the time machine has two versions. The rename example adds a third.
@@ -72,7 +74,27 @@ Registration → Ticket to Ride → Table B
 Registration → Ticket to Ride → Table C
 ```
 
-Moving Ticket to Ride changes its space reference. Its session ID stays the same, so the registrations still belong to it. You can inspect these relationships in the [Sanity schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaTypes.ts).
+Moving Ticket to Ride changes its space reference. Its session ID stays the same, so the registrations still belong to it. You can inspect these relationships in the [Sanity schema](https://github.com/himanshu748/inkshift/blob/main/sanity/schemaTypes.ts). Trimmed, with `// ...` marking skipped lines:
+
+```ts
+  // inkshiftRegistration: a booking points at a session
+      ref("session", "inkshiftSession"),
+  // inkshiftSession: the session points at its current table
+      ref("space", "inkshiftSpace"),
+  // inkshiftProposal: the plan it replaced, recorded at apply time
+      defineField({
+        name: "planBefore",
+        type: "object",
+  // inkshiftEvent: private aggregate, one revision guards every write
+      arr("spaces", table()),
+      arr("sessions", session()),
+      arr("bookings", booking()),
+  // inkshiftPublicEvent: what App SDK reads anonymously
+      arr("spaces", [str("id"), str("label"), capacity()]),
+        num("booked"),
+```
+
+The event aggregate repeats spaces, sessions and bookings as arrays on purpose: its document revision is the single lock. Every booking and approval patches it with `ifRevisionId` and writes the linked records and public projection in the same transaction. A write against a stale revision is rejected whole with a 409: a booking retries against the new state, and a stale approval has to be rechecked.
 
 The app also includes a live content inspector. After the move, it shows `session-1-1` at Table C with `1/4` places booked:
 
@@ -98,7 +120,7 @@ INKSHIFT uses Next.js and React, Sanity Content Lake, App SDK and Workflows. Pho
 
 ## My Build Process
 
-I built INKSHIFT with two AI-native tools: Codex for the first build and the finish, and Claude Code for an upgrade pass in between. Every step ran against the real Sanity project, so each claim below comes from a test run or a live check.
+Codex and Claude Code were my AI-native coding environment: Codex for the first build and the finish, Claude Code for an upgrade pass in between and the time machine. Every step ran against the real Sanity project, so each claim below comes from a test run or a live check.
 
 ### The pitch, then very short prompts
 
@@ -134,7 +156,7 @@ One detail from the docs shaped the design: the engine's checks are advisory, an
 
 After the first submission I wanted the strange part to be visible: ink on paper edits a live database, and the same people travel with their bookings as the paper changes. I asked Claude Code for a "paper time machine" and gave it one rule: do not fake history.
 
-Before any UI, it checked the rule against the real dataset with a GROQ read. 17 events had applied proposals, and in all 17 the latest applied preview matched the live plan exactly. Two problems came out of that read. 8 of 21 applied proposals were saved before `appliedVersion` existed, so ordering falls back to the applied time. And nothing stored the plan before the first edit, so version 1 of a sample could only be rebuilt from code. That is why `planBefore` now exists and why old gatherings say **Reconstructed** on version 1.
+Before any UI, it checked the rule against the real dataset with a GROQ read. When I reran it on September 28, 22 events had applied proposals, and in all 22 the latest applied preview matched the live plan exactly ([queries and counts](https://github.com/himanshu748/inkshift/blob/main/docs/evidence/timeline-dataset-check.json)). Two problems came out of that read. 8 of 30 applied proposals were saved before `appliedVersion` existed, so ordering falls back to the applied time. And nothing stored the plan before the first edit, so version 1 of a sample could only be rebuilt from code. That is why `planBefore` now exists and why old gatherings say **Reconstructed** on version 1.
 
 What went wrong: the first test run was flaky. A booking and an approval landed in the same millisecond, and the version-1 frame dropped the guest. The tests now run on a fixed clock, and a booking made at the exact moment of an apply counts as before it. The agent also hit its session limit while writing the component and picked the work up from the last commit.
 

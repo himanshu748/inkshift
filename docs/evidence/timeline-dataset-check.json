@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-09-28T07:19:56.191Z",
+  "projectId": "a5xdqsb7",
+  "dataset": "production",
+  "note": "Aggregate counts only. No participant names, photos or document contents are recorded. The live-plan comparison uses the space and session fields the time machine renders, sorted by stable ID.",
+  "queries": {
+    "events": "count(*[_type == \"inkshiftEvent\"])",
+    "proposalStatuses": "*[_type == \"inkshiftProposal\"].status",
+    "appliedWithoutAppliedVersion": "count(*[_type == \"inkshiftProposal\" && status == \"applied\" && !defined(appliedVersion)])",
+    "appliedWithPlanBefore": "count(*[_type == \"inkshiftProposal\" && status == \"applied\" && defined(planBefore)])",
+    "integrationCheckDocuments": "count(*[_type == \"inkshiftCheck\"])",
+    "latestAppliedVsLive": "*[_type == \"inkshiftEvent\" && count(*[_type == \"inkshiftProposal\" && status == \"applied\" && eventId == ^.id]) > 0]{\n  \"live\": { spaces, sessions },\n  \"applied\": *[_type == \"inkshiftProposal\" && status == \"applied\" && eventId == ^.id]{\n    appliedVersion, appliedAt, \"spaces\": preview.spaces, \"sessions\": preview.sessions\n  }\n}"
+  },
+  "results": {
+    "events": 40,
+    "proposals": 38,
+    "proposalsByStatus": {
+      "applied": 30,
+      "discarded": 3,
+      "review": 5
+    },
+    "eventsWithAppliedProposal": 22,
+    "appliedWithoutAppliedVersion": 8,
+    "appliedWithPlanBefore": 9,
+    "latestAppliedPreviewMatchesLivePlan": 22,
+    "integrationCheckDocuments": 1
+  }
+}

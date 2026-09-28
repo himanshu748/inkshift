@@ -15,7 +15,7 @@ Cross out a table on a paper plan and photograph it: a live Sanity database move
 
 The paper time machine halfway between version 1 and 2: Ticket to Ride slides from Table B to Table C and its booking goes with it.
 
-<!-- TIME MACHINE CLIP -->
+{% embed https://youtu.be/XpdGE0ESoFM %}
 
 [INKSHIFT](https://inkshift.vercel.app) turns a plan for a games night, workshop or club meetup into a shared signup page. Upload a photo or type the plan, check the sessions and send the invite link. Guests book a place without an account.
 

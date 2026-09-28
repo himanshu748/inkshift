@@ -274,6 +274,6 @@ export const schemaTypes = [
     "inkshiftCheck",
     "Integration check",
     [str("title")],
-    "Connectivity check created during development.",
+    "Holds one document, inkshift-integration-check, written on September 20, 2026 to confirm the write token worked. No app code reads or writes this type; it stays so Studio can still describe that document.",
   ),
 ];

@@ -2,7 +2,15 @@
 
 The September 22, 2026 continuation replaces the 3D landing and connects the existing review system to Sanity Workflows. Earlier deployment, concurrency and photo evidence remains in [the September 21 record](VERIFICATION-2026-09-21.md); its 3D performance findings describe a removed interface.
 
-## Product continuation — September 22
+## Time machine release: September 25 (checks rerun September 28)
+
+- The paper time machine shipped on September 25 with a `planBefore` snapshot on applied proposals. The deployed schema document `_.schemas.inkshift` in project a5xdqsb7 was created on September 24, 2026 and last updated on September 25, and it contains `planBefore`. The local schema still validates with **zero errors and zero warnings** (rechecked September 28).
+- `npx vitest run` on September 28: **37 tests passed** in 4 files (19 domain, 6 workflow, 6 organizer continuity, 6 time machine).
+- Hosted privacy check on September 28: `GET https://inkshift.vercel.app/api/events/MDFoWC-pZtWiTg/timeline` without the organizer cookie returned **403** (`organizer-required`). That sample event exists and has 2 applied proposals; its public event page returned 200. An unknown event ID returns 404.
+- Dataset check on September 28 (read-only GROQ, server token; aggregate counts only): 40 events, 38 proposals (30 applied, 3 discarded, 5 in review), 22 events with at least one applied proposal, 8 of 30 applied proposals without `appliedVersion`, 9 applied proposals with `planBefore`. In **22 of 22** events the latest applied proposal's preview matched the live plan on every field the time machine renders. The DEV post's earlier numbers (17 events, 8 of 21) came from an earlier read on September 25, before more events were created. See `evidence/timeline-dataset-check.json`; rerun with `node --env-file=.env.local scripts/timeline-dataset-check.mjs`.
+- A credential-free local run (`npm run dev` with every Sanity variable empty) served `/` with 200, reported `"storage":"local"` from `/api/health`, created a sample event, returned 403 for its timeline without the organizer cookie and 200 with it.
+
+## Product continuation: September 22
 
 - Added real gathering setup, the returning organizer list, private access-code backup and restore, an empty-workspace path, and Help/Privacy/About routes. Practice gatherings are separate from an organizer’s real plans.
 - TypeScript, ESLint, the optimized Next.js build and all **31 tests** passed. Six new unit tests cover gathering discovery and organizer access. The actual local HTTP flow verified custom details, invalid dates, owner-only discovery/export, cross-origin rejection, a manual plan with no example photo, and restoration in a separate cookie context without changing the plan. See `evidence/local-product-http.json`.
@@ -36,6 +44,6 @@ The September 22, 2026 continuation replaces the 3D landing and connects the exi
 
 The image inputs are rendered typed sheets, not photographed handwriting. Prepared example buttons do not use image inference. Browser tests use CSS viewports in a desktop browser, not physical phone hardware. The workflow fault-recovery test simulates a lost engine write in memory; it does not claim to have induced a live Sanity outage.
 
-Remote schema and Studio deployment remain pending. The local schema and Studio build are prepared; the earlier workflow release did not establish remote schema/Studio permissions.
+The schema was deployed on September 24 and 25 with the owner's Sanity login. The Studio itself is not hosted.
 
-An edited browser walkthrough is included; a physical-paper video, DEV publication and a submission receipt remain unfinished. The global event/photo caps are shared quota guards. Organizers can now save a private bearer code to restore access. There is still no account/email recovery when both that code and the original browser access are lost, and codes cannot yet be rotated in the interface. Distinct browsers do not establish distinct human identities.
+An edited browser walkthrough is included; there is no video of a physically photographed paper plan. The DEV post is published at https://dev.to/himanshu_748/inkshift-cross-out-a-table-keep-the-booking-344i. The global event/photo caps are shared quota guards. Organizers can now save a private bearer code to restore access. There is still no account/email recovery when both that code and the original browser access are lost, and codes cannot yet be rotated in the interface. Distinct browsers do not establish distinct human identities.

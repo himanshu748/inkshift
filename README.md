@@ -54,7 +54,7 @@ Configure the same environment variables on the host. `NEXT_PUBLIC_*` values are
 
 Project **a5xdqsb7**, dataset **production**. Credentials are excluded from source.
 
-The event aggregate, spaces, sessions, registrations, photos and proposals are linked records. Each domain write updates its records and public projection in one revision-checked transaction. Anonymous App SDK queries read a root-ID projection containing the schedule and counts. Private dot-path documents hold access hashes, participant names, registrations, proposals, photos and workflow instances.
+The event aggregate, spaces, sessions, registrations, photos and proposals are linked records. Each domain write updates its records and public projection in one revision-checked transaction. Anonymous App SDK queries read a root-ID projection containing the schedule and counts. Its ID is a SHA-256 digest of the event invite ID; neither the invite ID nor a private-event reference appears in the public document. Private dot-path documents hold access hashes, participant names, registrations, proposals, photos and workflow instances.
 
 `/event/<id>/inspector` uses App SDK directly and shows stable session IDs with their current table and count. The organizer also subscribes through App SDK and polls the server as a recovery path. Add your application's exact origin to Sanity CORS for browser subscriptions. Server routes authorize mutations and participant-specific reads.
 
@@ -90,12 +90,22 @@ npm run test:product-http
 npm run test:http
 ```
 
-The suite has 37 tests: 19 domain tests, six tests using the actual workflow engine with its in-memory test bench, six organizer-continuity tests and six time machine tests. `node --env-file=.env.local scripts/timeline-dataset-check.mjs` reruns the read-only GROQ check behind the time machine ([latest result](docs/evidence/timeline-dataset-check.json)). Live checks cover stale approval, relocation with stable booking IDs, discard, recorded caller context and private document access. Dated reports distinguish local production mode from the hosted app.
+The suite covers domain rules, the actual workflow engine with its in-memory test bench, organizer continuity, time machine history, stale-tab decisions, Unicode identities and registration limits. `node --env-file=.env.local scripts/timeline-dataset-check.mjs` reruns the read-only GROQ check behind the time machine ([latest result](docs/evidence/timeline-dataset-check.json)). Live checks cover stale approval, relocation with stable booking IDs, discard, recorded caller context and private document access. Dated reports distinguish local production mode from the hosted app.
 
 See [verification and limitations](docs/VERIFICATION.md), [architecture](docs/ARCHITECTURE.md), [workflow recovery](docs/WORKFLOWS.md), [demo script](docs/DEMO.md) and the [DEV post](https://dev.to/himanshu_748/inkshift-cross-out-a-table-keep-the-booking-344i) ([source](docs/DEV-POST.md)).
 
 ## Current limits
 
-Photographed handwriting, difficult lighting and the camera permission flow on physical phones have not been validated. Current image evidence uses rendered typed sheets. The app supports same-day sessions, up to 12 spaces, 30 sessions and 300 registrations per event. Organizer access lives in a 30-day browser cookie. A saved private bearer code restores that access on another device; it does not establish a user account. Losing both the code and the original browser access cannot be recovered. The code is not revocable through an in-app interface yet. Invite holders can book, and a determined person can reserve from multiple browsers. Daily event and photo caps are global quota guards, not per-person abuse prevention.
+Photographed handwriting, difficult lighting and the camera permission flow on physical phones have not been validated. Current image evidence uses rendered typed sheets. The app supports same-day sessions, up to 12 spaces, 30 sessions and 300 active registrations per event. Each event retains up to 1,200 lifetime registration records, including cancellations; further joins require a new gathering. One browser can make up to 20 joins per event in 10 minutes. Existing bookings remain viewable and cancellable at either limit. Organizer access lives in a 30-day browser cookie. A saved private bearer code restores that access on another device; it does not establish a user account. Losing both the code and the original browser access cannot be recovered. The code is not revocable through an in-app interface yet. Invite holders can book, and a determined person can reserve from multiple browsers. Daily event and photo caps are global quota guards, not per-person abuse prevention.
 
 Photos stay in private Sanity documents and are sent to the configured vision provider. The previous photo and approved plan may also be sent to resolve an edit; participant names and access hashes are excluded from the model context. There is no automatic retention/deletion interface.
+
+### Migrating legacy public projections
+
+Before deploying this change to an existing dataset, preview the migration with Node 24:
+
+```sh
+node --env-file=.env.local --conditions=react-server --import tsx scripts/migrate-public-projections.ts
+```
+
+The default is read-only and bounded to 200 public documents. `--limit=1000` raises that bound. After review, run the same command with `--apply` to replace each legacy projection with its safe hashed document and delete the old projection in one revision-guarded transaction. Reruns skip already migrated records. The report contains counts only; missing private events and concurrent changes are skipped for manual review. Deploy the matching App SDK update together with this migration. Previously exposed invite IDs cannot be made secret by changing projection IDs; existing invites would require separate rotation.

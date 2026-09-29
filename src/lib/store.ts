@@ -2,7 +2,7 @@ import "server-only";
 import { createClient } from "@sanity/client";
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import type { Proposal, ReviewSummary } from "./model";
 import type { TimelinePhoto, TimelineProposal } from "./timeline";
 
@@ -39,7 +39,7 @@ const stripSystem = (doc: Document) =>
     ),
   );
 
-class SanityStore implements Store {
+export class SanityStore implements Store {
   kind = "sanity" as const;
   private client = createClient({
     projectId: process.env.SANITY_PROJECT_ID!,
@@ -59,13 +59,28 @@ class SanityStore implements Store {
     );
   }
   async timelineRecords(eventId: string) {
-    return this.client.fetch<TimelineRecords>(
-      `{
-        "proposals": *[_type == "inkshiftProposal" && eventId == $eventId && status in ["applied", "discarded"]] | order(createdAt asc)[0...80]{id, status, source, photoId, baseVersion, createdAt, appliedAt, appliedVersion, discardedAt, planBefore, "preview": preview{spaces, sessions, changes, retainedBookings}},
-        "photos": *[_type == "inkshiftPhoto" && eventId == $eventId]{id, samplePath, "stored": defined(dataUrl)}
-      }`,
+    const proposals: TimelineProposal[] = [];
+    let cursor = "";
+    // Keyset pagination includes every decision without growing offset scans.
+    // _id is unique and immutable, including when createdAt timestamps tie.
+    for (;;) {
+      const page = await this.client.fetch<(TimelineProposal & { _id: string })[]>(
+        `*[_type == "inkshiftProposal" && eventId == $eventId && status in ["applied", "discarded"] && _id > $cursor] | order(_id asc)[0...80]{_id, id, status, source, photoId, baseVersion, createdAt, appliedAt, appliedVersion, discardedAt, planBefore, "preview": preview{spaces, sessions, changes, retainedBookings}}`,
+        { eventId, cursor },
+      );
+      for (const record of page) {
+        const { _id, ...proposal } = record;
+        if (_id <= cursor) throw new Error("Timeline pagination did not advance.");
+        proposals.push(proposal);
+        cursor = _id;
+      }
+      if (page.length < 80) break;
+    }
+    const photos = await this.client.fetch<TimelinePhoto[]>(
+      '*[_type == "inkshiftPhoto" && eventId == $eventId]{id, samplePath, "stored": defined(dataUrl)}',
       { eventId },
     );
+    return { proposals, photos };
   }
   async transact(expected: Expected, documents: Document[]) {
     const guards = expected
@@ -229,5 +244,5 @@ export const ids = {
   photo: (eventId: string, id: string) => `inkshift.photo.${eventId}.${id}`,
   proposal: (eventId: string, id: string) =>
     `inkshift.proposal.${eventId}.${id}`,
-  public: (id: string) => `inkshift-public-${id}`,
+  public: (id: string) => `inkshift-public-${createHash("sha256").update(id).digest("hex")}`,
 };

@@ -11,11 +11,15 @@ import {
   type Space,
 } from "./model";
 
-const normal = (s: string) =>
-  s
+const normal = (s: string) => {
+  const normalized = s
+    .normalize("NFC")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/[^\p{L}\p{M}\p{N}]+/gu, " ")
     .trim();
+  // Combining marks alone (including emoji variation selectors) are not names.
+  return /[\p{L}\p{N}]/u.test(normalized) ? normalized : "";
+};
 
 /** Interpret evidence as a proposal. Only a caller's later explicit approval can commit it. */
 export function reconcile(
@@ -67,8 +71,9 @@ export function reconcile(
         message: `The original table for ${candidate.label} no longer exists.`,
       });
     if (!previous && !candidate.existingId) {
+      const label = normal(candidate.label);
       const exact = event.spaces.filter(
-        (s) => normal(s.label) === normal(candidate.label),
+        (s) => label !== "" && normal(s.label) === label,
       );
       if (exact.length === 1) previous = exact[0];
     }
@@ -117,9 +122,10 @@ export function reconcile(
         message: `The original session for ${candidate.title} no longer exists.`,
       });
     if (!previous && !candidate.existingId) {
+      const title = normal(candidate.title);
       const exact = event.sessions.filter(
         (s) =>
-          normal(s.title) === normal(candidate.title) &&
+          title !== "" && normal(s.title) === title &&
           s.start === candidate.start &&
           s.end === candidate.end,
       );

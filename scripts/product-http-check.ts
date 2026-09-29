@@ -98,7 +98,7 @@ assert.equal(typed.value.source, "manual");
 assert.equal(typed.value.photoId, "");
 const applied = await request(
   `${path}/proposals/${typed.value.id}/approve`,
-  { reviewed: true, baseVersion: typed.value.baseVersion },
+  { reviewed: true, baseVersion: typed.value.baseVersion, proposalRevision: typed.value._rev },
   owner,
 );
 assert.equal(applied.status, 200);

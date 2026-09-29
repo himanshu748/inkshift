@@ -198,7 +198,8 @@ export type PhotoRecord = {
   _rev?: string;
   id: string;
   eventId: string;
-  dataUrl: string;
+  dataUrl?: string;
+  samplePath?: string;
   label: string;
   createdAt: string;
   source: "upload" | "camera" | "sample";
@@ -206,6 +207,7 @@ export type PhotoRecord = {
 export type PublicSession = Session & { booked: number; spaceLabel: string };
 export type EventView = {
   id: string;
+  publicProjectionId: string;
   title: string;
   date: string;
   timeZone: string;

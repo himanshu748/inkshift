@@ -247,7 +247,6 @@ export const schemaTypes = [
     "inkshiftPublicEvent",
     "Public live schedule",
     [
-      str("eventId"),
       ...eventFields(),
       num("version"),
       at("updatedAt"),

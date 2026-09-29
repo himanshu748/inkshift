@@ -73,12 +73,12 @@ const secondJoin = await request(
 assert.equal(secondJoin.status, 200);
 const stale = await request(`${reviewPath}/approve`, {
   reviewed: true,
-  baseVersion: review.baseVersion,
+  baseVersion: review.baseVersion, proposalRevision: review._rev,
 });
 assert.equal(stale.status, 409, JSON.stringify(stale.value));
 const rechecked = await request<ReviewedProposal>(
   reviewPath,
-  { draft: review.draft },
+  { draft: review.draft, proposalRevision: review._rev },
   owner,
   "PUT",
 );
@@ -88,7 +88,7 @@ assert.ok(review.workflow?.status === "tracked");
 assert.equal(review.workflow.counts.affectedRegistrations, 2);
 const approval = await request<{ proposal: ReviewedProposal }>(
   `${reviewPath}/approve`,
-  { reviewed: true, baseVersion: review.baseVersion },
+  { reviewed: true, baseVersion: review.baseVersion, proposalRevision: review._rev },
 );
 assert.equal(approval.status, 200, JSON.stringify(approval.value));
 assert.ok(approval.value.proposal.workflow?.status === "tracked");
@@ -115,14 +115,14 @@ assert.equal(
   (
     await request(`${path}/proposals/${capacity.value.id}/approve`, {
       reviewed: true,
-      baseVersion: capacity.value.baseVersion,
+      baseVersion: capacity.value.baseVersion, proposalRevision: capacity.value._rev,
     })
   ).status,
   422,
 );
 const discarded = await request<ReviewedProposal>(
   `${path}/proposals/${capacity.value.id}`,
-  undefined,
+  { proposalRevision: capacity.value._rev },
   owner,
   "DELETE",
 );

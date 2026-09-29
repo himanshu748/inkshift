@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import { errorResponse, json, ownerContext } from "@/lib/http";
 import { buildTimeline } from "@/lib/timeline";
+import { loadEvent } from "@/lib/service";
+import { StaleWriteError } from "@/lib/store";
 import { reviewEngines, reviewStages } from "@/lib/workflow";
 export const dynamic = "force-dynamic";
 export async function GET(
@@ -9,8 +11,17 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const { store, event } = await ownerContext(request, id);
-    const { proposals, photos } = await store.timelineRecords(id);
+    const { store, event: authorizedEvent } = await ownerContext(request, id);
+    let event = authorizedEvent;
+    let records = await store.timelineRecords(id);
+    for (let attempt = 0; ; attempt++) {
+      const current = await loadEvent(store, id);
+      if (current._rev === event._rev) break;
+      if (attempt === 2) throw new StaleWriteError();
+      event = current;
+      records = await store.timelineRecords(id);
+    }
+    const { proposals, photos } = records;
     const workflows = await reviewStages(
       reviewEngines(store),
       proposals

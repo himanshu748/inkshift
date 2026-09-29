@@ -60,7 +60,15 @@ export const visionAvailable = () =>
   Boolean(process.env.VISION_API_KEY || process.env.HF_TOKEN);
 
 /** All identity-bearing documents are private sub-path IDs. Only this projection is public. */
-export function projections(event: EventRecord): Document[] {
+export function projections(event: EventRecord, previous?: EventRecord): Document[] {
+  const next = allProjections(event);
+  if (!previous) return next;
+  // Keep unchanged identities and their revisions intact. In particular,
+  // a join/cancellation must not rewrite every historical registration.
+  const before = new Map(allProjections(previous).map((doc) => [doc._id, JSON.stringify(doc)]));
+  return next.filter((doc) => before.get(doc._id) !== JSON.stringify(doc));
+}
+function allProjections(event: EventRecord): Document[] {
   const eventRef = { _type: "reference", _ref: event._id };
   const samplePhotos = [
     ...new Set(
@@ -91,7 +99,6 @@ export function projections(event: EventRecord): Document[] {
     {
       _id: ids.public(event.id),
       _type: "inkshiftPublicEvent",
-      eventId: event.id,
       title: event.title,
       date: event.date,
       timeZone: event.timeZone,
@@ -226,6 +233,7 @@ export function toView(
   const participantHash = participantToken ? hash(participantToken) : "";
   return {
     id: event.id,
+    publicProjectionId: ids.public(event.id),
     title: event.title,
     date: event.date,
     timeZone: event.timeZone,
@@ -313,7 +321,7 @@ export async function makeProposal(
     createdAt: new Date().toISOString(),
   };
   await store.transact(null, [proposal as unknown as Document]);
-  return proposal;
+  return getProposal(store, event.id, id);
 }
 export async function getProposal(
   store: Store,
@@ -324,6 +332,18 @@ export async function getProposal(
   const proposal = await store.get<Proposal>(ids.proposal(eventId, proposalId));
   if (!proposal || proposal.eventId !== eventId)
     throw new AppError("Review not found.", 404);
+  return proposal;
+}
+/** Require the exact reading the organizer saw, before any workflow side effects. */
+export async function getReviewedProposal(
+  store: Store,
+  eventId: string,
+  proposalId: string,
+  proposalRevision: string,
+) {
+  const proposal = await getProposal(store, eventId, proposalId);
+  if (!proposalRevision || proposal._rev !== proposalRevision)
+    throw new StaleWriteError();
   return proposal;
 }
 export async function reviseProposal(
@@ -346,7 +366,7 @@ export async function reviseProposal(
   await store.transact({ id: proposal._id, rev: proposal._rev! }, [
     next as unknown as Document,
   ]);
-  return next;
+  return getProposal(store, proposal.eventId, proposal.id);
 }
 export async function applyProposal(
   store: Store,
@@ -398,7 +418,7 @@ export async function applyProposal(
     ],
     [
       next as unknown as Document,
-      ...projections(next),
+      ...projections(next, event),
       {
         ...proposal,
         status: "applied",
@@ -426,8 +446,12 @@ export async function discardProposal(store: Store, proposal: Proposal) {
   await store.transact({ id: proposal._id, rev: proposal._rev! }, [
     next as unknown as Document,
   ]);
-  return next;
+  return getProposal(store, proposal.eventId, proposal.id);
 }
+export const REGISTRATION_HISTORY_LIMIT = 1200;
+export const PARTICIPANT_JOIN_LIMIT = 20;
+export const PARTICIPANT_JOIN_WINDOW_MS = 10 * 60 * 1000;
+
 export async function register(
   store: Store,
   eventId: string,
@@ -469,12 +493,29 @@ export async function register(
         409,
         "time-overlap",
       );
+    if (event.bookings.length >= REGISTRATION_HISTORY_LIMIT)
+      throw new AppError(
+        "This event has reached its 1,200-registration history limit. Existing bookings can still be viewed and cancelled. Ask the organizer to start a new gathering for more registrations.",
+        429,
+        "registration-history-limit",
+      );
+    const now = Date.now();
+    const recentJoins = event.bookings.filter((b) =>
+      b.participantHash === participantHash &&
+      Date.parse(b.createdAt) >= now - PARTICIPANT_JOIN_WINDOW_MS,
+    ).length;
+    if (recentJoins >= PARTICIPANT_JOIN_LIMIT)
+      throw new AppError(
+        "This browser has joined 20 times in the last 10 minutes. Wait before joining again; you can still cancel a booking.",
+        429,
+        "join-rate-limit",
+      );
     if (active.length >= 300)
       throw new AppError(
         "This event has reached its 300-registration limit.",
         409,
       );
-    const at = new Date().toISOString();
+    const at = new Date(now).toISOString();
     const booking = {
       id: randomBytes(12).toString("base64url"),
       sessionId,
@@ -491,7 +532,7 @@ export async function register(
     try {
       await store.transact({ id: event._id, rev: event._rev! }, [
         next as unknown as Document,
-        ...projections(next),
+        ...projections(next, event),
       ]);
       return { event: next, booking, alreadyJoined: false };
     } catch (error) {
@@ -531,7 +572,7 @@ export async function cancelBooking(
     try {
       await store.transact({ id: event._id, rev: event._rev! }, [
         next as unknown as Document,
-        ...projections(next),
+        ...projections(next, event),
       ]);
       return next;
     } catch (error) {

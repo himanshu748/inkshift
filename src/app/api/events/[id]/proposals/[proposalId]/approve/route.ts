@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { body, errorResponse, json, ownerContext } from "@/lib/http";
-import { getProposal } from "@/lib/service";
+import { getReviewedProposal } from "@/lib/service";
 import { approveReview, reviewEngines } from "@/lib/workflow";
 export async function POST(
   request: NextRequest,
@@ -11,13 +11,17 @@ export async function POST(
     const { id, proposalId } = await params;
     const { store, event } = await ownerContext(request, id);
     const input = z
-      .object({ reviewed: z.literal(true), baseVersion: z.number().int() })
+      .object({
+        reviewed: z.literal(true),
+        baseVersion: z.number().int(),
+        proposalRevision: z.string().min(1),
+      })
       .parse(await body(request));
     const result = await approveReview(
       reviewEngines(store),
       store,
       event,
-      await getProposal(store, id, proposalId),
+      await getReviewedProposal(store, id, proposalId, input.proposalRevision),
       input.baseVersion,
     );
     return json({

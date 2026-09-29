@@ -15,25 +15,50 @@ export const cookieOptions = {
 };
 export function assertOrigin(request: NextRequest) {
   const origin = request.headers.get("origin");
-  if (
-    origin &&
-    new URL(origin).host !== new URL(request.url).host &&
-    new URL(origin).host !== request.headers.get("host")
-  )
-    throw new AppError("This action must come from INKSHIFT.", 403);
+  if (!origin) return;
+  try {
+    const source = new URL(origin);
+    const target = new URL(request.url);
+    if (
+      ["http:", "https:"].includes(source.protocol) &&
+      (source.host === target.host || source.host === request.headers.get("host"))
+    ) return;
+  } catch {
+    // Opaque and malformed origins must be rejected, not become server errors.
+  }
+  throw new AppError("This action must come from INKSHIFT.", 403);
 }
+export const MAX_REQUEST_BYTES = 2_000_000;
 export async function body(request: NextRequest) {
   assertOrigin(request);
-  if (Number(request.headers.get("content-length") ?? 0) > 2_000_000)
-    throw new AppError(
-      "The image is too large. Choose a smaller photograph.",
-      413,
-    );
-  const text = await request.text();
-  if (text.length > 2_000_000)
-    throw new AppError("The image is too large.", 413);
+  const tooLarge = () => new AppError(
+    "The request is too large. Choose a smaller photograph or plan.", 413,
+  );
+  if (Number(request.headers.get("content-length") ?? 0) > MAX_REQUEST_BYTES)
+    throw tooLarge();
+  const reader = request.body?.getReader();
+  const decoder = new TextDecoder();
+  const chunks: string[] = [];
+  let bytes = 0;
+  if (reader) {
+    try {
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_REQUEST_BYTES) {
+          await reader.cancel();
+          throw tooLarge();
+        }
+        chunks.push(decoder.decode(value, { stream: true }));
+      }
+      chunks.push(decoder.decode());
+    } finally {
+      reader.releaseLock();
+    }
+  }
   try {
-    return JSON.parse(text);
+    return JSON.parse(chunks.join(""));
   } catch {
     throw new AppError("The request could not be read. Try again.", 400);
   }

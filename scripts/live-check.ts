@@ -92,6 +92,8 @@ assert.equal(
 );
 const publicDoc = await anon.getDocument(ids.public(event.id));
 assert.ok(publicDoc);
+assert.ok(!JSON.stringify(publicDoc).includes(event.id));
+assert.equal(publicDoc.eventId, undefined);
 assert.ok(!JSON.stringify(publicDoc).includes("Later person"));
 const report = {
   checkedAt: new Date().toISOString(),

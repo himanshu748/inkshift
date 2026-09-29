@@ -157,6 +157,44 @@ describe("paper reconciliation", () => {
   });
 });
 describe("identity boundaries", () => {
+  it.each([["围棋", "象棋"], ["🎲", "🃏"], ["♟️", "♣️"]])(
+    "never transfers a booked identity from %s to %s without an explicit match",
+    async (original, replacement) => {
+      const { store, event } = await setup();
+      await register(store, event.id, "guest", "Guest", event.sessions[0].id);
+      const current = await loadEvent(store, event.id);
+      current.sessions[0].title = original;
+      current.spaces[0].label = original;
+      const draft = eventToDraft(current);
+      draft.sessions[0].existingId = null;
+      draft.sessions[0].title = replacement;
+      draft.spaces[0].existingId = null;
+      draft.spaces[0].label = replacement;
+      const preview = reconcile(current, draft, "new");
+      expect(preview.sessions.find((s) => s.title === replacement)?.id)
+        .not.toBe(current.sessions[0].id);
+      expect(preview.spaces.find((s) => s.label === replacement)?.id)
+        .not.toBe(current.spaces[0].id);
+      expect(preview.sessions.find((s) => s.id === current.bookings[0].sessionId)?.title)
+        .toBe(original);
+      expect(preview.conflicts.map((c) => c.code)).toEqual(
+        expect.arrayContaining(["missing-session", "missing-table"]),
+      );
+    },
+  );
+  it("matches Unicode names and canonically equivalent accents", async () => {
+    const { event } = await setup();
+    event.sessions[0].title = "围棋";
+    event.spaces[0].label = "Café";
+    const draft = eventToDraft(event);
+    draft.sessions[0].existingId = null;
+    draft.spaces[0].existingId = null;
+    draft.spaces[0].label = "Cafe\u0301";
+    const preview = reconcile(event, draft, "new");
+    expect(preview.sessions[0].id).toBe(event.sessions[0].id);
+    expect(preview.spaces[0].id).toBe(event.spaces[0].id);
+    expect(preview.conflicts).toEqual([]);
+  });
   it("never assigns a new session an existing identity at version zero", async () => {
     const { event } = await setup();
     const draft = eventToDraft(event);
@@ -288,8 +326,11 @@ describe("transactional participation", () => {
     const current = await loadEvent(store, event.id);
     const pub = projections(current).find((d) => !d._id.includes("."))!;
     expect(JSON.stringify(pub)).not.toMatch(
-      /Private Name|ownerHash|participantHash|dataUrl/,
+      /Private Name|ownerHash|participantHash|dataUrl|eventId|_ref/,
     );
+    expect(JSON.stringify(pub)).not.toContain(event.id);
+    expect(pub._id).toMatch(/^inkshift-public-[a-f0-9]{64}$/);
+    expect(toView(current, false, undefined, store).publicProjectionId).toBe(pub._id);
     const view = toView(current, false, undefined, store);
     expect(view.bookings).toBeUndefined();
     expect(view.photoId).toBeUndefined();

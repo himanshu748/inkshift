@@ -56,7 +56,7 @@ function usePublicEvent(id: string) {
     projectId,
     dataset,
     query: "*[_id == $id][0]{title,version,updatedAt,spaces,sessions}",
-    params: { id: `inkshift-public-${id}` },
+    params: { id },
   });
 }
 function Watcher({ id, onVersion }: { id: string; onVersion: () => void }) {
@@ -137,7 +137,7 @@ function LiveContent({ id }: { id: string }) {
     </>
   );
 }
-export function Inspector({ id }: { id: string }) {
+export function Inspector({ id, publicProjectionId }: { id: string; publicProjectionId: string }) {
   return (
     <>
       <header className="workspace-header">
@@ -161,7 +161,7 @@ export function Inspector({ id }: { id: string }) {
         {projectId ? (
           <ConnectionBoundary>
             <Provider>
-              <LiveContent id={id} />
+              <LiveContent id={publicProjectionId} />
             </Provider>
           </ConnectionBoundary>
         ) : (

@@ -73,14 +73,14 @@ const firstRawConflicts = first.preview.conflicts.map((c) => c.message);
 if (firstRawConflicts.length) {
   const blocked = await request(`${path}/proposals/${first.id}/approve`, {
     reviewed: true,
-    baseVersion: first.baseVersion,
+    baseVersion: first.baseVersion, proposalRevision: first._rev,
   });
   assert.equal(blocked.status, 422);
   // Explicit test-operator correction against the known typed sheet. Keep the
   // original model conflicts in the report; the application never does this.
   const revised = await request<ReviewedProposal>(
     `${path}/proposals/${first.id}`,
-    { draft: sampleDraft("2026-09-27", "Asia/Kolkata") },
+    { draft: sampleDraft("2026-09-27", "Asia/Kolkata"), proposalRevision: first._rev },
     organizerCookie,
     "PUT",
   );
@@ -94,7 +94,7 @@ assert.equal(
 );
 let approval = await request(`${path}/proposals/${first.id}/approve`, {
   reviewed: true,
-  baseVersion: first.baseVersion,
+  baseVersion: first.baseVersion, proposalRevision: first._rev,
 });
 assert.equal(approval.status, 200);
 const event = (
@@ -114,7 +114,7 @@ const rawConflicts = second.preview.conflicts.map((c) => c.message);
 if (rawConflicts.length) {
   const blocked = await request(`${path}/proposals/${second.id}/approve`, {
     reviewed: true,
-    baseVersion: second.baseVersion,
+    baseVersion: second.baseVersion, proposalRevision: second._rev,
   });
   assert.equal(blocked.status, 422);
   // The test operator knows this rendered fixture. These are explicit review edits,
@@ -123,7 +123,7 @@ if (rawConflicts.length) {
   checked.spaces.find((s) => s.label === "Table B")!.removed = true;
   const revised = await request<ReviewedProposal>(
     `${path}/proposals/${second.id}`,
-    { draft: checked },
+    { draft: checked, proposalRevision: second._rev },
     organizerCookie,
     "PUT",
   );
@@ -138,7 +138,7 @@ assert.ok(
 );
 approval = await request(`${path}/proposals/${second.id}/approve`, {
   reviewed: true,
-  baseVersion: second.baseVersion,
+  baseVersion: second.baseVersion, proposalRevision: second._rev,
 });
 assert.equal(approval.status, 200);
 const guest = (await request<EventView>(path, undefined, joined.cookie, "GET"))

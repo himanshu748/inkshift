@@ -14,6 +14,18 @@ export async function GET(
     const photo = await store.get<PhotoRecord>(ids.photo(id, photoId));
     if (!photo || photo.eventId !== id)
       throw new AppError("Photograph not found.", 404);
+    const samples = new Set([
+      "/samples/original.svg", "/samples/table-removed.svg",
+      "/samples/capacity.svg", "/samples/renamed.svg",
+    ]);
+    if (photo.source === "sample" && photo.samplePath && samples.has(photo.samplePath)) {
+      return new NextResponse(null, {
+        status: 307,
+        headers: { location: new URL(photo.samplePath, request.url).href, "cache-control": "private, no-store" },
+      });
+    }
+    if (!photo.dataUrl || !/^data:image\/(jpeg|png|webp);base64,[a-zA-Z0-9+/=]+$/.test(photo.dataUrl))
+      throw new AppError("Photograph not found.", 404);
     const [meta, value] = photo.dataUrl.split(",");
     return new NextResponse(Buffer.from(value, "base64"), {
       headers: {

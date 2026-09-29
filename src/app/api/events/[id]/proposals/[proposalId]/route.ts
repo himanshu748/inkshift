@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { z } from "zod";
 import {
   assertOrigin,
   body,
@@ -7,7 +8,7 @@ import {
   ownerContext,
 } from "@/lib/http";
 import { draftSchema } from "@/lib/model";
-import { getProposal } from "@/lib/service";
+import { getProposal, getReviewedProposal } from "@/lib/service";
 import {
   discardReview,
   reviseReview,
@@ -34,11 +35,17 @@ export async function DELETE(request: NextRequest, { params }: Context) {
     assertOrigin(request);
     const { id, proposalId } = await params;
     const { store } = await ownerContext(request, id);
+    const input = z
+      .object({ proposalRevision: z.string().min(1) })
+      .parse(await body(request));
+    const proposal = await getReviewedProposal(
+      store, id, proposalId, input.proposalRevision,
+    );
     return json(
       await discardReview(
         reviewEngines(store),
         store,
-        await getProposal(store, id, proposalId),
+        proposal,
       ),
     );
   } catch (error) {
@@ -52,14 +59,19 @@ export async function PUT(
   try {
     const { id, proposalId } = await params;
     const { store, event } = await ownerContext(request, id);
-    const draft = draftSchema.parse((await body(request)).draft);
+    const input = z
+      .object({ draft: draftSchema, proposalRevision: z.string().min(1) })
+      .parse(await body(request));
+    const proposal = await getReviewedProposal(
+      store, id, proposalId, input.proposalRevision,
+    );
     return json(
       await reviseReview(
         reviewEngines(store),
         store,
         event,
-        await getProposal(store, id, proposalId),
-        draft,
+        proposal,
+        input.draft,
       ),
     );
   } catch (error) {

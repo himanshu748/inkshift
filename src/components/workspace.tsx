@@ -536,7 +536,7 @@ export function Workspace({ id }: { id: string }) {
       setProposal(
         await api<ReviewedProposal>(
           `/api/events/${id}/proposals/${proposal.id}`,
-          undefined,
+          { proposalRevision: proposal._rev },
           "DELETE",
         ),
       );
@@ -611,7 +611,7 @@ export function Workspace({ id }: { id: string }) {
       setProposal(
         await api<ReviewedProposal>(
           `/api/events/${id}/proposals/${proposal.id}`,
-          { draft },
+          { draft, proposalRevision: proposal._rev },
           "PUT",
         ),
       );
@@ -630,6 +630,7 @@ export function Workspace({ id }: { id: string }) {
         {
           reviewed: true,
           baseVersion: proposal.baseVersion,
+          proposalRevision: proposal._rev,
         },
       );
       setNotice(
@@ -686,7 +687,7 @@ export function Workspace({ id }: { id: string }) {
   return (
     <>
       <div hidden>
-        <SanityLiveBridge id={id} onVersion={refresh} />
+        <SanityLiveBridge id={event.publicProjectionId} onVersion={refresh} />
       </div>
       <header className="workspace-header">
         <Brand small />

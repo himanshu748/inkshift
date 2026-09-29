@@ -1567,3 +1567,27 @@ main[data-reveal-ready] [data-reveal]:not(.is-in) {
     display: none;
   }
 }
+
+.ink-hero > .ink-sample-purpose {
+  max-width: 65ch;
+  margin: 16px auto 0;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.product-landing .landing-error {
+  max-width: 65ch;
+  margin: 18px auto 0;
+  font-size: 13px;
+}
+.product-landing .landing-error p + p {
+  margin-top: 8px;
+}
+.product-landing .landing-error a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-inline: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

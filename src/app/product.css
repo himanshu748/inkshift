@@ -728,3 +728,177 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.sample-guide {
+  margin: 0 0 32px;
+  padding: 22px 24px;
+  background: var(--mint);
+  border-radius: 12px;
+}
+.sample-guide-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sample-guide-heading h2 {
+  font-size: 23px;
+  letter-spacing: -0.025em;
+}
+.sample-guide-heading p {
+  max-width: 70ch;
+  margin-top: 6px;
+  color: var(--supporting-ink);
+  font-size: 13px;
+}
+.sample-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.sample-guide-steps li {
+  padding: 18px 18px 12px 0;
+}
+.sample-guide-steps strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.sample-guide-steps strong > span {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 23px;
+  height: 23px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  font-variant-numeric: tabular-nums;
+}
+.sample-guide-steps li[data-complete="true"] strong > span {
+  background: var(--forest);
+  color: var(--white);
+  border-color: var(--forest);
+}
+.sample-guide-steps p {
+  margin-top: 8px;
+  color: var(--supporting-ink);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.sample-guide .text-button,
+.sample-participant-guide .text-button {
+  min-height: 44px;
+  font-size: 12px;
+  text-align: left;
+}
+.sample-guide-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 12px;
+}
+.sample-guide-evidence {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  font-size: 13px;
+}
+.sample-guide-evidence summary {
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.sample-guide-evidence > p {
+  max-width: 75ch;
+  margin: 10px 0;
+}
+.sample-evidence-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.sample-booking-proof {
+  margin: 16px 0;
+  padding: 16px 0;
+  border-block: 1px solid var(--line);
+}
+.sample-booking-proof p {
+  margin: 6px 0 12px;
+}
+.sample-booking-proof dl {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+.sample-booking-proof dt {
+  color: var(--supporting-ink);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.sample-booking-proof dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.sample-guide-privacy {
+  color: var(--supporting-ink);
+  font-size: 12px;
+}
+.sample-participant-guide {
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  background: var(--mint);
+  border-radius: 12px;
+}
+.sample-participant-guide strong {
+  font-family: Archivo, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+.sample-participant-guide p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+@media (max-width: 1050px) {
+  .sample-guide-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .sample-guide {
+    padding: 18px;
+  }
+  .sample-guide-heading {
+    display: block;
+  }
+  .sample-guide-heading h2 {
+    font-size: 22px;
+  }
+  .sample-guide-steps {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 12px;
+  }
+  .sample-guide-steps li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .sample-guide-evidence {
+    border-top: 0;
+  }
+  .sample-booking-proof dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+.sample-review-notice {
+  margin: 8px 0 16px;
+  color: var(--supporting-ink);
+  font-size: 13px;
+}
+.sample-review-notice a {
+  text-underline-offset: 3px;
+}

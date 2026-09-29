@@ -41,24 +41,6 @@ const questions = [
 function Walkthrough() {
   const [step, setStep] = useState(2);
   const [playing, setPlaying] = useState(false);
-  const section = useRef<HTMLElement>(null);
-  const autoplayed = useRef(false);
-  useEffect(() => {
-    const node = section.current;
-    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || autoplayed.current) return;
-        autoplayed.current = true;
-        observer.disconnect();
-        setStep(0);
-        setPlaying(true);
-      },
-      { threshold: 0.45 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
   useEffect(() => {
     if (!playing) return;
     let next = 0;
@@ -73,13 +55,11 @@ function Walkthrough() {
     return () => clearInterval(timer);
   }, [playing]);
   function choose(value: number) {
-    autoplayed.current = true;
     setPlaying(false);
     setStep(value);
   }
   return (
     <section
-      ref={section}
       id="how-it-works"
       className="product-demo"
       aria-label="Illustrated product walkthrough"
@@ -101,7 +81,6 @@ function Walkthrough() {
         <button
           className="demo-play"
           onClick={() => {
-            autoplayed.current = true;
             if (playing) setPlaying(false);
             else {
               setStep(0);
@@ -410,7 +389,7 @@ export function Landing() {
       onClick={start}
     >
       <Play size={16} />
-      {busy ? "Opening your sample…" : "Try a sample"}
+      {busy ? "Opening your sample…" : "Try the guided sample"}
     </button>
   );
   return (
@@ -445,10 +424,23 @@ export function Landing() {
             </Link>
             {sample}
           </div>
+          <p className="ink-sample-purpose">
+            In the sample: book Ticket to Ride at Table B, approve its move to
+            Table C, and check the same saved booking. Prepared readings; real
+            demo registrations.
+          </p>
           {error && (
-            <p className="landing-error" role="alert">
-              {error}
-            </p>
+            <div className="landing-error" role="alert">
+              <p>{error}</p>
+              <p>Try the sample again, or follow the recorded booking and table change.</p>
+              <button className="button secondary" onClick={start} disabled={!!busy}>
+                {busy ? "Opening your sample…" : "Retry the guided sample"}
+              </button>
+              <a href="https://youtu.be/xM5eC-q7t_0" target="_blank" rel="noreferrer">
+                Watch the recorded walkthrough <ArrowUpRight size={15} />
+              </a>
+              <Link href="/about">See how the booking is stored</Link>
+            </div>
           )}
         </section>
         <div className="ink-stage">

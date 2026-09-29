@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   Check,
@@ -108,10 +109,22 @@ export function Join({ id }: { id: string }) {
           </div>
         </div>
         {event.sample && (
-          <p className="sample-banner">
-            Example event · the places you book here are real demo
-            registrations.
-          </p>
+          <section className="sample-participant-guide" aria-label="Practice gathering guide">
+            <strong>{event.sessions.find((session) => session.id === "session-1-1")?.spaceLabel === "Table C"
+              ? "The sample session is now at Table C."
+              : "Try a booking before the table changes."}</strong>
+            <p>{event.sessions.find((session) => session.id === "session-1-1")?.spaceLabel === "Table C"
+              ? "Check Your places for a booking you already made. Return to the organizer to inspect the saved move and compare the paper versions."
+              : "Enter your name and join Ticket to Ride at Table B. Keep this page open while the organizer reviews the move to Table C, then check Your places."}</p>
+            {event.role === "organizer" ? (
+              <Link className="text-button" href={`/event/${id}`}>
+                Return to organizer <ArrowRight size={15} />
+              </Link>
+            ) : (
+              <p>Return to the organizer’s original tab to review the move. This participant link does not give organizer access.</p>
+            )}
+            <p className="sample-guide-privacy">Prepared example plan; the places you book here are real demo registrations.</p>
+          </section>
         )}
         {error && (
           <div className="notice warning" role="alert">

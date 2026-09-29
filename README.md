@@ -25,7 +25,7 @@ npm ci
 npm run dev -- --port 3333
 ```
 
-Open http://localhost:3333 and choose **Try a sample**. `curl http://localhost:3333/api/health` should report `"storage":"local"`.
+Open http://localhost:3333 and choose **Try the guided sample**. `curl http://localhost:3333/api/health` should report `"storage":"local"`.
 
 ### With Sanity
 
@@ -39,7 +39,7 @@ npm run dev -- --port 3333
 
 `workflows:deploy` reads `.env.local` and deploys only this project's review definition. It opts out of sharing definitions with Sanity. It requires an existing dataset and a token with access to it. See [the workflow implementation](docs/WORKFLOWS.md).
 
-Open http://localhost:3333. **Plan a gathering** opens setup for a name, date and time zone. Add a photo or type a plan, approve it, then invite people. **Try a sample** creates a separate practice gathering. **Your gatherings** lists plans this browser can manage. Save a private organizer access code from the workspace to restore access on another device.
+Open http://localhost:3333. **Plan a gathering** opens setup for a name, date and time zone. Add a photo or type a plan, approve it, then invite people. **Try the guided sample** creates a separate practice gathering with a four-step guide: open the participant page, book Ticket to Ride at Table B, review the prepared move to Table C, and check the saved booking. Its identity proof is shown only after an actual applied move and a registration made before it; no demo guests are created automatically. **Your gatherings** lists plans this browser can manage. Save a private organizer access code from the workspace to restore access on another device.
 
 To fall back to local storage in a checkout that has a `.env.local`, clear the server and `NEXT_PUBLIC_*` Sanity variables, omit vision variables and set `INKSHIFT_REQUIRE_SANITY=false`. Domain review rules still apply in local mode. Vercel deployments refuse local storage.
 

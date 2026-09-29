@@ -485,6 +485,128 @@ function Review({
   );
 }
 
+function sampleMove(proposal: ReviewedProposal | null) {
+  return proposal?.source === "sample"
+    ? proposal.preview.changes.find((change) =>
+        change.kind === "move" && change.entityId === "session-1-1" &&
+        change.before === "Table B" && change.after === "Table C",
+      )
+    : undefined;
+}
+
+function SampleGuide({
+  event,
+  proposal,
+  busy,
+  onExample,
+  onReview,
+  reviewNotice,
+}: {
+  event: EventView;
+  proposal: ReviewedProposal | null;
+  busy: boolean;
+  onExample: () => void;
+  onReview: () => void;
+  reviewNotice: string;
+}) {
+  const ride = event.sessions.find((session) => session.id === "session-1-1");
+  const atB = ride?.spaceLabel === "Table B";
+  const atC = ride?.spaceLabel === "Table C";
+  const booked = ride?.booked ?? 0;
+  const move = sampleMove(proposal);
+  const applied = !!move && proposal?.status === "applied";
+  const kept = applied && atC && proposal?.appliedAt
+    ? (event.bookings ?? []).filter((booking) =>
+        booking.sessionId === ride?.id && booking.createdAt <= proposal.appliedAt!,
+      )
+    : [];
+  const reviewOpen = !!move && proposal?.status === "review";
+  return (
+    <section className="sample-guide" aria-labelledby="sample-guide-title">
+      <div className="sample-guide-heading">
+        <div>
+          <h2 id="sample-guide-title">Move the table. Keep the booking.</h2>
+          <p>Use this practice gathering to try the whole flow. The readings are prepared; bookings and decisions are saved.</p>
+        </div>
+        <Link className="text-button" href="/new">Use your own plan <ArrowRight size={15} /></Link>
+      </div>
+      <ol className="sample-guide-steps">
+        <li data-complete={booked > 0}>
+          <strong><span>1</span> Open the signup page</strong>
+          <p>Keep the organizer open. The participant view opens in another tab.</p>
+          <Link className="text-button" href={`/join/${event.id}`} target="_blank">
+            Open participant view <ArrowUpRight size={15} />
+          </Link>
+        </li>
+        <li data-complete={booked > 0}>
+          <strong><span>2</span> Book Ticket to Ride</strong>
+          <p>{booked > 0
+            ? `${booked} real demo registration${booked === 1 ? " is" : "s are"} saved for this session.`
+            : atB
+              ? "Enter your name and join Ticket to Ride at Table B. Then return here."
+              : "The table has already changed. Use a fresh sample to book before the move."}</p>
+          {booked > 0 && <span className="sample-guide-state"><Check size={14} /> Booking saved</span>}
+        </li>
+        <li data-complete={applied}>
+          <strong><span>3</span> Review Table B → C</strong>
+          <p>{reviewOpen
+            ? "Check the proposed move and preserved registrations, then approve in the review below."
+            : atC
+              ? "Open the saved review to inspect the decision and its recorded booking count."
+              : "Cross out Table B. Nothing changes until you check and approve the proposed move."}</p>
+          {atC || reviewOpen ? (
+            <button className="text-button" onClick={onReview} disabled={busy}>
+              {reviewOpen ? "Go to the move review" : move ? "Go to the saved move review" : "Open saved move review"} <ArrowRight size={15} />
+            </button>
+          ) : (
+            <button className="text-button" onClick={onExample} disabled={busy || !atB || !booked}>
+              {busy ? "Opening the review…" : "Use the crossed-out example"} <ArrowRight size={15} />
+            </button>
+          )}
+        </li>
+        <li data-complete={kept.length > 0}>
+          <strong><span>4</span> Check your saved place</strong>
+          <p>{kept.length > 0
+            ? `${kept.length} existing Ticket to Ride registration${kept.length === 1 ? " is" : "s are"} still attached to the same session, now at Table C.`
+            : applied && atC
+              ? "No active Ticket to Ride registration from before this move is present. Book before approving in a fresh sample to test preservation."
+              : atC
+                ? booked > 0
+                  ? "Open the saved move review to show the preserved booking. Then check your existing place on the participant page."
+                  : "Open the saved move review to check whether registrations existed before the move. No active Ticket to Ride booking is present now."
+                : "Return to the participant tab after approval. Your saved place should show Table C; no second signup is needed."}</p>
+          <Link className="text-button" href={`/join/${event.id}`} target="_blank">
+            Check participant view <ArrowUpRight size={15} />
+          </Link>
+        </li>
+      </ol>
+      {reviewNotice && <p className="sample-review-notice" role="status">{reviewNotice} <a href="#saved-reviews">See saved reviews</a>.</p>}
+      <details className="sample-guide-evidence">
+        <summary>How Sanity keeps the booking attached</summary>
+        <p>A registration points to a session. The session points to a table. Approving the move changes the table reference while the session and registration keep their identities.</p>
+        {kept.length > 0 && (
+          <div className="sample-booking-proof">
+            <strong>Recorded move: Table B → Table C</strong>
+            <p>{kept.length} active registration{kept.length === 1 ? " was" : "s were"} created before this approved move.</p>
+            <dl>
+              <div><dt>Same registration</dt><dd><code>{kept[0].id}</code></dd></div>
+              <div><dt>Same session</dt><dd><code>{ride?.id}</code></dd></div>
+              <div><dt>Current table</dt><dd>{ride?.spaceLabel}</dd></div>
+            </dl>
+          </div>
+        )}
+        <p>Content Lake saves the linked records together. Workflows records Reading, Review and the decision. App SDK subscribes to the public schedule and counts.</p>
+        <div className="sample-evidence-links">
+          <Link className="text-button" href={`/event/${event.id}/inspector`} target="_blank">Inspect live content <ArrowUpRight size={15} /></Link>
+          <a className="text-button" href="#saved-reviews">See saved reviews <ArrowRight size={15} /></a>
+          <a className="text-button" href="#time-machine-title">Compare paper versions <ArrowRight size={15} /></a>
+        </div>
+        <p className="sample-guide-privacy">The identity proof above uses your authorized organizer view. The public inspector contains sessions and counts; participant names and registration identities stay private.</p>
+      </details>
+    </section>
+  );
+}
+
 export function Workspace({ id }: { id: string }) {
   const { event, error: loadError, connected, refresh } = useEvent(id);
   const [busy, setBusy] = useState("");
@@ -493,6 +615,7 @@ export function Workspace({ id }: { id: string }) {
   const [proposal, setProposal] = useState<ReviewedProposal | null>(null);
   const [reviews, setReviews] = useState<ReviewSummary[]>([]);
   const [reviewsError, setReviewsError] = useState("");
+  const [sampleReviewNotice, setSampleReviewNotice] = useState("");
   const [sharing, setSharing] = useState(false);
   const [savingAccess, setSavingAccess] = useState(false);
   const [active, setActive] = useState<string>();
@@ -529,6 +652,30 @@ export function Workspace({ id }: { id: string }) {
         ),
       ),
     );
+  }
+  async function openSampleMoveReview() {
+    setSampleReviewNotice("");
+    if (proposal && sampleMove(proposal) && proposal.status !== "discarded") {
+      showProposal(proposal);
+      return;
+    }
+    await action("reopen", async () => {
+      const candidates = reviews.filter((review) =>
+        review.source === "sample" && review.status === "applied",
+      );
+      for (const review of candidates) {
+        const saved = await api<ReviewedProposal>(
+          `/api/events/${id}/proposals/${review.id}`, undefined, "GET",
+        );
+        if (saved.status === "applied" && sampleMove(saved)) {
+          showProposal(saved);
+          return;
+        }
+      }
+      setSampleReviewNotice(
+        "No recorded Table B to Table C move was found in the latest 20 reviews. Inspect the saved history or start a fresh guided sample to try the move.",
+      );
+    });
   }
   async function discard() {
     if (!proposal) return;
@@ -750,6 +897,16 @@ export function Workspace({ id }: { id: string }) {
           <OrganizerAccess id={id} onClose={() => setSavingAccess(false)} />
         )}
         {sharing && <SharePanel id={id} onClose={() => setSharing(false)} />}
+        {event.sample && (
+          <SampleGuide
+            event={event}
+            proposal={proposal}
+            busy={!!busy}
+            onExample={() => example("remove-table")}
+            onReview={openSampleMoveReview}
+            reviewNotice={sampleReviewNotice}
+          />
+        )}
         {!event.sessions.length && !proposal && (
           <section className="first-plan-guide">
             <div>
@@ -1082,6 +1239,7 @@ export function Workspace({ id }: { id: string }) {
         <TimeMachine eventId={id} revision={event.version} />
         {(reviews.length > 0 || reviewsError) && (
           <section
+            id="saved-reviews"
             className="saved-reviews"
             aria-labelledby="saved-reviews-title"
           >

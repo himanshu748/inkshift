@@ -25,6 +25,6 @@ Rehearse this with actual handwriting before recording. The completed automated 
 
 ## Reproducible fallback demonstration
 
-Choose **Try a sample**, join a game through its invite, and choose **Use the crossed-out example**. Say that the reading is prepared. This proves registration, reconciliation and persistence, while the image reader needs a separate photo demonstration. The interface already labels the distinction.
+Choose **Try the guided sample**. Follow the four steps above the practice workspace: open the participant view in another tab, enter a name and join Ticket to Ride at Table B, return to the organizer and choose **Use the crossed-out example**, review and approve, then check the existing place at Table C. The optional Sanity explanation shows the real registration ID, unchanged session ID and recorded B-to-C move only in the authorized organizer view; the public inspector shows schedule and counts. Say that the reading is prepared. This proves registration, reconciliation and persistence, while the image reader needs a separate photo demonstration. The interface already labels the distinction.
 
 The real Sanity race report is in `docs/evidence/live-sanity.json`. Do not claim that a staged two-phone join establishes concurrency correctness; use that report for the one-seat race result.

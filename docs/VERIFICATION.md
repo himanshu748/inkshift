@@ -42,8 +42,19 @@ The September 22, 2026 continuation replaces the 3D landing and connects the exi
 
 ## Evidence limits
 
-The image inputs are rendered typed sheets, not photographed handwriting. Prepared example buttons do not use image inference. Browser tests use CSS viewports in a desktop browser, not physical phone hardware. The workflow fault-recovery test simulates a lost engine write in memory; it does not claim to have induced a live Sanity outage.
+Image checks through September 29 used rendered typed sheets. The September 30 check below used one genuine photographed handwritten schedule. Prepared example buttons do not use image inference. Browser tests use CSS viewports in a desktop browser, not physical phone hardware. The workflow fault-recovery test simulates a lost engine write in memory; it does not claim to have induced a live Sanity outage.
 
 The schema was deployed on September 24 and 25 with the owner's Sanity login. The Studio itself is not hosted.
 
 An edited browser walkthrough is included; there is no video of a physically photographed paper plan. The DEV post is published at https://dev.to/himanshu_748/inkshift-cross-out-a-table-keep-the-booking-344i. The global event/photo caps are shared quota guards. Organizers can now save a private bearer code to restore access. There is still no account/email recovery when both that code and the original browser access are lost, and codes cannot yet be rotated in the interface. Distinct browsers do not establish distinct human identities.
+
+## Handwritten-photo continuation: September 30
+
+- Uploaded one real handwritten schedule by [James Arthur Cattell](https://jacattell.medium.com/unconference-agenda-creation-a3d3ea720fb5), used under CC BY 4.0, through production's file chooser at a 390-pixel browser viewport. The source image has 12 sessions, three rooms and four 45-minute slots; it supplies no capacities.
+- The first reading returned all sessions/times but guessed four-seat limits, misread one title and reported no uncertainties. It was discarded without applying. This revealed an approval gap, not a successful capacity extraction.
+- Released implementation `e2e8642`: every inference reading now includes a mandatory capacity-check question. The provider can supply up to 19 other questions; none are dropped to make room. The organizer must explicitly acknowledge corrections, recheck and approve. This cannot establish whether the organizer chose the right number.
+- All 65 tests in 10 files, type checking, lint and local/hosted production builds passed. Claude independently read the change, ran the 65 tests and type check in an environment-free scratch copy, and marked it READY.
+- Production deployment `dpl_HZSF9eMJG6XSJV2puJw4YGPGKG2d` is READY; the service-owned alias points to it and its metadata identifies `e2e864219909b630494855322c11cbf9906d526c`. No budgets, credentials or schema permissions changed.
+- The fresh hosted rerun blocked approval before and during correction. After explicit acknowledgment/recheck, it approved 12 sessions with eight places each, supplied by the operator. One title was corrected.
+- A guest then booked Hybrid meeting Tips. A separate manual organizer edit added Room D and moved that session from B to D. The guest's existing place updated without another join. An independent HTTP readback confirmed original session `session-1-1`, Room D and one booking, with all room/session limits eight. This move was not inferred from a second edited photograph.
+- Both browser tabs recorded zero warnings/errors. Physical phone camera, poor lighting and general handwriting accuracy remain unverified. See [bounded result and source attribution](evidence/handwritten-photo-check.json).

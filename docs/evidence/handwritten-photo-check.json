@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-09-30T15:37:18.063Z",
+  "productionUrl": "https://inkshift.vercel.app",
+  "source": {
+    "author": "James Arthur Cattell",
+    "page": "https://jacattell.medium.com/unconference-agenda-creation-a3d3ea720fb5",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "imageUnmodified": true,
+    "sha256": "3a7e0f01c368e323afa2b72fc09061034775916e9e4edb857d8a3d1a6047688f"
+  },
+  "input": "One genuine photographed handwritten schedule, uploaded as a file through a 390-pixel desktop-browser viewport",
+  "physicalPhoneCameraTested": false,
+  "photoContainsCapacityLimits": false,
+  "originalReading": {
+    "sessionsFound": 12,
+    "roomsFound": 3,
+    "timeSlots": [
+      "11:00–11:45",
+      "12:00–12:45",
+      "14:00–14:45",
+      "15:00–15:45"
+    ],
+    "unsupportedCapacity": 4,
+    "titleMisread": "Better form time management",
+    "uncertaintiesReported": 0,
+    "approveEnabled": true,
+    "discardedWithoutApplying": true
+  },
+  "deployedRerun": {
+    "newReadingApprovalBlocked": true,
+    "blockedAfterEditsUntilExplicitAcknowledgment": true,
+    "explicitAcknowledgmentAndRecheckRequired": true,
+    "allRoomAndSessionLimitsSuppliedByOperator": 8,
+    "titleCorrected": "Better your time management",
+    "approvedSessions": 12,
+    "readerAccuracyClaim": "No general accuracy claim; capacities remain provisional until organizer confirmation"
+  },
+  "continuity": {
+    "laterChange": "Manual organizer edit added Room D and moved Hybrid meeting Tips from B to D",
+    "secondEditedPhotoInference": false,
+    "guestJoinedBeforeMove": true,
+    "guestExistingPlaceAtRoomDWithoutJoiningAgain": true,
+    "movedSessionIdUnchanged": true,
+    "liveSessionId": "session-1-1",
+    "liveBookedCount": 1
+  },
+  "checks": {
+    "testsPassed": 65,
+    "typecheck": "passed",
+    "lint": "passed",
+    "localAndHostedBuild": "passed",
+    "claudeCodeReview": "READY",
+    "browserWarningsAndErrors": []
+  },
+  "limits": [
+    "One legible public photograph is not a handwriting benchmark",
+    "Desktop browser viewport and file chooser do not test physical phone camera",
+    "Organizer acknowledgment cannot guarantee a correct capacity choice"
+  ]
+}

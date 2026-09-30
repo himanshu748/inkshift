@@ -52,7 +52,7 @@ After approval, the guest's existing booking appears under **Your places** at Ta
 
 They do not need to sign up again.
 
-The videos and screenshots use labelled prepared samples with fixed readings. **Try the guided sample** and **Use the crossed-out example** exercise real signup, review and Content Lake writes, but skip image inference. The screenshots show a saved demo registration and an applied review. Separate photo-reader checks used rendered typed sheets; physical handwriting and phone-camera capture have not been tested.
+The videos and screenshots use labelled prepared samples with fixed readings. **Try the guided sample** and **Use the crossed-out example** exercise real signup, review and Content Lake writes, but skip image inference. The screenshots show a saved demo registration and an applied review. Separate photo-reader checks used rendered typed sheets and one genuine handwritten schedule, described below. Physical phone-camera capture remains untested.
 
 ### Scrub back through the paper
 
@@ -166,9 +166,21 @@ What went wrong: the first test run was flaky. A booking and an approval landed 
 
 I pushed back on two drafts: "you've to establish it as completed product not incomplete" and "why'd you talk about how we made it instead of what product and how it uses sanity". That's why the post opens with the product. The build story lives here.
 
+### Testing a handwritten schedule
+
+On September 30, Codex uploaded a [photographed handwritten unconference schedule by James Arthur Cattell](https://jacattell.medium.com/unconference-agenda-creation-a3d3ea720fb5) through the hosted app at a 390-pixel browser viewport. It contains 12 sessions in Rooms A, B and C, with four 45-minute slots. It has no seat limits.
+
+![The photographed handwritten schedule used for the reader check](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/cattell-handwritten-grid.jpg)
+
+*Photograph © 2024 James Arthur Cattell, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), reproduced unchanged from the linked article.*
+
+The first reading found the sessions and times, misread one title and guessed four-seat limits. It reported no uncertainty. Codex discarded it without changing the live plan. That failure led to a new gate: every photo reading now requires the organiser to check seat limits explicitly before approval. The model can still guess a number; the acknowledgement does not prove it is right.
+
+Claude reviewed the fix independently. In the hosted rerun, approval stayed disabled through edits until the reading was explicitly checked and rechecked. Codex supplied eight places per room and session for this test, corrected the title, then approved the 12-session plan. A guest booked Hybrid Meeting Tips. A later manual edit added Room D and moved that session there; the guest's existing place appeared at Room D without another signup. The room move was an organiser edit, not a second photograph interpreted by the reader.
+
 ### What is still unverified
 
-Real handwriting (every image test used rendered typed sheets) and camera access on physical phones remain unverified. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts. The September 28 suite had 37 tests, including six for the time machine: ordering, discarded readings left out, bookings followed by session ID, missing photos and reconstructed originals. The September 29 release expanded the suite to 62 passing tests and passed the hosted product, workflow and typed-photo checks. An earlier live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
+Camera access on physical phones and broad handwriting accuracy remain unverified. The single-photo check above tests one legible handwritten schedule. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts. The September 28 suite had 37 tests, including six for the time machine: ordering, discarded readings left out, bookings followed by session ID, missing photos and reconstructed originals. The September 29 release expanded the suite to 62 passing tests and passed the hosted product, workflow and typed-photo checks. The September 30 capacity-review fix brought the suite to 65 passing tests and passed type checking, lint and the production build. An earlier live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
 
 In the September 29 photo check, the first typed sheet needed no correction. The crossed-out sheet produced two ambiguity questions. The test operator corrected that reading before approval, and the same booking then appeared at Table C. That run demonstrates the reader-to-review-to-approval path, including its need for a human decision.
 

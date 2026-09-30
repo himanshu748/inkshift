@@ -21,7 +21,7 @@ Use a fresh event and a second browser. A hosted URL is needed for judges to sca
 
 Write all three spaces and their limits: A 4, B 4, C 6. Write Catan at A, 18:00–19:30, four players; Ticket to Ride at B, 18:00–19:30, four players; Wavelength at C, 19:30–20:30, six players. Keep the whole sheet in both photographs. Cross out the table label only; keep the game's name visible so it is clear the game is moving rather than being canceled.
 
-Rehearse this with actual handwriting before recording. The completed automated image test used rendered typed sheets and one correction. Do not describe that as a completed handwriting test.
+Rehearse this with actual handwriting before recording. Earlier automated image checks used rendered typed sheets and explicit corrections. A September 30 hosted file-upload check used one genuine handwritten photograph ([results](evidence/handwritten-photo-check.json)); its limits were supplied by the operator. Physical phone-camera capture remains untested.
 
 ## Reproducible fallback demonstration
 

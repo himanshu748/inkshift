@@ -2,6 +2,7 @@ import "server-only";
 import { z } from "zod";
 import { draftSchema, eventToDraft, type EventRecord } from "./model";
 import { AppError } from "./service";
+import { requirePhotoCapacityReview } from "./photo-review";
 
 const outputSchema = z.toJSONSchema(draftSchema, { target: "draft-7" });
 // Inference providers commonly support homogeneous arrays, not JSON Schema tuples.
@@ -15,6 +16,8 @@ for (const collection of ["spaces", "sessions"]) {
     maxItems: 4,
   };
 }
+// One of the 20 review slots is always reserved for organizer capacity checking.
+(outputSchema.properties!.uncertainties as { maxItems: number }).maxItems = 19;
 delete outputSchema.$schema;
 
 export async function interpretPhoto(
@@ -154,7 +157,7 @@ Evidence.box = [left, top, width, height] in normalized 0..1 image coordinates. 
     const raw = JSON.parse(
       content.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, ""),
     );
-    return { draft: draftSchema.parse(raw), model };
+    return { draft: requirePhotoCapacityReview(draftSchema.parse(raw)), model };
   } catch {
     throw new AppError(
       "The photo reader could not produce a complete plan. Try a clearer photograph with table names, times, and player limits.",

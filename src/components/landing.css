@@ -1591,3 +1591,27 @@ main[data-reveal-ready] [data-reveal]:not(.is-in) {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Pause decorative loops outside the viewport. */
+.ink-hero:not(.motion-visible) *,
+.ink-uses:not(.motion-visible) *,
+.ink-bento:not(.motion-visible) *,
+.ink-close:not(.motion-visible) * {
+  animation-play-state: paused;
+}
+.ink-hero:not(.motion-visible) *::after,
+.ink-hero:not(.motion-visible) *::before,
+.ink-uses:not(.motion-visible) *::after,
+.ink-uses:not(.motion-visible) *::before,
+.ink-bento:not(.motion-visible) *::after,
+.ink-bento:not(.motion-visible) *::before,
+.ink-close:not(.motion-visible) *::after,
+.ink-close:not(.motion-visible) *::before { animation-play-state: paused; }
+
+.motion-hidden *, .motion-hidden *::before, .motion-hidden *::after {
+  animation-play-state: paused !important;
+}
+@media (max-width: 700px) {
+  .demo-steps button, .demo-play { min-height: 44px; }
+  .demo-play { min-width: 44px; }
+}

@@ -39,7 +39,7 @@ const questions = [
 ];
 
 function Walkthrough() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
     if (!playing) return;
@@ -414,8 +414,8 @@ export function Landing() {
             The people <em>stay.</em>
           </h1>
           <p>
-            Photograph or type your event plan and share a signup page. Change
-            the paper later. Everyone keeps their place.
+            Photograph or type your event plan, check the reading, then share
+            a signup page. Approve a session move and its bookings move with it.
           </p>
           <div className="ink-actions">
             <Link className="button dark ink-launch" href="/new">
@@ -485,9 +485,9 @@ export function Landing() {
         <section className="ink-close" aria-labelledby="close-title">
           <div className="ink-close-dots" aria-hidden="true" />
           <h2 id="close-title">
-            Make a little room for a <em>good</em> time.
+            Change the plan. Keep your <em>guests.</em>
           </h2>
-          <p>Bring your plan. INKSHIFT keeps a place for every person.</p>
+          <p>Start with your paper, or try a table move with a saved booking.</p>
           <div className="ink-actions">
             <Link className="button primary ink-launch" href="/new">
               Plan a gathering

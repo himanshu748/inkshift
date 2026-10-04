@@ -588,7 +588,7 @@ input[type="checkbox"] {
 }
 .workspace-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.94fr);
   gap: 52px;
 }
 .section-toolbar {
@@ -2428,4 +2428,14 @@ input[type="checkbox"] {
 @media (max-width: 480px) {
   .change-location { gap: 10px; }
   .change-location del, .change-location b { font-size: 23px; }
+}
+
+/* Keep workspace actions comfortable on narrow touch screens. */
+@media (max-width: 700px) {
+  .workspace-grid .tab-list { gap: 14px; flex-wrap: wrap; height: auto; }
+  .workspace-grid .section-toolbar { height: auto; min-height: 47px; }
+  .icon-button, .text-button, .example-links button, .tab-list button {
+    min-height: 44px;
+  }
+  .icon-button { min-width: 44px; }
 }

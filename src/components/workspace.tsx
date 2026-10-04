@@ -961,6 +961,147 @@ export function Workspace({ id }: { id: string }) {
           </div>
         )}
         <div className="workspace-grid">
+          <section className="plan-column">
+            <div className="section-toolbar">
+              <div
+                className="tab-list"
+                role="group"
+                aria-label="Event information"
+              >
+                <button
+                  aria-pressed={tab === "schedule"}
+                  onClick={() => setTab("schedule")}
+                >
+                  The live plan
+                </button>
+                <button
+                  aria-pressed={tab === "people"}
+                  onClick={() => setTab("people")}
+                >
+                  People <span>{event.totalBookings}</span>
+                </button>
+                <button
+                  aria-pressed={tab === "history"}
+                  onClick={() => setTab("history")}
+                  aria-label="Change history"
+                >
+                  <History size={17} /> History
+                </button>
+              </div>
+              <span className="live-label">
+                <span
+                  className={`status-dot ${!connected ? "disconnected" : ""}`}
+                />
+                {connected ? "Live" : "Offline"}
+              </span>
+            </div>
+            {tab === "schedule" && (
+              <>
+                <div className="schedule-summary">
+                  <span>
+                    <Table2 size={16} />
+                    {event.spaces.filter((s) => !s.removed).length} tables
+                  </span>
+                  <span>
+                    <Users size={16} />
+                    {event.totalBookings}{" "}
+                    {event.totalBookings === 1 ? "person" : "people"} joined
+                  </span>
+                </div>
+                <Schedule
+                  event={event}
+                  active={active}
+                  onActive={setActive}
+                  highlighted={highlighted}
+                />
+                <div className="plan-note">
+                  <CheckCheck size={18} />
+                  <p>
+                    People join the session.
+                    <br />
+                    <strong>Their place stays with them when it moves.</strong>
+                  </p>
+                </div>
+              </>
+            )}
+            {tab === "people" && (
+              <div className="people-list">
+                {event.bookings?.length ? (
+                  event.bookings.map((b, i) => (
+                    <div className="person-row" key={b.id}>
+                      <span className={`person-avatar tone-${i % 3}`}>
+                        {b.name.slice(0, 2).toUpperCase()}
+                      </span>
+                      <div>
+                        <strong>{b.name}</strong>
+                        <span>
+                          {
+                            event.sessions.find((s) => s.id === b.sessionId)
+                              ?.title
+                          }
+                        </span>
+                      </div>
+                      <span className="person-table">
+                        {
+                          event.sessions.find((s) => s.id === b.sessionId)
+                            ?.spaceLabel
+                        }
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="empty-schedule">
+                    <Users size={32} strokeWidth={1.2} />
+                    <h3>There’s room for everyone to start.</h3>
+                    <p>Share your invite link to welcome the first person.</p>
+                    <button
+                      className="button secondary"
+                      onClick={() => setSharing(true)}
+                    >
+                      Get invite link
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+            {tab === "history" && (
+              <div className="history-list">
+                {event.history.map((h) => (
+                  <div className="history-row" key={h.id}>
+                    <span className="history-dot" />
+                    <div>
+                      <strong>{h.action}</strong>
+                      <p>{h.detail}</p>
+                      <time dateTime={h.at}>
+                        {new Date(h.at).toLocaleTimeString([], {
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </time>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="invite-strip">
+              <div className="invite-symbol">
+                <Users size={22} />
+              </div>
+              <div>
+                <strong>A plan is better with people.</strong>
+                <p>Send a link. Save them a place.</p>
+              </div>
+              <button
+                className="icon-button"
+                onClick={() => setSharing(true)}
+                aria-label="Share participant invite"
+                disabled={!event.sessions.length}
+              >
+                <ArrowUpRight size={22} />
+              </button>
+            </div>
+          </section>
           <section className="paper-column">
             <div className="section-toolbar">
               <h2>Your paper</h2>
@@ -1078,147 +1219,6 @@ export function Workspace({ id }: { id: string }) {
                 </span>
               </div>
             )}
-          </section>
-          <section className="plan-column">
-            <div className="section-toolbar">
-              <div
-                className="tab-list"
-                role="group"
-                aria-label="Event information"
-              >
-                <button
-                  aria-pressed={tab === "schedule"}
-                  onClick={() => setTab("schedule")}
-                >
-                  The live plan
-                </button>
-                <button
-                  aria-pressed={tab === "people"}
-                  onClick={() => setTab("people")}
-                >
-                  People <span>{event.totalBookings}</span>
-                </button>
-                <button
-                  aria-pressed={tab === "history"}
-                  onClick={() => setTab("history")}
-                  aria-label="Change history"
-                >
-                  <History size={17} />
-                </button>
-              </div>
-              <span className="live-label">
-                <span
-                  className={`status-dot ${!connected ? "disconnected" : ""}`}
-                />
-                {connected ? "Live" : "Offline"}
-              </span>
-            </div>
-            {tab === "schedule" && (
-              <>
-                <div className="schedule-summary">
-                  <span>
-                    <Table2 size={16} />
-                    {event.spaces.filter((s) => !s.removed).length} tables
-                  </span>
-                  <span>
-                    <Users size={16} />
-                    {event.totalBookings}{" "}
-                    {event.totalBookings === 1 ? "person" : "people"} joined
-                  </span>
-                </div>
-                <Schedule
-                  event={event}
-                  active={active}
-                  onActive={setActive}
-                  highlighted={highlighted}
-                />
-                <div className="plan-note">
-                  <CheckCheck size={18} />
-                  <p>
-                    People join the session.
-                    <br />
-                    <strong>Their place stays with them when it moves.</strong>
-                  </p>
-                </div>
-              </>
-            )}
-            {tab === "people" && (
-              <div className="people-list">
-                {event.bookings?.length ? (
-                  event.bookings.map((b, i) => (
-                    <div className="person-row" key={b.id}>
-                      <span className={`person-avatar tone-${i % 3}`}>
-                        {b.name.slice(0, 2).toUpperCase()}
-                      </span>
-                      <div>
-                        <strong>{b.name}</strong>
-                        <span>
-                          {
-                            event.sessions.find((s) => s.id === b.sessionId)
-                              ?.title
-                          }
-                        </span>
-                      </div>
-                      <span className="person-table">
-                        {
-                          event.sessions.find((s) => s.id === b.sessionId)
-                            ?.spaceLabel
-                        }
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <div className="empty-schedule">
-                    <Users size={32} strokeWidth={1.2} />
-                    <h3>There’s room for everyone to start.</h3>
-                    <p>Share your invite link to welcome the first person.</p>
-                    <button
-                      className="button secondary"
-                      onClick={() => setSharing(true)}
-                    >
-                      Get invite link
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-            {tab === "history" && (
-              <div className="history-list">
-                {event.history.map((h) => (
-                  <div className="history-row" key={h.id}>
-                    <span className="history-dot" />
-                    <div>
-                      <strong>{h.action}</strong>
-                      <p>{h.detail}</p>
-                      <time dateTime={h.at}>
-                        {new Date(h.at).toLocaleTimeString([], {
-                          hour: "numeric",
-                          minute: "2-digit",
-                        })}
-                      </time>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="invite-strip">
-              <div className="invite-symbol">
-                <Users size={22} />
-              </div>
-              <div>
-                <strong>A plan is better with people.</strong>
-                <p>Send a link. Save them a place.</p>
-              </div>
-              <button
-                className="icon-button"
-                onClick={() => setSharing(true)}
-                aria-label="Share participant invite"
-                disabled={!event.sessions.length}
-              >
-                <ArrowUpRight size={22} />
-              </button>
-            </div>
           </section>
         </div>
         <div ref={reviewRef} className="review-anchor">

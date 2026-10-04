@@ -18,6 +18,23 @@ export function useReveal(root: RefObject<HTMLElement | null>) {
       { rootMargin: "0px 0px -12% 0px", threshold: 0.15 },
     );
     targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+    // Decorative loops only run while their section is visible.
+    const motionObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        entry.target.classList.toggle("motion-visible", entry.isIntersecting);
+      }
+    });
+    node
+      .querySelectorAll(".ink-hero, .ink-uses, .ink-bento, .ink-close")
+      .forEach((target) => motionObserver.observe(target));
+    const updateVisibility = () =>
+      node.classList.toggle("motion-hidden", document.hidden);
+    updateVisibility();
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", updateVisibility);
+      observer.disconnect();
+      motionObserver.disconnect();
+    };
   }, [root]);
 }

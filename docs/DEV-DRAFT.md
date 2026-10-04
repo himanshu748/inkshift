@@ -1,3 +1,3 @@
-# DEV draft
+# DEV submission
 
-The current unpublished draft is [DEV-POST.md](DEV-POST.md). It replaces the earlier Three.js-era draft.
+[DEV-POST.md](DEV-POST.md) contains the published submission, updated October 4, 2026. It replaces the earlier Three.js-era draft.

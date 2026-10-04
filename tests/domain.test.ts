@@ -72,6 +72,35 @@ describe("paper reconciliation", () => {
       event.spaces[2].id,
     );
   });
+  it("keeps a guest's duplicate join and cancellation attached to the booking after an approved move", async () => {
+    const { store, event } = await setup();
+    const sessionId = event.sessions[1].id;
+    const { booking } = await register(
+      store, event.id, "guest", "Guest", sessionId,
+    );
+    const current = await loadEvent(store, event.id);
+    const proposal = await makeProposal(
+      store,
+      current,
+      sampleEdit(current, "remove-table"),
+      "moved-paper",
+      "sample",
+    );
+    await applyProposal(store, current, proposal, current.version);
+    const repeated = await register(store, event.id, "guest", "Guest", sessionId);
+    expect(repeated.alreadyJoined).toBe(true);
+    expect(repeated.booking.id).toBe(booking.id);
+    await expect(
+      cancelBooking(store, event.id, "other-guest", booking.id),
+    ).rejects.toThrow("another browser");
+    const cancelled = await cancelBooking(store, event.id, "guest", booking.id);
+    expect(
+      cancelled.bookings.find((b) => b.id === booking.id)?.cancelledAt,
+    ).toBeTruthy();
+    expect(cancelled.sessions.find((s) => s.id === sessionId)?.spaceId).toBe(
+      event.spaces[2].id,
+    );
+  });
   it("does not move a game into a table occupied by a different game", async () => {
     const { event } = await setup();
     const draft = sampleEdit(event, "remove-table");

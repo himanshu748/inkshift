@@ -2,7 +2,7 @@
 
 INKSHIFT turns a paper plan for a games night, workshop or club meetup into a live signup page backed by Sanity. Photograph or type the plan, review the reading and share the invite; guests book a place without an account. When the paper changes (cross out Table B, write Table C), photograph it again: the organizer reviews the proposed edit against the people already booked, approves it and the same bookings move with their session. The **Paper time machine** under the live plan then scrubs through every applied version of the paper, with each session and its booking tokens sliding between tables.
 
-Built for [DEV's Sanity Challenge, Path Two](https://dev.to/challenges/sanity-2026-09-16). The landing demonstrates a paper plan, phone signup, review and relocation. Its illustrative registrations are labeled; the real sample opens a separate event.
+Built for [DEV's Sanity Challenge, Path Two](https://dev.to/challenges/sanity-2026-09-16). The landing demonstrates a paper plan, phone signup, review and relocation. Its illustrative registrations are labeled; the real sample opens a separate event. The illustration starts with the original plan and advances only when you choose a step or press Play. The organizer sees the live plan before the paper source; the labeled History control opens saved changes. Decorative loops pause while their section is offscreen, and the time machine animates only a chosen version transition.
 
 **[Open INKSHIFT](https://inkshift.vercel.app)**
 

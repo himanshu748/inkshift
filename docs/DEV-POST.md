@@ -1,6 +1,6 @@
 ---
 title: "INKSHIFT: cross out a table, keep the booking"
-published: false
+published: true
 description: "Turn an event plan into a signup page, then move a session without losing its bookings. Powered by Sanity Content Lake, App SDK and Workflows."
 tags: devchallenge, sanitychallenge, sanity, ai
 ---
@@ -9,23 +9,17 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 ## What I Built
 
-INKSHIFT lets an organiser change a meetup plan after people have signed up. Move Ticket to Ride from Table B to Table C, approve the reviewed change and the same guests keep their bookings. The paper time machine lets you scrub through the plan's versions and see those bookings travel with the session.
+INKSHIFT lets an organiser change a meetup plan after people have signed up. A guest books Ticket to Ride at Table B. The organiser reviews a move to Table C and approves it; the original session and registration IDs stay the same, and the guest sees the new table under **Your places** without booking again. The paper time machine shows that booking through the saved plan versions.
 
 [Open INKSHIFT](https://inkshift.vercel.app) · [Watch the booking move](https://youtu.be/XpdGE0ESoFM) · [Watch the product walkthrough](https://youtu.be/xM5eC-q7t_0) · [Source code](https://github.com/himanshu748/inkshift)
 
-A photo or typed plan starts the process. The organiser reviews what the reader understood, corrects uncertainty and approves the change before it reaches the live schedule. The demonstrated outcome is a booking that survives the move; the prepared sample below makes that easy to inspect.
+Upload a photo or type a plan, review the reading and approve. In the guided sample, inspect the guest’s existing booking after the move, then open the saved review for the preserved session and booking IDs. Its reading is fixed; signup, approval and Content Lake writes are real.
 
 ![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
 
-The paper time machine halfway between version 1 and 2: Ticket to Ride slides from Table B to Table C and its booking goes with it.
-
 {% embed https://youtu.be/XpdGE0ESoFM %}
 
-[INKSHIFT](https://inkshift.vercel.app) turns a plan for a games night, workshop or club meetup into a shared signup page. Upload a photo or type the plan, check the sessions and send the invite link. Guests book a place without an account.
-
-When the paper changes, you review the proposed edit against the people who have already joined, correct the reading if needed and approve. Guests keep their places at the new location.
-
-Sanity gives the gathering continuity: Content Lake stores the linked sessions and registrations, Workflows records each plan review and App SDK subscribes to the shared schedule. The booking belongs to a session whose location can change.
+Guests join a games night, workshop or meetup without an account. Content Lake stores the linked sessions and registrations, Workflows records each plan review and App SDK subscribes to the shared schedule. A booking belongs to a session whose location can change.
 
 ## Demo
 
@@ -50,21 +44,15 @@ After approval, the guest's existing booking appears under **Your places** at Ta
 
 ![Participant page showing the existing Ticket to Ride booking at Table C](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/participant-booking-kept.jpg)
 
-They do not need to sign up again.
-
-The videos and screenshots use labelled prepared samples with fixed readings. **Try the guided sample** and **Use the crossed-out example** exercise real signup, review and Content Lake writes, but skip image inference. The screenshots show a saved demo registration and an applied review. Separate photo-reader checks used rendered typed sheets and one genuine handwritten schedule, described below. Physical phone-camera capture remains untested.
+The videos and screenshots use labelled prepared samples with fixed readings. Signup, review and Content Lake writes are real; image inference is skipped. Separate reader checks used rendered typed sheets and one handwritten schedule, described below. Physical phone-camera capture remains untested.
 
 ### Scrub back through the paper
 
-Every approved edit becomes a version. Below the live plan there is a **Paper time machine**: a slider over every version of the paper, with the sheet on the left and the tables on the right. Move from version 1 to version 2 and the Ticket to Ride card slides from Table B to Table C, carrying Ada's token with it. Move back and it slides home.
+Every approved edit becomes a **Paper time machine** version. Scrub between versions 1 and 2 to see Ticket to Ride move from B to C carrying Ada’s booking token. Each version shows its application time, changes, preserved bookings and Workflows state. Discarded readings appear as faded notes, never versions. Apply the sample’s crossed-out example for two versions; its rename example adds a third.
 
-Each version shows when it was applied, what changed ("Ticket to Ride: Table B → Table C"), how many bookings were kept and the state of its Workflows run. Readings I discarded appear as a faded note, never as a version.
+The timeline reads saved proposals and `planBefore`, captured at apply time. Older sample gatherings reconstruct version 1 from the prepared definition and label it **Reconstructed**. Booking placement uses `createdAt`, `cancelledAt` and the stable session ID.
 
-Version 1 in the sample needs no upload: choose **Try the guided sample**, join as a guest, apply the crossed-out example and the time machine has two versions. The rename example adds a third.
-
-The time machine reads saved records. Plans only change when a proposal is applied, so each applied proposal's stored preview is exactly the plan it produced. The one gap was the plan before the first edit: nothing stored it. INKSHIFT now records a `planBefore` snapshot on the proposal at apply time. Older sample gatherings that predate the snapshot rebuild version 1 from the prepared sample definition, and the time machine labels that version **Reconstructed**. Bookings are placed per version from their `createdAt` and `cancelledAt` times; they always point at the same session ID, so nothing has to be guessed about where a person went.
-
-The timeline, photos and booking initials come from an organiser-only server route. A request without the organiser cookie gets a 403, and the App SDK public schedule still carries only sessions and counts.
+Timeline photos and booking initials require an organiser cookie; unauthorised requests return 403. The public App SDK schedule carries sessions and counts.
 
 ### How Sanity keeps the booking attached
 
@@ -106,13 +94,23 @@ App SDK reads this public schedule and its booking counts from Content Lake. Par
 
 ### A change has a review and a decision
 
-An edited plan becomes a saved proposal. Sanity Workflows tracks it through Reading, Review and either Applied or Discarded, so the organiser can return to a review and see what happened.
+Sanity Workflows records proposals through Reading, Review and Applied or Discarded. Someone can join during review, so approval checks both event and proposal revisions and recomputes seats and time constraints. A changed event requires rechecking. The approved plan, linked records and public projection commit together.
 
-There is a timing problem here: someone can join while the organiser is reviewing a move. A proposal that fitted the earlier bookings may no longer fit.
+App SDK subscribes to the public schedule version and prompts an authorised refresh of private organiser data. Workflows checks are advisory; the server enforces permission and validates the move. Reader and organiser labels record caller context under the server credential, not permission to approve.
 
-Before applying it, the server checks the event and proposal revisions and recomputes the constraints. If the event has changed, the organiser has to recheck. Once approved, the plan, linked records and public schedule are saved together in one Content Lake transaction.
+On September 30 Codex reopened the saved manual room move from the handwritten-schedule test. The hosted organiser view showed this review record:
 
-App SDK subscribes to the public schedule's version. A change prompts the organiser workspace to refresh its private data through an authorised server route. Workflows records the review's progress; the server checks permission and validates the move. Reader and organiser labels describe the caller context under the server credential. They do not grant permission to approve a change.
+```text
+Source: Manual plan
+Progress: Reading (Organizer) → Review (Organizer) → Applied (Organizer)
+Applied: 30 September, 21:03, Asia/Calcutta
+Changes: add Room D; move Hybrid meeting Tips from Room B to Room D
+Unresolved checks: 0
+Registrations affected: 1
+Applied result: 1 registration preserved
+```
+
+This transcribes the hosted saved review after approval. Organizer records server caller context. The move was entered manually after correcting the photograph. To inspect your gathering’s run, open a saved review and expand **Review record · Sanity Workflows**.
 
 ## Code
 
@@ -122,19 +120,17 @@ INKSHIFT uses Next.js and React, Sanity Content Lake, App SDK and Workflows. Pho
 
 ## My Build Process
 
-Codex and Claude Code were my AI-native coding environment: Codex for the first build and the finish, Claude Code for an upgrade pass in between and the time machine. I checked the deployed paths against the real Sanity project and used local tests for the domain rules. The prepared demonstration and photo-reader checks are separate, because a fixed reading cannot establish whether the model understood a photograph.
+Codex built the first version and finished the upgrade; Claude Code handled an intermediate pass and the time machine. I checked hosted paths against the real Sanity project and used local tests for domain rules. A prepared reading cannot establish photograph accuracy.
 
 ### The pitch, then very short prompts
 
 The idea started as a note I pasted in: "A handwritten plan becomes a working, multiplayer app. Then you change the paper, and the app understands what changed without losing what people already did."
 
-My prompts after that were short. "go on it's for dev.to challenge", then "anything works also if that does not fit the hackathon let me know and switch over to another project". Codex read the Path Two rules before writing code and answered that it fit, because Sanity would hold the model the whole product depends on.
+I followed with “go on it’s for dev.to challenge” and permission to switch projects if it did not fit. Codex checked Path Two before coding. Sanity would store the sessions, registrations and review history the product uses.
 
-### The first correction: a table is not a session
+### The first correction: separate tables and sessions
 
-The first model tied each game to its table. Moving Ticket to Ride from Table B to Table C would have replaced the session and dropped its bookings, which is the exact failure the product exists to prevent. Spaces, sessions and registrations became separate records with stable IDs, and a registration points to its session. Most of the later work follows from that decision.
-
-The same day we set a second rule: a region missing from a photo leaves its contents uncertain and sends the reading to review.
+The first model tied games to tables, so moving Ticket to Ride would have replaced its session and dropped bookings. We separated spaces, sessions and registrations with stable IDs. A registration points to its session. We also required review when a cropped photo leaves part of the plan uncertain.
 
 ### Where the models got stuck
 
@@ -146,25 +142,17 @@ The same day we set a second rule: a region missing from a photo leaves its cont
 
 ### What I threw away
 
-I asked for a Three.js scroll world on the landing page. It worked: the paper became tables, pawns took their seats and the game moved from B to C. It also looked like a toy, with small pieces and handwriting you couldn't read. I told Claude the 3D looked bad and chose a replacement built from the real interface. The homepage now uses an illustrated interface walkthrough. The separate browser recordings above show the real app controls and saved data.
+I asked for a Three.js scroll world: paper became tables, pawns took seats and the game moved from B to C. It looked like a toy, with unreadable handwriting. I told Claude the 3D looked bad and chose an illustrated interface walkthrough. The browser recordings above show the app controls and saved data.
 
 ### Reaching into Workflows
 
-When I added Workflows, the agent worked from the docs. Claude wrote the `inkshift-plan-change` definition (Reading, then Review, then Applied or Discarded) and its adapter, then hit its session limit before wiring the routes and interface. Codex picked up that working copy, connected proposal creation, readings, corrections, approval and discard to the engine, and deployed definition v1.
-
-One detail from the docs shaped the design: the engine's checks are advisory, and only the Content Lake enforces anything. So the server still rechecks revisions, seats and the time slot before it writes, and a registration that arrives during review invalidates the stale proposal. Codex also added recovery for a plan decision whose workflow follow-up fails.
+Claude worked from the docs, wrote the `inkshift-plan-change` definition and adapter, then reached its session limit before connecting routes and UI. Codex continued that working copy, connected readings, corrections, approval and discard, and deployed v1. Because Workflows checks are advisory, the server still checks revisions, seats and time slots. Codex added recovery when workflow follow-up fails after a plan decision.
 
 ### The time machine
 
-After the first submission I wanted the strange part to be visible: ink on paper edits a live database, and the same people travel with their bookings as the paper changes. I asked Claude Code for a "paper time machine" and gave it one rule: do not fake history.
+I asked Claude for a “paper time machine” with one rule: do not fake history. It checked the dataset with GROQ before building UI. My September 28 rerun found that all 22 events with applied proposals had latest previews matching their live plans ([queries and counts](https://github.com/himanshu748/inkshift/blob/main/docs/evidence/timeline-dataset-check.json)). Eight of 30 applied proposals predated `appliedVersion`, so ordering falls back to application time. Missing original snapshots led to `planBefore` and the Reconstructed label for old sample originals.
 
-Before any UI, it checked the rule against the real dataset with a GROQ read. When I reran it on September 28, 22 events had applied proposals, and in all 22 the latest applied preview matched the live plan exactly ([queries and counts](https://github.com/himanshu748/inkshift/blob/main/docs/evidence/timeline-dataset-check.json)). Two problems came out of that read. 8 of 30 applied proposals were saved before `appliedVersion` existed, so ordering falls back to the applied time. And nothing stored the plan before the first edit, so version 1 of a sample could only be rebuilt from code. That is why `planBefore` now exists and why old gatherings say **Reconstructed** on version 1.
-
-What went wrong: the first test run was flaky. A booking and an approval landed in the same millisecond, and the version-1 frame dropped the guest. The tests now run on a fixed clock, and a booking made at the exact moment of an apply counts as before it. The agent also hit its session limit while writing the component and picked the work up from the last commit.
-
-### Writing this post
-
-I pushed back on two drafts: "you've to establish it as completed product not incomplete" and "why'd you talk about how we made it instead of what product and how it uses sanity". That's why the post opens with the product. The build story lives here.
+A flaky test caught a booking and approval in the same millisecond: version 1 dropped the guest. Tests now use a fixed clock and count a booking at the exact application time as preceding it. Claude reached its session limit while writing the component and resumed from the last commit.
 
 ### Testing a handwritten schedule
 
@@ -180,13 +168,13 @@ Claude reviewed the fix independently. In the hosted rerun, approval stayed disa
 
 ### What is still unverified
 
-Camera access on physical phones and broad handwriting accuracy remain unverified. The single-photo check above tests one legible handwritten schedule. The domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts. The September 28 suite had 37 tests, including six for the time machine: ordering, discarded readings left out, bookings followed by session ID, missing photos and reconstructed originals. The September 29 release expanded the suite to 62 passing tests and passed the hosted product, workflow and typed-photo checks. The September 30 capacity-review fix brought the suite to 65 passing tests and passed type checking, lint and the production build. An earlier live race for the last place produced exactly one winner, and five booking IDs survived a relocation.
+Camera access on physical phones and broad handwriting accuracy remain unverified. The handwritten check covers one legible schedule. Domain tests cover relocation, full destinations, identity ambiguity, cropped photos, time conflicts and capacity cuts; timeline tests cover ordering, discarded readings, stable session IDs, missing photos and reconstructed originals. The September 30 capacity-review release passed 65 tests, type checking, lint and the production build. Earlier hosted checks covered product, workflow and typed-photo paths; a live last-place race produced one winner, and five booking IDs survived relocation.
 
 In the September 29 photo check, the first typed sheet needed no correction. The crossed-out sheet produced two ambiguity questions. The test operator corrected that reading before approval, and the same booking then appeared at Table C. That run demonstrates the reader-to-review-to-approval path, including its need for a human decision.
 
-The release audit also found that a proposal could change after the organiser had reviewed it. Approve, revise and discard now require the exact proposal revision shown in the review. Timeline loading includes the complete saved history, and ordinary joins and cancellations write only the records that changed. Claude independently reviewed the repairs before deployment.
+The release audit found that a proposal could change after review. Approve, revise and discard now require the displayed proposal revision. Timeline loading includes complete history; joins and cancellations write changed records only. Claude independently reviewed the repairs before deployment.
 
-The read-only Studio schema was deployed with my Sanity login on September 24 and updated on September 25. The September 29 schema changes are committed, but the optional admin metadata sync was refused by the current credentials. The running app and completed public-record migration do not depend on that sync.
+I deployed the read-only Studio schema with my Sanity login on September 24 and updated it September 25. September 29 schema changes are committed, but credentials refused optional admin metadata sync. The app and public-record migration do not depend on that sync.
 
 INKSHIFT is bounded to small gatherings and keeps up to 1,200 lifetime registration records, including cancellations. Its recent-join guard is per browser, so an invite holder using fresh cookies could exhaust that limit. Existing places remain viewable and cancellable; recovery currently means creating a new gathering. Removing invite IDs from public projections cannot revoke links someone already knew.
 

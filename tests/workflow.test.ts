@@ -133,14 +133,14 @@ describe("Sanity review workflow", () => {
       expect(polled.version).toBeGreaterThan(event.version);
       const records = await store.timelineRecords(event.id);
       const early = buildTimeline(polled, records.proposals, records.photos,
-        await reviewStages(engines, records.proposals));
+        await reviewStages(engines, [proposal]));
       expect(early.frames.at(-1)?.workflow).toMatchObject({ status: "tracked", stage: "review" });
       release();
       await approval;
       const current = await loadEvent(store, event.id);
       expect(current.version).toBe(polled.version);
       const fresh = buildTimeline(current, records.proposals, records.photos,
-        await reviewStages(engines, records.proposals));
+        await reviewStages(engines, [proposal]));
       expect(fresh.frames.at(-1)?.workflow).toMatchObject({ status: "tracked", stage: "applied" });
       expect(fresh.frames.at(-1)?.bookings).toEqual(early.frames.at(-1)?.bookings);
     } finally {

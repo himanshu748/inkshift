@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-04T17:41:44.666Z",
+  "baseUrl": "http://localhost:3367",
+  "sourceSha": "2d746e5b67770ae32faf6172ae6a1af40138d576",
+  "storage": "local",
+  "staleApprovalBlocked": true,
+  "unauthorizedReviewBlocked": true,
+  "sameBookingAfterMove": true,
+  "finalTable": "Table C",
+  "limits": {
+    "restore": {
+      "statuses": [
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        429,
+        429
+      ],
+      "retryAfter": "60"
+    },
+    "events": {
+      "statuses": [
+        400,
+        400,
+        400,
+        400,
+        429,
+        429,
+        429
+      ],
+      "retryAfter": "60"
+    },
+    "photos": {
+      "statuses": [
+        404,
+        404,
+        404,
+        429,
+        429
+      ],
+      "retryAfter": "60"
+    }
+  },
+  "liveProviderCalls": 0,
+  "sanityCalls": 0,
+  "workflowEngineIntegration": "covered by passed in-memory unit suite; hosted-workflow HTTP script requires tracked Sanity and is inapplicable to local mode"
+}

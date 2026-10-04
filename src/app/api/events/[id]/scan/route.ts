@@ -17,12 +17,14 @@ import {
 } from "@/lib/service";
 import { interpretPhoto } from "@/lib/vision";
 import { reviewEngines, trackReview } from "@/lib/workflow";
+import { reserveRequestBudget } from "@/lib/request-limit";
 export const maxDuration = 120;
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    reserveRequestBudget(request, "photos");
     const { id } = await params;
     const { store, event } = await ownerContext(request, id);
     const input = z

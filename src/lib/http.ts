@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { AppError, loadEvent, requireOwner } from "./service";
 import { getStore, StaleWriteError, type Document } from "./store";
+import { RequestLimitError } from "./request-limit";
 
 export const ownerCookie = (id: string) => `inkshift_owner_${id}`;
 export const participantCookie = "inkshift_participant";
@@ -78,6 +79,11 @@ export const json = (value: unknown, status = 200) =>
     },
   });
 export function errorResponse(error: unknown) {
+  if (error instanceof RequestLimitError) {
+    const response = json({ error: error.message, code: error.code }, error.status);
+    response.headers.set("Retry-After", String(error.retryAfter));
+    return response;
+  }
   if (error instanceof AppError)
     return json({ error: error.message, code: error.code }, error.status);
   if (error instanceof StaleWriteError)

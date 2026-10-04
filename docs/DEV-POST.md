@@ -178,6 +178,8 @@ I deployed the read-only Studio schema with my Sanity login on September 24 and 
 
 INKSHIFT is bounded to small gatherings and keeps up to 1,200 lifetime registration records, including cancellations. Its recent-join guard is per browser, so an invite holder using fresh cookies could exhaust that limit. Existing places remain viewable and cancellable; recovery currently means creating a new gathering. Removing invite IDs from public projections cannot revoke links someone already knew.
 
+The October 4 release adds an early burst guard for organiser-access attempts, new gatherings and photo scans: 10, 5 and 3 attempts respectively per minute per client IP. On Vercel it trusts the platform-supplied client-IP header; missing or malformed headers share a fallback bucket. It returns HTTP 429 with Retry-After before body, store or provider work. The guard keeps at most 10,000 buckets in each process, resets on restart and does not coordinate serverless instances. It reduces bursts; it does not establish a distributed per-person quota or a global spend cap. Persisted daily event and photo caps remain separate.
+
 ## Sanity Project Details
 
 Project ID: `a5xdqsb7`  

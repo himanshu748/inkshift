@@ -12,6 +12,7 @@ import { createEvent } from "@/lib/service";
 import { draftSchema } from "@/lib/model";
 import { ownedGatherings } from "@/lib/gatherings";
 import { getStore } from "@/lib/store";
+import { reserveRequestBudget } from "@/lib/request-limit";
 export const runtime = "nodejs";
 export async function GET(request: NextRequest) {
   try {
@@ -29,6 +30,7 @@ export async function GET(request: NextRequest) {
 }
 export async function POST(request: NextRequest) {
   try {
+    reserveRequestBudget(request, "events");
     const input = z
       .object({
         mode: z.enum(["sample", "blank"]),

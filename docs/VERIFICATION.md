@@ -2,6 +2,13 @@
 
 The September 22, 2026 continuation replaces the 3D landing and connects the existing review system to Sanity Workflows. Earlier deployment, concurrency and photo evidence remains in [the September 21 record](VERIFICATION-2026-09-21.md); its 3D performance findings describe a removed interface.
 
+## Burst guard release: October 4, 2026
+
+- Reconciled the feature patch with GitHub main `19760b1c2cf19ad10daa25ba344e5513d1ca1568`, preserving its UI, Unicode identity and deferred-workflow fixes and Next.js 16.3.8.
+- All **72 tests in 11 files**, type checking, lint and the optimized production build (`next build --webpack`, reusing existing installed dependencies) passed. The five request-budget tests cover client/scope isolation, expiry, untrusted-header fallback, early HTTP 429 with Retry-After, and a 10,000-bucket ceiling that fails closed without evicting active limits.
+- The early guard permits 10 organizer-access attempts, 5 gathering creations and 3 photo scans per minute per client IP, per process. Missing/malformed trusted Vercel headers and non-Vercel hosts share a fallback bucket. It resets on restart and does not coordinate serverless instances; persisted daily quotas remain separate, and this is not a global spend cap.
+- No live image inference or provider check was run for this release. Local production HTTP/browser verification was blocked by automatic approval review citing the original audit-only scope. Historical hosted/browser evidence below and the September 22 prepared-example video do not verify this release.
+
 ## Time machine release: September 25 (checks rerun September 28)
 
 - The paper time machine shipped on September 25 with a `planBefore` snapshot on applied proposals. The deployed schema document `_.schemas.inkshift` in project a5xdqsb7 was created on September 24, 2026 and last updated on September 25, and it contains `planBefore`. The local schema still validates with **zero errors and zero warnings** (rechecked September 28).

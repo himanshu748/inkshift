@@ -9,9 +9,11 @@ import {
 } from "@/lib/http";
 import { restoreOrganizerAccess } from "@/lib/gatherings";
 import { getStore } from "@/lib/store";
+import { reserveRequestBudget } from "@/lib/request-limit";
 
 export async function POST(request: NextRequest) {
   try {
+    reserveRequestBudget(request, "restore");
     const { code } = z
       .object({ code: z.string().trim().max(150) })
       .parse(await body(request));

@@ -613,6 +613,7 @@ export function Workspace({ id }: { id: string }) {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [proposal, setProposal] = useState<ReviewedProposal | null>(null);
+  const [timelineRefresh, setTimelineRefresh] = useState(0);
   const [reviews, setReviews] = useState<ReviewSummary[]>([]);
   const [reviewsError, setReviewsError] = useState("");
   const [sampleReviewNotice, setSampleReviewNotice] = useState("");
@@ -687,6 +688,7 @@ export function Workspace({ id }: { id: string }) {
           "DELETE",
         ),
       );
+      setTimelineRefresh((current) => current + 1);
     });
   }
   async function action(name: string, run: () => Promise<void>) {
@@ -703,6 +705,7 @@ export function Workspace({ id }: { id: string }) {
   }
   function showProposal(next: ReviewedProposal) {
     setProposal(next);
+    setTimelineRefresh((current) => current + 1);
     requestAnimationFrame(() =>
       reviewRef.current?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -762,6 +765,7 @@ export function Workspace({ id }: { id: string }) {
           "PUT",
         ),
       );
+      setTimelineRefresh((current) => current + 1);
     } catch (e) {
       setError((e as Error).message);
       throw e;
@@ -784,6 +788,9 @@ export function Workspace({ id }: { id: string }) {
         `${proposal.preview.changes.length} change${proposal.preview.changes.length === 1 ? "" : "s"} applied. ${proposal.preview.retainedBookings} registration${proposal.preview.retainedBookings === 1 ? "" : "s"} kept.`,
       );
       setProposal(result.proposal);
+      // Polling may already have seen this event revision before the workflow
+      // follow-up finished. Refresh its timeline after the completed response.
+      setTimelineRefresh((current) => current + 1);
       await refresh();
       setHighlighted(true);
       setTimeout(() => setHighlighted(false), 3500);
@@ -1236,7 +1243,11 @@ export function Workspace({ id }: { id: string }) {
             />
           )}
         </div>
-        <TimeMachine eventId={id} revision={event.version} />
+        <TimeMachine
+          eventId={id}
+          revision={event.version}
+          refreshToken={timelineRefresh}
+        />
         {(reviews.length > 0 || reviewsError) && (
           <section
             id="saved-reviews"

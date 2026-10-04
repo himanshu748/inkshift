@@ -78,9 +78,11 @@ function allSpaces(timeline: Timeline) {
 export function TimeMachine({
   eventId,
   revision,
+  refreshToken,
 }: {
   eventId: string;
   revision: number;
+  refreshToken: number;
 }) {
   const [timeline, setTimeline] = useState<Timeline | null>(null);
   const [error, setError] = useState("");
@@ -106,7 +108,7 @@ export function TimeMachine({
     return () => {
       live = false;
     };
-  }, [eventId, revision]);
+  }, [eventId, revision, refreshToken]);
 
   function go(next: number) {
     if (!timeline) return;

@@ -13,6 +13,7 @@ import {
   approveReview,
   discardReview,
   reviseReview,
+  reviewStages,
   trackReview,
   type ReviewEngines,
 } from "../src/lib/workflow";
@@ -24,6 +25,7 @@ import {
   register,
 } from "../src/lib/service";
 import { sampleEdit } from "../src/lib/sample";
+import { buildTimeline } from "../src/lib/timeline";
 import { StaleWriteError } from "../src/lib/store";
 import { MemoryStore } from "./memory-store";
 
@@ -107,6 +109,45 @@ describe("Sanity review workflow", () => {
         (h) => h._type === "actionFired" && h.action === "approve",
       )?.executionContext?.id,
     ).toBe(ORGANIZER_CONTEXT);
+  });
+  it("refreshes the timeline stage after deferred workflow completion without another event revision", async () => {
+    const { engines, store, event, proposal } = await setup();
+    await trackReview(engines, proposal);
+    let release!: () => void;
+    let reached!: () => void;
+    const waiting = new Promise<void>((resolve) => { release = resolve; });
+    const atFollowUp = new Promise<void>((resolve) => { reached = resolve; });
+    const fireAction = engines.organizer.fireAction.bind(engines.organizer);
+    const spy = vi.spyOn(engines.organizer, "fireAction").mockImplementation(async (input) => {
+      if (input.action === "approve") {
+        reached();
+        await waiting;
+      }
+      return fireAction(input);
+    });
+    const approval = approveReview(engines, store, event, proposal, event.version);
+    try {
+      await atFollowUp;
+      // Event polling can see the applied plan while workflow tracking is pending.
+      const polled = await loadEvent(store, event.id);
+      expect(polled.version).toBeGreaterThan(event.version);
+      const records = await store.timelineRecords(event.id);
+      const early = buildTimeline(polled, records.proposals, records.photos,
+        await reviewStages(engines, records.proposals));
+      expect(early.frames.at(-1)?.workflow).toMatchObject({ status: "tracked", stage: "review" });
+      release();
+      await approval;
+      const current = await loadEvent(store, event.id);
+      expect(current.version).toBe(polled.version);
+      const fresh = buildTimeline(current, records.proposals, records.photos,
+        await reviewStages(engines, records.proposals));
+      expect(fresh.frames.at(-1)?.workflow).toMatchObject({ status: "tracked", stage: "applied" });
+      expect(fresh.frames.at(-1)?.bookings).toEqual(early.frames.at(-1)?.bookings);
+    } finally {
+      release();
+      await approval;
+      spy.mockRestore();
+    }
   });
   it("blocks unresolved readings, then records corrected counts before allowing approval", async () => {
     const { engines, store, event, proposal } = await setup("vision");

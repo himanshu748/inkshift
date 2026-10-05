@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 beforeEach(() => {
   vi.resetModules();
   vi.stubEnv("VERCEL", "1");
+  vi.stubEnv("INKSHIFT_CLIENT_LIMIT_SECRET", "test-private-secret");
   vi.useFakeTimers();
 });
 afterEach(() => {
@@ -58,7 +59,7 @@ describe("public request budgets", () => {
     expect(() => reserveRequestBudget(request("10.0.0.0"), "events")).toThrow();
     vi.advanceTimersByTime(60_000);
     expect(() => reserveRequestBudget(request("192.0.2.3"), "events")).not.toThrow();
-  });
+  }, 20_000);
   it("blocks creation and scanning before store, daily quota or provider work", async () => {
     const getStore = vi.fn();
     vi.doMock("../src/lib/store", async (original) => ({

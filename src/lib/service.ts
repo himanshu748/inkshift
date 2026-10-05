@@ -452,6 +452,13 @@ export const REGISTRATION_HISTORY_LIMIT = 1200;
 export const PARTICIPANT_JOIN_LIMIT = 20;
 export const PARTICIPANT_JOIN_WINDOW_MS = 10 * 60 * 1000;
 
+export function requireJoinSession(event: EventRecord, sessionId: string) {
+  const session = event.sessions.find((s) => s.id === sessionId && !s.removed);
+  if (!session || event.spaces.find((s) => s.id === session.spaceId)?.removed)
+    throw new AppError("This session is no longer available.", 409);
+  return session;
+}
+
 export async function register(
   store: Store,
   eventId: string,
@@ -461,11 +468,7 @@ export async function register(
 ) {
   for (let attempt = 0; attempt < 5; attempt++) {
     const event = await loadEvent(store, eventId);
-    const session = event.sessions.find(
-      (s) => s.id === sessionId && !s.removed,
-    );
-    if (!session || event.spaces.find((s) => s.id === session.spaceId)?.removed)
-      throw new AppError("This session is no longer available.", 409);
+    const session = requireJoinSession(event, sessionId);
     const participantHash = hash(participantToken);
     const active = activeBookings(event);
     const existing = active.find(

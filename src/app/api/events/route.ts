@@ -12,7 +12,7 @@ import { createEvent } from "@/lib/service";
 import { draftSchema } from "@/lib/model";
 import { ownedGatherings } from "@/lib/gatherings";
 import { getStore } from "@/lib/store";
-import { reserveRequestBudget } from "@/lib/request-limit";
+import { reserveClientBudget, reserveRequestBudget } from "@/lib/request-limit";
 export const runtime = "nodejs";
 export async function GET(request: NextRequest) {
   try {
@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
         timeZone: draftSchema.shape.timeZone.default("UTC"),
       })
       .parse(await body(request));
+    await reserveClientBudget(request, "events");
     await reserveDailyBudget("events");
     const { event, token } = await createEvent(
       getStore(),

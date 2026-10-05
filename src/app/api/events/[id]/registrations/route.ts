@@ -7,8 +7,9 @@ import {
   json,
   participantCookie,
 } from "@/lib/http";
-import { AppError, cancelBooking, randomToken, register } from "@/lib/service";
+import { AppError, cancelBooking, randomToken, register, loadEvent, requireJoinSession } from "@/lib/service";
 import { getStore } from "@/lib/store";
+import { reserveClientBudget } from "@/lib/request-limit";
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -28,8 +29,11 @@ export async function POST(
       .parse(await body(request));
     const token =
       request.cookies.get(participantCookie)?.value ?? randomToken();
+    const store = getStore();
+    requireJoinSession(await loadEvent(store, id), input.sessionId);
+    await reserveClientBudget(request, "joins", store);
     const result = await register(
-      getStore(),
+      store,
       id,
       token,
       input.name,

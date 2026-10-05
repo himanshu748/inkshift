@@ -17,7 +17,7 @@ import {
 } from "@/lib/service";
 import { interpretPhoto } from "@/lib/vision";
 import { reviewEngines, trackReview } from "@/lib/workflow";
-import { reserveRequestBudget } from "@/lib/request-limit";
+import { reserveClientBudget, reserveRequestBudget } from "@/lib/request-limit";
 export const maxDuration = 120;
 export async function POST(
   request: NextRequest,
@@ -39,6 +39,7 @@ export async function POST(
         "The photo reader is not connected. Use the sample or enter your plan manually.",
         503,
       );
+    await reserveClientBudget(request, "photos");
     await reserveDailyBudget("photos");
     const photo = await savePhoto(
       store,

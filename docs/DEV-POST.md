@@ -17,7 +17,7 @@ Upload a photo or type a plan, review the reading and approve. In the guided sam
 
 ![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
 
-Guests join a games night, workshop or meetup without an account. Content Lake stores the linked sessions and registrations, Workflows records each plan review and App SDK subscribes to the shared schedule. A booking belongs to a session whose location can change.
+Guests join a games night, workshop or meetup without an account. Content Lake stores the event and its linked records, and Workflows records each plan review. App SDK subscriptions power the organiser workspace and content inspector; guest pages poll the server every 2.5 seconds while visible. A booking belongs to a session whose location can change.
 
 ## Demo
 
@@ -82,7 +82,7 @@ Moving Ticket to Ride changes its space reference. Its session ID stays the same
         num("booked"),
 ```
 
-The event aggregate repeats spaces, sessions and bookings as arrays on purpose: its document revision is the single lock. Every booking and approval patches it with `ifRevisionId` and saves the changed linked records and public projection in the same transaction. A write against a stale revision is rejected whole with a 409: a booking retries against the new state, and a stale approval has to be rechecked.
+The event aggregate is the app’s source of truth: routes read its spaces, sessions and bookings arrays, while the separate linked documents are mirrors written in the same transaction for inspection, not read to serve the app. Its document revision is the single lock. Every booking and approval patches it with `ifRevisionId` and saves the changed linked records and public projection in the same transaction. A write against a stale revision is rejected whole with a 409: a booking retries against the new state, and a stale approval has to be rechecked.
 
 The app also includes a live content inspector. After the move, it shows `session-1-1` at Table C with `1/4` places booked:
 

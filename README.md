@@ -6,7 +6,7 @@ Built for [DEV's Sanity Challenge, Path Two](https://dev.to/challenges/sanity-20
 
 **[Open INKSHIFT](https://inkshift.vercel.app)**
 
-[Watch the 43-second product walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). This edited browser sequence shows setup, a prepared sample, a guest booking and its move from B to C.
+[Watch the 43-second product walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). Captured September 22, 2026, this edited browser sequence shows setup, a prepared sample, a guest booking and its move from B to C. It is a dated recording, not a recording of the current interface.
 
 ![INKSHIFT product walkthrough](docs/images/product-review.jpg)
 
@@ -60,7 +60,7 @@ The event aggregate, spaces, sessions, registrations, photos and proposals are l
 
 Sanity Workflows records Reading → Review → Applied or Discarded. Its approval requirement blocks unresolved checks. Organizer corrections update the same run. Event and proposal revision checks remain the final transaction guard. The saved proposal decision lets the workflow recover after an interrupted follow-up write without applying the plan twice. Saved reviews can be reopened from the organizer.
 
-Studio configuration lives in `sanity/`. Domain records are read-only there because direct edits would bypass event transaction checks. Run that package separately to inspect its schema. The schema validates with zero errors or warnings and is deployed to project a5xdqsb7 as `_.schemas.inkshift`: first on September 24, 2026, then again on September 25 with the `planBefore` snapshot field. The Studio itself is not hosted; it is not required for public app use. Workflow definition deployment uses the Content Lake credential and has been verified independently.
+Studio configuration lives in `sanity/`. Domain records are read-only there because direct edits would bypass event transaction checks. Run that package separately to inspect its schema. The local schema validation returned zero errors and warnings on September 28. The last verified deployed schema snapshot in project a5xdqsb7 is `_.schemas.inkshift`: first deployed September 24, 2026, then updated September 25 with the `planBefore` snapshot field. September 29 schema changes are committed, but credentials refused the optional admin metadata sync; the deployed snapshot is not claimed to contain those later changes. The Studio itself is not hosted; it is not required for public app use. Workflow definition deployment uses the Content Lake credential and has been verified independently.
 
 ## Demo in two browsers
 

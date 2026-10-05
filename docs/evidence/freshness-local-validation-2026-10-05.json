@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-05",
+  "baseCommit": "d9ed6c1",
+  "scope": "Current source with documentation clarifications and Help registration-limit copy; no domain or provider changes",
+  "nextVersion": "16.3.8",
+  "checks": [
+    {
+      "command": "npm test -- --maxWorkers=1",
+      "passed": true,
+      "testFiles": 11,
+      "tests": 72
+    },
+    {
+      "command": "npm run typecheck",
+      "passed": true
+    },
+    {
+      "command": "npm run lint",
+      "passed": true
+    },
+    {
+      "command": "npm run build",
+      "passed": true
+    }
+  ],
+  "boundary": "Local validation only. No fresh hosted end-to-end, image-provider, schema-admin or physical-phone check was performed."
+}

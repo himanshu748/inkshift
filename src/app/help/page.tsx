@@ -66,8 +66,15 @@ export default function Page() {
         <h2>Current limits</h2>
         <p>
           A gathering supports one day of activities, up to 12 tables or spaces,
-          30 sessions and 300 registrations. Photos need checking; photographed
-          handwriting across different conditions has not yet been validated.
+          30 sessions and 300 active registrations. Each gathering keeps up to
+          1,200 lifetime registration records, including cancellations; start a
+          new gathering for further joins once that limit is reached. One browser
+          can join up to 20 times per gathering in 10 minutes. Existing bookings
+          remain viewable and cancellable at these limits.
+        </p>
+        <p>
+          Photos need checking; photographed handwriting across different
+          conditions has not yet been validated.
           Shared daily limits apply to new gatherings and photo readings.
           Existing plans continue to work when those limits are reached.
         </p>

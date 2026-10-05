@@ -343,14 +343,14 @@ function RealApp() {
       </div>
       <a
         className="ink-watch"
-        href="https://youtu.be/xM5eC-q7t_0"
+        href="https://youtu.be/_fX19uDjTe8"
         target="_blank"
         rel="noreferrer"
       >
         <span className="ink-watch-icon">
           <Play size={15} />
         </span>
-        Watch the 43-second walkthrough
+        Watch latest demo
         <ArrowUpRight size={15} />
       </a>
     </section>
@@ -436,8 +436,8 @@ export function Landing() {
               <button className="button secondary" onClick={start} disabled={!!busy}>
                 {busy ? "Opening your sample…" : "Retry the guided sample"}
               </button>
-              <a href="https://youtu.be/xM5eC-q7t_0" target="_blank" rel="noreferrer">
-                Watch the recorded walkthrough <ArrowUpRight size={15} />
+              <a href="https://youtu.be/_fX19uDjTe8" target="_blank" rel="noreferrer">
+                Watch latest demo <ArrowUpRight size={15} />
               </a>
               <Link href="/about">See how the booking is stored</Link>
             </div>

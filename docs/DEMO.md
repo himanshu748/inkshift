@@ -1,8 +1,10 @@
-# Recorded product walkthrough
+# Latest recorded demo
 
-[Watch the 43-second walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). Captured from the public app on September 22, 2026, then edited from real browser states with cursor motion. Network waits and guest-form entry are compressed. The recording uses a visibly labeled prepared sample; it does not demonstrate photographed handwriting.
+[Watch the 87-second demo on YouTube](https://youtu.be/_fX19uDjTe8). Captured from the public app on October 5, 2026, this edited browser sequence includes Deepgram narration and captions. It uses a visibly labeled prepared sample; it is not a continuous screen recording or a live photo-inference demonstration. Waiting and form entry are compressed.
 
-It shows gathering setup, a saved organizer workspace, the practice plan, participant invite, a guest booking at Table B, approval of the move, the retained place at Table C, and the returning organizer list. The full API and browser records are in `evidence/product-hosted-browser-flow.json`, `evidence/hosted-product-http.json`, and `evidence/hosted-workflow-http.json`.
+It shows the guided sample, a guest booking Ticket to Ride at Table B, organizer review preserving one registration, approval, the same guest booking at Table C without re-signup or reload, original and applied timeline versions, linked session and booking evidence, the connected Sanity App SDK inspector, and the Applied workflow stage.
+
+The September 22 MP4 is retained only as a [dated archive](video/inkshift-product-walkthrough.mp4). Its interface and silent recording are historical.
 
 # Physical-paper demo script, about 90 seconds
 

@@ -1,11 +1,11 @@
-# INKSHIFT product walkthrough
+# Latest INKSHIFT demo
 
-[Watch on YouTube](https://youtu.be/xM5eC-q7t_0). Published as unlisted on September 22, 2026; anyone with the link can watch. The [MP4 copy](inkshift-product-walkthrough.mp4) remains in this folder.
+[Watch the 87-second demo on YouTube](https://youtu.be/_fX19uDjTe8). Captured and published October 5, 2026, with Deepgram `aura-2-thalia-en` narration and burned captions.
 
-Edited sequence of actual in-app browser states captured from https://inkshift.vercel.app on September 22, 2026. It is not a continuous screen recording or a physical-handwriting demonstration. Network waits and guest-form entry are compressed. The sample is visibly labeled a prepared example.
+This edited sequence uses actual hosted browser captures at 1280 × 720, exported at 1920 × 1080 and 30fps with H.264 video and AAC audio. It is not a continuous screen recording or a live photo-inference demonstration. The guided sample uses prepared readings, visibly labeled in the app. Waiting and form entry are compressed. The quiet pointer has no fabricated click events.
 
-The creation flow saved Friday at the games café for October 2. The sample flow registered Demo guest, proposed a move from Table B to C, approved it, and showed the retained guest booking. No private organizer code was retrieved or recorded.
+The recorded flow books Ticket to Ride at Table B, reviews a proposed move with one registration preserved, approves two changes, and shows the same guest at Table C without re-signup or reload. It then compares original and applied timeline versions and shows linked records, the connected Sanity App SDK inspector at revision 2, and the Applied workflow stage.
 
-Native browser content captures are 1440 × 1005. Output preserves that crop at 3840 × 2680, 60fps, rather than stretching it to 4:3. Cursor is an existing transparent arrow asset; motion/click choreography is rendered by the browser-video-recording skill. Source frames are unchanged JPEG screenshots.
+## Dated archive
 
-The public copy is 1920 × 1340 at 60fps; the local export retains 3840 × 2680. Both preserve the captured aspect ratio. No audio track is included.
+The [September 22, 2026 MP4](inkshift-product-walkthrough.mp4) remains in this folder as historical evidence. It records an earlier interface, uses a prepared sample, and has no audio. It is superseded by the October 5 demo above.

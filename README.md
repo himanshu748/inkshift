@@ -6,7 +6,7 @@ Built for [DEV's Sanity Challenge, Path Two](https://dev.to/challenges/sanity-20
 
 **[Open INKSHIFT](https://inkshift.vercel.app)**
 
-[Watch the 43-second product walkthrough on YouTube](https://youtu.be/xM5eC-q7t_0). Captured September 22, 2026, this edited browser sequence shows setup, a prepared sample, a guest booking and its move from B to C. It is a dated recording, not a recording of the current interface.
+[Watch the latest 87-second demo on YouTube](https://youtu.be/_fX19uDjTe8). Captured October 5, 2026, this edited browser sequence has Deepgram narration and captions. It shows the prepared guided sample, a guest booking preserved through a reviewed move from Table B to C, original and applied timeline versions, and connected Sanity App SDK evidence. It does not demonstrate live photo inference.
 
 ![INKSHIFT product walkthrough](docs/images/product-review.jpg)
 

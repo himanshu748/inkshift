@@ -11,21 +11,19 @@ tags: devchallenge, sanitychallenge, sanity, ai
 
 INKSHIFT lets an organiser change a meetup plan after people have signed up. A guest books Ticket to Ride at Table B. The organiser reviews a move to Table C and approves it; the original session and registration IDs stay the same, and the guest sees the new table under **Your places** without booking again. The paper time machine shows that booking through the saved plan versions.
 
-[Open INKSHIFT](https://inkshift.vercel.app) · [Watch the booking move](https://youtu.be/XpdGE0ESoFM) · [Watch the product walkthrough](https://youtu.be/xM5eC-q7t_0) · [Source code](https://github.com/himanshu748/inkshift)
+[Open INKSHIFT](https://inkshift.vercel.app) · [Watch the latest demo](https://www.youtube.com/watch?v=_fX19uDjTe8) · [Source code](https://github.com/himanshu748/inkshift)
 
 Upload a photo or type a plan, review the reading and approve. In the guided sample, inspect the guest’s existing booking after the move, then open the saved review for the preserved session and booking IDs. Its reading is fixed; signup, approval and Content Lake writes are real.
 
 ![Paper time machine between version 1 and 2, with Ticket to Ride moving into Table C and its booking token travelling with it](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/time-machine-moving.png)
 
-{% embed https://youtu.be/XpdGE0ESoFM %}
-
 Guests join a games night, workshop or meetup without an account. Content Lake stores the linked sessions and registrations, Workflows records each plan review and App SDK subscribes to the shared schedule. A booking belongs to a session whose location can change.
 
 ## Demo
 
-The 43-second walkthrough, captured September 22, 2026, follows a prepared games-night plan through a table change:
+The latest 87-second demo, narrated with Deepgram, uses browser captures from the deployed app on October 5, 2026. Ada books Ticket to Ride at Table B; the organiser approves the move to Table C with one registration preserved. The same guest page updates without another signup or a reload. The paper time machine then shows the saved booking in both plan versions.
 
-{% embed https://www.youtube.com/watch?v=xM5eC-q7t_0 %}
+{% embed https://www.youtube.com/watch?v=_fX19uDjTe8 %}
 
 Choose **Try the guided sample**. Its organiser checklist, **Move the table. Keep the booking.**, follows the same flow:
 
@@ -44,7 +42,7 @@ After approval, the guest's existing booking appears under **Your places** at Ta
 
 ![Participant page showing the existing Ticket to Ride booking at Table C](https://raw.githubusercontent.com/himanshu748/inkshift/main/docs/images/participant-booking-kept.jpg)
 
-The videos and screenshots use labelled prepared samples with fixed readings. Signup, review and Content Lake writes are real; image inference is skipped. Separate reader checks used rendered typed sheets and one handwritten schedule, described below. Physical phone-camera capture remains untested.
+The video is an edited sequence with narration and captions, with waiting compressed. The video and screenshots use labelled prepared samples with fixed readings. Signup, review and Content Lake writes are real; image inference is skipped. Separate reader checks used rendered typed sheets and one handwritten schedule, described below. Physical phone-camera capture remains untested.
 
 ### Scrub back through the paper
 
